@@ -1,0 +1,27 @@
+{
+  "name": "assignment-2b",
+  "version": "1.0.0",
+  "description": "Training Program",
+  "main": "assignment.js",
+  "scripts": {
+    "start": "node assignment.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NS-Javascript/Assignment-2B.git"
+  },
+  "author": "Aaron Furtado",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NS-Javascript/Assignment-2B/issues"
+  },
+  "homepage": "https://github.com/NS-Javascript/Assignment-2B#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-watch": "^1.0.0"
+  }
+}
