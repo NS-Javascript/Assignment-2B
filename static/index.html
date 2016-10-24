@@ -29,6 +29,9 @@
 <!-- Responsive -->
 <link href="css/responsive.css" rel="stylesheet" />
 
+<script src="js/validation.js" type="text/javascript"></script>
+
+
 
 
 </head>
@@ -125,44 +128,44 @@
 					<li class="fileds">
 						<div class="name_fileds">
 							<label>First Name</label>
-							<input name="firstname" type="text" id="e_firstname"/> <!-- mychange1-->
+							<input id="firstname" type="text" />
 						</div>
 						<div class="name_fileds">
 							<label>Last Name</label>
-							<input name="lastname" type="text"  id="e_lastname"/> <!-- mychange3-->
+							<input id="lastname" type="text" />
 						</div>
 					</li>
 					<li class="fileds">
 						<div class="phone_fileds">
 							<label>Phone No</label>
-							<input name="phone" type="text" />
+							<input id="phone" type="text" />
 						</div>
 						<div class="phone_fileds">
 							<label>Office No</label>
-							<input name="office" type="text" />
+							<input id="office" type="text" />
 						</div>
 					</li>
 					<li class="fileds">
 						<div class="email_fileds">
 							<label>Email</label>
-							<input name="email" type="text" />
+							<input id="email" type="text" />
 						</div>
 						<div class="pass_fileds">
 							<label>Password</label>
-							<input name="password" type="text" />
+							<input id="password" type="text" />
 						</div>
 					</li>
 					<li class="fileds">
 						<div class="pass_fileds">
 							<label>Confirm Password</label>
-							<input name="password" type="text" />
+							<input id="password" type="text" />
 						</div>
 							<div class="dob_fileds selectbox">
 								<label>My birthdate is</label>
 
 								<ul>
 									<li>
-										<select name="month" class="select month">
+										<select id="month" class="select month">
 											<option value="jan">Jan</option>
 											<option value="feb">Feb</option>
 											<option value="march">March</option>
@@ -178,7 +181,7 @@
 										</select>
 									</li>
 									<li>
-										<select name="day" class="select day">
+										<select id="day" class="select day">
 											<option value="1">01</option>
 											<option value="2">02</option>
 											<option value="3">03</option>
@@ -216,7 +219,7 @@
 									</li>
 
 									<li>
-										<select name="year" class="select year">
+										<select id="year" class="select year">
 											<option value="volvo">Year</option>
 										</select>
 									</li>
@@ -226,7 +229,7 @@
 					<li class="fileds">
 						<div class="age_fileds">
 							<label>Age</label>
-							<input name="age" type="text" />
+							<input id="age" type="text" />
 						</div>
 						<div class="gender_fileds">
 							<label>Gender</label>
@@ -253,7 +256,7 @@
 					<li class="fileds">
 						<div class="country_fileds selectbox">
 							<label>Country</label>
-							<select name="gender" class="select">
+							<select id="gender" class="select">
 								<option value="Select Country">Select Country</option>
 								<option value="USA">USA</option>
 								<option value="India">India</option>
@@ -263,7 +266,7 @@
 						</div>
 						<div class="state_fileds selectbox">
 							<label>State</label>
-							<select name="gender" class="select">
+							<select id="gender" class="select">
 								<option value="Select Country">Select State</option>
 								<option value="Albury">Albury</option>
 							</select>
@@ -272,7 +275,7 @@
 					<li class="fileds">
 						<div class="city_fileds selectbox">
 							<label>City</label>
-							<select name="gender" class="select">
+							<select id="gender" class="select">
 								<option value="Select Country">Select City</option>
 								<option value="Sydney">Sydney</option>
 								<option value="Albury">Albury</option>
@@ -280,7 +283,7 @@
 						</div>
 					</li>
 				</ul>
-				<div class="next_btn_block">
+				<div class="next_btn_block" id="nextStep">
 					<div class="next_btn">
 						<a href="partners_preference_form.html">Proceed to Step 2 <span><img src="images/small_triangle.png" alt="small_triangle"> </span></a>
 					</div>
@@ -453,11 +456,19 @@ Live a life without regrets and take action today!</p>
    Sticky Contact Number End-->
 
 </div>
+<<<<<<< HEAD
 <!-- <script type="text/javascript">
 	$(document).ready(function(){
 	  $('.bxslider').bxSlider();
 	});
 </script> -->
+=======
+<script type="text/javascript">
+	// $(document).ready(function(){
+	//   $('.bxslider').bxSlider();
+	// });
+</script>
+>>>>>>> 9b64238d1fb3a1392a3a2a308c0e2c2970c3206c
 <!--wrapper-starts-->
 
 <script type="text/javascript" src="js/jquery.js"></script>
