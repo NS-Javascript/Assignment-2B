@@ -127,7 +127,7 @@
         };
 
         var validatePass = function(eventData) {
-            var pattern = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]){6,16}/;
+            var pattern = /^((?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])){6,16}/;
             if (!pattern.test(eventData.delegateTarget.value)) {
                 if ($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount == 0) {
                     $(eventData.delegateTarget.previousSibling.previousElementSibling).append(" <span id='s6' style='color:red'>*Use 8 characters with min 1 lower 1 upper case & digit! </span>");
@@ -139,6 +139,26 @@
             } else {
                 {
                     $("#s6").remove();
+
+                    console.log($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount);
+
+                }
+            }
+        };
+
+        var validateConfirm_password = function(eventData) {
+            var pattern = /^((?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])){6,16}/;
+            if (!pattern.test(eventData.delegateTarget.value)) {
+                if ($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount == 0) {
+                    $(eventData.delegateTarget.previousSibling.previousElementSibling).append(" <span id='s7' style='color:red'>*password is not matched </span>");
+
+                    console.log($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount);
+                }
+
+
+            } else {
+                {
+                    $("#s7").remove();
 
                     console.log($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount);
 
@@ -168,6 +188,9 @@
                     break;
                 case "password":
                     validatePass(eventData);
+                    break;
+                case "Confirm_password":
+                    validateConfirm_password(eventData);
                     break;
                 default:
 
