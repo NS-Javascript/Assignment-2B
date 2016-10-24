@@ -24,19 +24,36 @@
       "nextStep"
     ];
 
+//var sp= $('<span />').attr({'className':'error-msg', 'id':'first_span' });
+var sp1= $('<span />').attr({'className':'error-msg', 'id':'last_span' });
 
     var validateFirstName = function (eventData) {
-      if($("#firstname").val()==""){
-    alert("empty");
-    return false;
-    }
-        else
-        alert("not empty");
+      var sp= $('<span />').attr({'className':'error-msg', 'id':'first_span' });
+      console.log(eventData);
+      console.log(eventData.delegateTarget.parentElement.childElementCount);
+        if($("#firstname").val()==""){
+          if(eventData.delegateTarget.parentElement.childElementCount==2){
+          sp.html("hii");
+          $("#firstname").after(sp);
+          }
+}
+        else{
+        $("#first_span").remove();
         return true;
+      }
     };
 
     var validateLastName = function (eventData) {
-
+      if($("#lastname").val()==""){
+            sp1.text("plz enter last name");
+            $(this).next("span").remove();
+            $("#lastname").after(sp1);
+            return false;
+            }
+      else{
+      $("#last_span").html("");
+      return true;
+      }
     };
 
 
@@ -75,8 +92,8 @@
       $("#" + validationOnIDs[i]).on("blur click", function (event) {
         var eventType = event.type;
         var eventSource = event.delegateTarget.id;
-        console.log(eventSource);
-        console.log(eventType);
+        //console.log(eventSource);
+        //console.log(eventType);
         hadleEvent(eventType, eventSource, event);
       });
     }
