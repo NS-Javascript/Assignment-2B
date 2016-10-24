@@ -26,11 +26,11 @@
 
 /*validation First Name*/
 var validateFirstName = function (eventData) {
-  console.log(eventData);
+//console.log(eventData);
 var eventTag=eventData.delegateTarget;
 var length=eventTag.value.length;
 //console.log(length);
-if (length=0) {
+if (length==0) {
   $(eventData.delegateTarget).after('<span class="error-message" id="ediv1" style="display : table-row-group">plz valid</span>');
   return false;
   }else {
@@ -39,10 +39,21 @@ if (length=0) {
   }
 }
 
-
+/*validation Last Name*/
     var validateLastName = function (eventData) {
+      var eventTag=eventData.delegateTarget;
+      var length=eventTag.value.length;
+      //console.log(length);
+      if (length==0) {
+        $(eventData.delegateTarget).after('<span class="error-message" id="ediv2" style="display : table-row-group">plz valid</span>');
+        return false;
+        }else {
+        $("#ediv2").remove();
+        return true;
+        }
+      }
 
-    };
+
 
 
     var handleBlurEvent = function (eventSource, eventData) {
