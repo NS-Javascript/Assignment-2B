@@ -20,6 +20,9 @@
 
 <!-- jQuery library (served from Google) -->
 <script src="js/jquery.js"></script>
+<script type="text/javascript" src="js/valid2.js"></script>
+
+
 <!-- bxSlider Javascript file -->
 <script src="js/jquery.bxslider.min.js"></script>
 <script src="js/script.js" type="text/javascript"></script>
@@ -125,27 +128,32 @@
 					<li class="fileds">
 						<div class="name_fileds">
 							<label>First Name</label>
-							<input name="firstname" type="text" />
+							<input name="firstname" type="text" id="firstname" />
+              <span id="first_span"></span>
 						</div>
 						<div class="name_fileds">
 							<label>Last Name</label>
-							<input name="lastname" type="text" />
+							<input name="lastname" type="text" id="lastname"/>
+              <span id="last_span"></span>
 						</div>
 					</li>
 					<li class="fileds">
 						<div class="phone_fileds">
 							<label>Phone No</label>
-							<input name="phone" type="text" />
+							<input name="phone" type="text"  id="phone"/>
+      <span id="phone_span"></span>
 						</div>
 						<div class="phone_fileds">
 							<label>Office No</label>
-							<input name="office" type="text" />
+							<input name="office" type="text" id="office"/>
+              <span id="office_span"></span>
 						</div>
 					</li>
 					<li class="fileds">
 						<div class="email_fileds">
 							<label>Email</label>
-							<input name="email" type="text" />
+							<input name="email" type="text" id="email"/>
+              <span id="email_span"></span>
 						</div>
 						<div class="pass_fileds">
 							<label>Password</label>
@@ -454,9 +462,9 @@ Live a life without regrets and take action today!</p>
 
 </div>
 <script type="text/javascript">
-	$(document).ready(function(){
-	  $('.bxslider').bxSlider();
-	});
+	// $(document).ready(function(){
+	//   $('.bxslider').bxSlider();
+	// });
 </script>
 <!--wrapper-starts-->
 
