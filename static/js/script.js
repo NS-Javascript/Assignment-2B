@@ -75,3 +75,46 @@ jQuery(document).ready(function() {
 	/* Fixed Header */
 
 });
+
+
+
+
+
+/*
+*	Validation Script
+*	Author : Vaibhav Khot
+*	Date : 24/10/2016
+*/
+
+
+
+
+$(document).ready(function () {
+
+emptyValid();
+
+
+
+
+})
+
+
+function emptyValid() {
+var inputElements = $('input[id^="e_"]');
+console.log(inputElements);
+for (var i = 0; i < inputElements.length; i++){
+$(inputElements[i]).blur(function() {
+console.log(this);
+console.log($(this).val());
+var name=$(this).val().length;
+ if(name==0){
+$(this).after('<span class="error-message" id="ediv1" style="display : table-row-group">plz valid</span>');
+return false;
+}else {
+$("#ediv1").remove();
+return true;
+}
+})
+
+}
+}
