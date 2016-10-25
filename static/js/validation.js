@@ -2,10 +2,10 @@
   'use strict';
 
   $(document).ready(function (event) {
-
-
 years_drop();
 
+var flag=0;
+console.log(flag);
     var validationOnIDs = [
       "firstname",
       "lastname",
@@ -37,12 +37,15 @@ years_drop();
               if(eventData.delegateTarget.parentElement.childElementCount==2){
                     sp.html("enter first name");
                     $("#firstname").after(sp);
-                    return false;
+                    flag=0;
+                    console.log(flag);
+                    //return false;
           }
         }
         else{
               $("#first_span").remove();
-                    return true;
+                    flag=1;
+                    console.log(flag);
       }
     };
 
@@ -362,9 +365,28 @@ var validateAboutyou = function (eventData) {
     var handleClickEvent = function (eventSource, eventData) {
       switch (eventSource)
       {
-      // case "residence1":
-      //   validateGender(eventData);
-      //   break;
+      case "residence1":
+       validateGender(eventData);
+       break;
+
+      case "residence2":
+        validateGender(eventData);
+        break;
+
+      case "year":
+        dob(eventData);
+        break;
+      case "checkbox_sample18":
+        validateInterest(eventData);
+        break;
+
+      case "checkbox_sample19":
+        validateInterest(eventData);
+        break;
+
+      case "checkbox_sample20":
+        validateInterest(eventData);
+        break;
       }
     };
 
