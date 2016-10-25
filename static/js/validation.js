@@ -10,7 +10,7 @@
       "office",
       "email",
       "password",
-      "password",
+      "cpassword",
       "month",
       "day",
       "year",
@@ -117,7 +117,46 @@
               }
     }
 
+/*validation Password Blur ------------------------------------------------------*/
+    /*Password Pattern--------------------------------------------------- */
+      var validatePass = function (eventData) {
+      var eventTag=eventData.delegateTarget;
+      var length=eventTag.value.length;
 
+        if (length==0 || (!eventTag.value.match(/^([0-9]){4,4}$/)) ) {
+          if(eventData.currentTarget.parentElement.childElementCount==2) {
+              $(eventData.delegateTarget).after
+              ('<span class="pass-error-span"  style="display : table-row-group">Please Fill Valid 4 Digit Password</span>');
+              return false;
+            }
+        }
+          else {
+                $(".pass-error-span").remove();
+                return true;
+              }
+    }
+
+
+/*validation Confirm Password Blur ------------------------------------------------------*/
+    /*Confirm Password Pattern + Password and Confirm Password Match------------------ */
+      var validateConPass = function (eventData) {
+      var eventTag=eventData.delegateTarget;
+      var tagValue=eventTag.value;
+      var length=tagValue.length;
+      var pass=$("#password").val()
+
+        if (length==0 || (!eventTag.value.match(/^([0-9]){4,4}$/)) ||  tagValue!==pass) {
+          if(eventData.currentTarget.parentElement.childElementCount==2) {
+              $(eventData.delegateTarget).after
+              ('<span class="cpass-error-span"  style="display : table-row-group">Please Fill Valid Same 4 Digit Password</span>');
+              return false;
+            }
+        }
+          else {
+                $(".cpass-error-span").remove();
+                return true;
+              }
+    }
 
 
 
@@ -138,6 +177,9 @@
         break;
         case "password" :
           validatePass(eventData);
+        break;
+        case "cpassword" :
+          validateConPass(eventData);
         break;
         default:
 
