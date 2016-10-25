@@ -158,6 +158,23 @@
               }
     }
 
+/* Year Generation ----------------------------------------- ------------------------*/
+  function listYear(target, start) {
+    if (!target) {
+        return false;
+        }
+        else {
+            var currentYear = (new Date).getFullYear();
+            for (var i = currentYear; i>=start; i--){
+                var opt = document.createElement('option');
+                opt.value = i;
+                opt.innerHTML = i;
+                $(target).append(opt);
+            }
+        }
+    }
+
+listYear("#year",1976); //call to Year Generation Method
 
 
 /*Blur Events and associated Methods ----------------------------------------- */
@@ -201,6 +218,9 @@
         break;
         case "click":
           handleClickEvent(eventSource, eventData);
+        break;
+        case "change":
+          handleChangeEvent(eventSource, eventData);
         break;
         default:
 
