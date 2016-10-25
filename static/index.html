@@ -173,11 +173,12 @@
                                     <input id="Confirm_password" type="text" />
                                 </div>
                                 <div class="dob_fileds selectbox">
-                                    <label>My birthdate is</label>
+                                    <label id="bdname">My birthdate is</label>
 
                                     <ul>
                                         <li>
                                             <select id="month" class="select month">
+                                              	<option value="select">Select</option>
 											<option value="jan">Jan</option>
 											<option value="feb">Feb</option>
 											<option value="march">March</option>
@@ -194,6 +195,7 @@
                                         </li>
                                         <li>
                                             <select id="day" class="select day">
+                                              	<option value="select">Select</option>
 											<option value="1">01</option>
 											<option value="2">02</option>
 											<option value="3">03</option>
@@ -224,9 +226,9 @@
 											<option value="26">26</option>
 											<option value="27">27</option>
 											<option value="28">28</option>
-											<option value="29">29</option>
-											<option value="30">30</option>
-											<option value="31">31</option>
+											<option value="29" id="29">29</option>
+											<option value="30" id="30">30</option>
+											<option value="31" id="31">31</option>
 										</select>
                                         </li>
 
@@ -262,7 +264,7 @@
                                 </div>
                                 <div class="about_you_fileds">
                                     <label>About you</label>
-                                    <textarea></textarea>
+                                    <textarea id="About_you"></textarea>
                                 </div>
                             </li>
                             <li class="fileds">
@@ -297,7 +299,7 @@
                         </ul>
                         <div class="next_btn_block" id="nextStep">
                             <div class="next_btn">
-                                <a href="partners_preference_form.html">Proceed to Step 2 <span><img src="images/small_triangle.png" alt="small_triangle"> </span></a>
+                                <a href="partners_preference_form.html" id="step2" >Proceed to Step 2 <span><img src="images/small_triangle.png" alt="small_triangle"> </span></a>
                             </div>
                         </div>
                     </div>

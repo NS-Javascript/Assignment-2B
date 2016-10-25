@@ -1,8 +1,9 @@
 (function() {
     'use strict';
 
-    $(document).ready(function(event) {
 
+    $(document).ready(function(event) {
+     dyanmicyear();
         var validationOnIDs = [
             "firstname",
             "lastname",
@@ -10,7 +11,7 @@
             "office",
             "email",
             "password",
-            "password",
+            "Confirm_password",
             "month",
             "day",
             "year",
@@ -21,8 +22,22 @@
             "checkbox_sample19",
             "checkbox_sample20",
             "gender",
-            "nextStep"
+            "nextStep",
+            "About_you"
         ];
+
+        function dyanmicyear() {
+            var myDate = new Date();
+            console.log(myDate);
+            var year = myDate.getFullYear();
+            for (var i = 1980; i < year + 1; i++) {
+                var opt = $("<option>");
+              opt.html(i);
+                var elementy = $("#year");
+                elementy.append(opt);
+            }
+
+        }
 
 
         var validateFirstName = function(eventData) {
@@ -32,14 +47,17 @@
                 if ($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount == 0) {
                     $(eventData.delegateTarget.previousSibling.previousElementSibling).append(" <span id='s1' style='color:red'>Please Fill the First name</span>");
 
-                    console.log($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount);
+                  //  console.log($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount);
+                    return false;
                 }
+                  return false;
 
             } else {
                 {
                     $("#s1").remove();
 
-                    console.log($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount);
+                  //  console.log($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount);
+                    return true;
 
                 }
             }
@@ -53,14 +71,16 @@
                     $(eventData.delegateTarget.previousSibling.previousElementSibling).append(" <span id='s2' style='color:red'>Please Fill the Last name</span>");
 
                     console.log($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount);
+                    return false;
                 }
-
+                return false;
 
             } else {
                 {
                     $("#s2").remove();
 
                     console.log($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount);
+                    return true;
 
                 }
             }
@@ -73,14 +93,16 @@
                     $(eventData.delegateTarget.previousSibling.previousElementSibling).append(" <span id='s3' style='color:red'>*phone can only 10 digit number </span>");
 
                     console.log($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount);
+                    return false;
                 }
-
+                return false;
 
             } else {
                 {
                     $("#s3").remove();
 
                     console.log($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount);
+                    return true;
 
                 }
             }
@@ -93,14 +115,16 @@
                     $(eventData.delegateTarget.previousSibling.previousElementSibling).append(" <span id='s4' style='color:red'>*Office can min 6 digit & max 8 number </span>");
 
                     console.log($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount);
+                    return false;
                 }
-
+                return false;
 
             } else {
                 {
                     $("#s4").remove();
 
                     console.log($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount);
+                    return true;
 
                 }
             }
@@ -113,61 +137,316 @@
                     $(eventData.delegateTarget.previousSibling.previousElementSibling).append(" <span id='s5' style='color:red'>*please fill valid email </span>");
 
                     console.log($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount);
+                    return false;
                 }
-
+                return false;
 
             } else {
                 {
                     $("#s5").remove();
 
                     console.log($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount);
+                    return true;
 
                 }
             }
         };
-
+var b;
         var validatePass = function(eventData) {
+          b=eventData.delegateTarget.value;
             var pattern = /^((?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])){6,16}/;
             if (!pattern.test(eventData.delegateTarget.value)) {
                 if ($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount == 0) {
                     $(eventData.delegateTarget.previousSibling.previousElementSibling).append(" <span id='s6' style='color:red'>*Use 8 characters with min 1 lower 1 upper case & digit! </span>");
 
                     console.log($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount);
+                    return false;
                 }
-
+                return false;
 
             } else {
                 {
                     $("#s6").remove();
 
                     console.log($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount);
+                    return true;
 
                 }
             }
         };
 
         var validateConfirm_password = function(eventData) {
-            var pattern = /^((?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])){6,16}/;
-            if (!pattern.test(eventData.delegateTarget.value)) {
+//var a=$("password").val();
+            if (eventData.delegateTarget.value !=b) {
                 if ($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount == 0) {
                     $(eventData.delegateTarget.previousSibling.previousElementSibling).append(" <span id='s7' style='color:red'>*password is not matched </span>");
 
                     console.log($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount);
+                    console.log(eventData.delegateTarget.value);
+                    console.log(b);
+                    return false;
                 }
-
+                return false;
 
             } else {
                 {
                     $("#s7").remove();
 
                     console.log($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount);
+                    return true;
+
+                }
+            }
+        };
+
+        function daycalculator() {
+          //  var monthcal = document.getElementById("month").value;
+        //    var yearcal = document.getElementById("year").value;
+        var monthcal=month;
+        console.log(month);
+            if (monthcal == "jan" || monthcal == "march" || monthcal == "5" || monthcal == "7" ||
+                monthcal == "8" || monthcal == "10" || monthcal == "12") {
+                document.getElementById("31").style.visibility = "visible";
+                document.getElementById("29").style.visibility = "visible";
+                document.getElementById("30").style.visibility = "visible";
+                console.log("true");
+                return true;
+            } else if (monthcal == "2") {
+                year();
+                if (yearcal % 400 == 0 || yearcal % 4 == 0) {
+                    document.getElementById("30").style.visibility = "hidden";
+                    document.getElementById("31").style.visibility = "hidden";
+                    return true;
+                    console.log("leap");
+                } else {
+                    document.getElementById("30").style.visibility = "hidden";
+                    document.getElementById("31").style.visibility = "hidden";
+                    document.getElementById("29").style.visibility = "hidden";
+                }
+                console.log("false");
+
+            } else {
+                document.getElementById("31").style.visibility = "hidden";
+                document.getElementById("29").style.visibility = "visible";
+                document.getElementById("30").style.visibility = "visible";
+                console.log("else");
+            }
+        }
+        var validateAbout_you = function(eventData) {
+
+            if (eventData.delegateTarget.value == "" || eventData.delegateTarget.value == null) {
+                if ($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount == 0) {
+                    $(eventData.delegateTarget.previousSibling.previousElementSibling).append(" <span id='s8' style='color:red'>Please Fill the About_you</span>");
+
+                    console.log($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount);
+                    return false;
+                }
+                return false;
+
+            } else {
+                {
+                    $("#s8").remove();
+
+                    console.log($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount);
+                    return true;
 
                 }
             }
         };
 
 
+            /*    var validateResidence1 = function(eventData) {
+                  console.log(eventData.currentTarget.parentElement.nextElementSibling.children.residence2.checked);
+console.log(eventData.delegateTarget.value);
+console.log(eventData.currentTarget.parentElement.offsetParent.childNodes[1]);
+                  //  if (eventData.delegateTarget.value == "off" )
+                  if (eventData.delegateTarget.value == "off" || eventData.currentTarget.parentElement.nextElementSibling.children.residence2.checked == true ) {
+                        if ($(eventData.currentTarget.parentElement.offsetParent.childNodes[1]).context.childElementCount == 0) {
+                            $(eventData.currentTarget.parentElement.offsetParent.childNodes[1]).append(" <span id='s9' style='color:red'>Please Fill the About_you</span>");
 
+                            console.log($(eventData.currentTarget.parentElement.offsetParent.childNodes[1]).context.childElementCount);
+                            return false;
+                        }
+                        return false;
+
+                    } else {
+
+                        {
+                            $("#s9").remove();
+
+                          //  console.log($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount);
+                            return true;
+
+                        }
+                    }
+                };
+
+*/
+var male;
+var female;
+ var validateResidence1 = function(eventData) {
+
+console.log(eventData.currentTarget.checked);
+male=eventData.currentTarget.checked;
+console.log(male);
+//console.log(female);
+if (male==true) {
+  console.log(  $($(eventData.currentTarget.parentElement.parentElement).previousSibling));
+  $(eventData.delegateTarget.parentElement.parentElement.previousSibling).append(" <span id='sGender' style='color:red'>Please Fill the About_you</span>");
+
+//  console.log($(eventData.delegateTarget.parentElement.parentElement.previousSibling).context.childElementCount);
+  return false;
+
+
+} else {
+{
+  $("#sGender").remove();
+
+//  console.log($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount);
+  return true;
+
+}
+}
+
+
+ };
+
+
+ var validateResidence2 = function(eventData) {
+
+console.log(eventData.currentTarget.checked);
+female=eventData.currentTarget.checked;
+console.log(female);
+console.log(male);
+ };
+function validateGender() {
+  if(male==false || female==false){
+
+  }else {
+
+  }
+
+}
+ var validateMonth = function(eventData) {
+//console.log(eventData.delegateTarget.value);
+var month=$("#month").val();
+    if (month == "select" || month == "") {
+      return false;
+    }
+    else{
+      if (month == "jan" || month == "march" || month == "may" || month == "july" ||
+          month == "aug" || month == "oct" || month == "dec") {
+
+
+          $("#29").show();
+            $("#30").show();
+              $("#31").show();
+          return true;
+      }
+      else if (month=="feb") {
+        $("#29").hide();
+          $("#30").hide();
+            $("#31").hide();
+        return true;
+
+      }
+      else {
+        $("#29").show();
+          $("#30").show();
+            $("#31").hide();
+        return true;
+      }
+    }
+ };
+var validateDay = function(eventData) {
+  var day=$("#day").val();
+  if(day=="select" || day==""){
+    return false;
+  }
+  else {
+    return true;
+  }
+
+};
+ var validateYear = function(eventData) {
+//console.log(eventData.delegateTarget.value);
+var year=$("#year").val();
+//console.log($("#month").val());
+    if (year == "select" || year == "") {
+      return false;
+    }
+    else{
+      if($("#month").val()=="select" ){
+        return false;
+      }
+      else   if($("#month").val()=="feb"){
+        if (year%4==0||year%400==0) {
+            $("#29").show();
+              $("#30").hide();
+                $("#31").hide();
+            return true;
+        }
+        else {
+          $("#29").hide();
+            $("#30").hide();
+              $("#31").hide();
+          return true;
+        }
+      }
+}
+};
+
+var validateStep2 = function (eventData) {
+  console.log(eventData);
+  if (validateFirstName() && validateLastName() && validatePhoneNo() && validateOfficeNo() && validateEmail() && validatePass() &&
+      validateConfirm_password() && Dob()) {
+      return true;
+  } else {
+      alert("Please fill all the details")
+      return false;
+  }
+
+};
+
+function Dob() {
+    if (validateMonth()==false || validateDay()==false || validateYear()==false) {
+console.log($("#bdname").context.childElementCount);
+      if ($("#bdname").context.childElementCount == 1) {
+          $("#bdname").append(" <span id='sdob' style='color:red'>*Please select Dob ! </span>");
+
+
+          return false;
+      }
+      return false;
+
+      } else {
+
+          $("#sdob").remove();
+
+
+          return true;
+
+      }
+    };
+
+
+
+
+
+
+  /*      document.getElementById("bdname").innerHTML = "";
+        month();
+        year();
+        Agecal();
+        return true;
+    } else {
+        //  document.getElementById("Agename").innerHTML = ("Please select birthdate first");
+        document.getElementById('age').value = "Please select birthdate first";
+        return false;
+
+    }
+
+}*/
 
         var handleBlurEvent = function(eventSource, eventData) {
             switch (eventSource) {
@@ -192,22 +471,49 @@
                 case "Confirm_password":
                     validateConfirm_password(eventData);
                     break;
+                    case "About_you":
+                        validateAbout_you(eventData);
+                        break;
                 default:
 
             }
         };
 
         var handleClickEvent = function(eventSource, eventData) {
+          switch (eventSource) {
+            case "month":
+                validateMonth(eventData);
+                break;
+                case "day":
+                    validateDay(eventData);
+                    break;
+                    case "year":
+                        validateYear(eventData);
+                        Dob();
+
+                        break;
+              case "residence1":
+                  validateResidence1(eventData);
+                  break;
+                  case "residence2":
+                      validateResidence2(eventData);
+                      break;
+                      case "nextStep":
+                          validateStep2(eventData);
+                          break;
+
+                      default:
+                }
 
         };
 
         var hadleEvent = function(eventType, eventSource, eventData) {
             switch (eventType) {
                 case "blur":
-                    handleBlurEvent(eventSource, eventData);
+                return handleBlurEvent(eventSource, eventData);
                     break;
                 case "click":
-                    handleClickEvent(eventSource, eventData);
+                  return handleClickEvent(eventSource, eventData);
                     break;
                 default:
 
@@ -219,8 +525,13 @@
             $("#" + validationOnIDs[i]).on("blur click", function(event) {
                 var eventType = event.type;
                 var eventSource = event.delegateTarget.id;
-                hadleEvent(eventType, eventSource, event);
+              var rahul = hadleEvent(eventType, eventSource, event);
+          //    console.log("dfdfgd");
+            //  console.log(rahul);
+
+
             });
         }
+
     });
 }());
