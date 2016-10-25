@@ -1,6 +1,9 @@
 @charset "utf-8";
 /* CSS Document */
 
+.error-msg{
+  color: red;
+}
 
 @font-face {
     font-family: 'roboto_slabregular';
@@ -99,7 +102,7 @@ section { width:100%;}
 .divBanner{ position:relative; width:100%; color:#fff;}
 .divBannerTxt h1{ font-size: 23px; font-family: 'roboto_slabregular'; padding:25px;color:#fff;background:url(../images/icon5.png) no-repeat scroll left center  transparent;
  float:left; position: relative; padding: 38px 0 38px 70px; font-weight:normal; margin-bottom: 0; }
- .divBannerTxt a{ float: right;border: 2px solid #fff;background: transparent;padding: 15px 40px;border-radius: 5px;margin-top: 24px; color:#fff; 
+ .divBannerTxt a{ float: right;border: 2px solid #fff;background: transparent;padding: 15px 40px;border-radius: 5px;margin-top: 24px; color:#fff;
 font-family: 'roboto_slabregular'; text-decoration: none; font-size:16px;}
 .divBannerTxt:hover  a{background: #70726b;}
  .divBannerTxt .container{ width:896px; margin:0 auto;}
@@ -119,7 +122,7 @@ padding: 50px 70px;background-color: rgba(148,177,50,0.7);top: 270px;left: 110px
 a.tooltip:before{background: url(../images/dotted-line.png); content: ""; position: absolute; right: -38px; top: 45%; height: 5px; z-index: 5; min-width:76px; background-repeat: repeat-x;}
 a.tooltip:last-child:before{display:none;}
 a.tooltip strong {line-height:30px; font-weight: normal; font-family: 'roboto_slablight';text-transform:none;}
-a.tooltip:hover {text-decoration:none;} 
+a.tooltip:hover {text-decoration:none;}
 a.tooltip:hover .number{color:#628407;}
 a.tooltip span {
     z-index:10;display:none; padding:14px 20px;
@@ -130,7 +133,7 @@ a.tooltip:hover span{
     display:inline; position:absolute; left: -100%;
 }
 .callout {z-index:20;position:absolute;border:0;top:-14px;left:120px;}
-    
+
 /*CSS3 extras*/
 a.tooltip span{border-radius:4px;  border:4px solid #c9ef3f;  color:#5c5c5c;  /*opacity: 0.8;*/}
 
@@ -150,7 +153,7 @@ a.tooltip span{border-radius:4px;  border:4px solid #c9ef3f;  color:#5c5c5c;  /*
 .About_Cont_Left ul li{list-style:none; display:block; color:#333333; background-image:url(../images/arrow1.png); background-repeat:no-repeat; background-position:top left; padding:0 0 15px 25px; font-family: 'roboto_slabregular';}
 
 .About_Cont_Left .Contact_bt1 {}
-.About_Cont_Left .Contact_bt1 a{color:#fff; text-decoration:none; width:245px; height:55px; line-height:55px; text-align:center; background-color:#a9c924; font-size:16px; line-height:55px;-webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; font-family: 'roboto_slabregular';  display: block;} 
+.About_Cont_Left .Contact_bt1 a{color:#fff; text-decoration:none; width:245px; height:55px; line-height:55px; text-align:center; background-color:#a9c924; font-size:16px; line-height:55px;-webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; font-family: 'roboto_slabregular';  display: block;}
 .About_Cont_Left .Contact_bt1:hover a{text-decoration:none; background-color: #bbd841;}
 .About_Cont_Right{width:42%; height:auto; margin:0; padding:145px 0 0 0; border:0px solid red;}
 .About_Cont_Right p{font-size:16px; line-height:28px; color:#5c5c5c;}
@@ -170,7 +173,7 @@ a.tooltip span{border-radius:4px;  border:4px solid #c9ef3f;  color:#5c5c5c;  /*
 
 .Process_Woman .Contact_bt1{ display: block;}
 
-.Process_Woman .Contact_bt1 a{width:245px; height:55px; line-height:55px; margin:0 auto; text-align:center; background-color:#a9c924; font-size:16px;  color:#fff; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; font-family: 'roboto_slabregular'; text-decoration:none; display: block;} 
+.Process_Woman .Contact_bt1 a{width:245px; height:55px; line-height:55px; margin:0 auto; text-align:center; background-color:#a9c924; font-size:16px;  color:#fff; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; font-family: 'roboto_slabregular'; text-decoration:none; display: block;}
 /*.Process_Woman .Contact_bt1 a:hover{color:#000; text-decoration:none;}*/
 .Process_Woman .Contact_bt1:hover a{background:#7b9917;}
 .Process_Woman .marg1{ margin-top:67px;}
@@ -192,7 +195,7 @@ a.tooltip span{border-radius:4px;  border:4px solid #c9ef3f;  color:#5c5c5c;  /*
 .Blog_Box1 p{width:85%; font-size:16px; line-height:28px; color:#686868; margin:0; font-family: 'roboto_slablight';}
 
 .Blog_Box1 .blog_bt1{ width:150px; height:40px; line-height:40px; margin:20px 0 0; text-align:center; border:1px solid #a9c924; /*background-color:#c;*/ font-size:14px; color:#fff; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; font-family: 'roboto_slabregular'; cursor: pointer;}
-.Blog_Box1 .blog_bt1 a{color:#a9c924; text-decoration:none;} 
+.Blog_Box1 .blog_bt1 a{color:#a9c924; text-decoration:none;}
 /*.Blog_Box1 .blog_bt1 a:hover{color:#000; text-decoration:none;}*/
 
 
@@ -454,7 +457,7 @@ ul.blogs_list li .blog_image{display: block; border-radius: 3px;}
 
 
 /* Contact Us Google Form */
-.gform_wrapper_1 ul.gform_fields{} 
+.gform_wrapper_1 ul.gform_fields{}
 .gform_wrapper_1 ul.gform_fields li.gfield{display: inline-block; width: 48%;}
 .gform_wrapper_1 ul.gform_fields li.gfield a{border-radius: 5px;
     color: #686868;
@@ -760,8 +763,8 @@ span.select{position:absolute; background:#ffffff url('../images/drop-down.png')
 .thank_you_bock h4{font-size: 25px; line-height: 29px; color: #5c5c5c; font-family: 'roboto_slabregular'; font-weight: normal;}
 .thank_you_bock .clients_comments{padding: 50px 30px; background: url(../images/clients_comment_bg.png) no-repeat; background-size: cover; font-size: 20px; line-height: 36px; color: #fff; font-family: 'roboto_slabregular'; position: relative;}
 
-.arrow_box { position: relative; background: #f7f7f7; border: 5px solid #0; } 
-.thank_you_bock .clients_comments:after { background: transparent; border: medium solid transparent; bottom: -30px;  content: " "; height: 0; left: 50px; pointer-events: none; position: absolute; width: 0; z-index: 1; } 
+.arrow_box { position: relative; background: #f7f7f7; border: 5px solid #0; }
+.thank_you_bock .clients_comments:after { background: transparent; border: medium solid transparent; bottom: -30px;  content: " "; height: 0; left: 50px; pointer-events: none; position: absolute; width: 0; z-index: 1; }
 .thank_you_bock .clients_comments:after { border-color: rgba(247, 247, 247, 0); border-top-color: #f7f7f7; border-width: 15px; margin-left: -15px; }
 .thank_you_bock .cliets_name{font-size: 20px; line-height: 24px;font-family: 'robotoslab-bold'; vertical-align: baseline; margin-top: 5px; color: #5c5c5c;}
 .thank_you_bock .cliets_name span{ display: inline-block; height: 51px; margin-right: 10px; vertical-align: bottom; width: 51px;}
