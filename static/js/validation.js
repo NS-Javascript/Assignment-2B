@@ -24,7 +24,9 @@
       "nextStep"
     ];
 
-
+/*##########################################################################################
+Blur Methods
+###########################################################################################/*
 /*validation First Name Blur------------------------------------------------------ */
     var validateFirstName = function (eventData) {
     var eventTag=eventData.delegateTarget;
@@ -157,6 +159,59 @@
                 return true;
               }
     }
+/*##########################################################################################*/
+
+
+/*##########################################################################################
+Click Methods
+###########################################################################################/*
+/*Year Chnage Click Event----------------------------------------------------------------*/
+  var changeYear =function(eventData){
+      selectDate($("#day").attr("id"),$("#month").attr("id"),$("#year").attr("id"));
+    };
+
+
+
+/*Month Chnage Click Event----------------------------------------------------------------*/
+    var changeMonth =function(eventData){
+        selectDate($("#day").attr("id"),$("#month").attr("id"),$("#year").attr("id"));
+      };
+
+/*validation Gender Click------------------------------------------------------ */
+    var clickResidence1= function (eventData) {
+
+  };
+
+
+  /*Day Chnage Click and Age Calculation-----------------------------------------------------*/
+    var changeDay =function(eventData){
+
+      var y=parseInt($("#year").val());
+      var m=parseInt($("#month").val());
+      var d=parseInt($("#day").val());
+
+        if ($("#day").value!="select" &&
+            $("#year").value!="select" &&
+            $("#month").value!="select"){
+                  var dob = new Date(y,m,d);
+                  var today = new Date();
+                  var diffDate = Math.abs(dob.getTime() - today.getTime());
+                  var diff = parseFloat(Math.abs(diffDate / (1000 * 60 * 60 * 24 * 365.25)));
+                  if(diff!="NaN"){
+                    $("#age").val(diff.toPrecision(3)+" Years");
+                  }
+                }
+                else {
+                    $("#age").val("Years") ;
+                }
+          };
+
+/*########################################################################################*/
+
+
+/*##########################################################################################
+Other Methods
+###########################################################################################/*
 
 /* Year Generation ----------------------------------------- ------------------------*/
   function listYear(target, start) {
@@ -180,40 +235,7 @@ listYear("#year",1976); //call to Year Generation Method
 
 
 
-/*Year Chnage Click Event----------------------------------------------------------------*/
-  var changeYear =function(eventData){
-      selectDate($("#day").attr("id"),$("#month").attr("id"),$("#year").attr("id"));
-    };
 
-
-
-/*Month Chnage Click Event----------------------------------------------------------------*/
-    var changeMonth =function(eventData){
-        selectDate($("#day").attr("id"),$("#month").attr("id"),$("#year").attr("id"));
-      };
-
-/*Day Chnage Click and Age Calculation-----------------------------------------------------*/
-  var changeDay =function(eventData){
-
-    var y=parseInt($("#year").val());
-    var m=parseInt($("#month").val());
-    var d=parseInt($("#day").val());
-
-      if ($("#day").value!="select" &&
-          $("#year").value!="select" &&
-          $("#month").value!="select"){
-                var dob = new Date(y,m,d);
-                var today = new Date();
-                var diffDate = Math.abs(dob.getTime() - today.getTime());
-                var diff = parseFloat(Math.abs(diffDate / (1000 * 60 * 60 * 24 * 365.25)));
-                if(diff!="NaN"){
-                  $("#age").val(diff.toPrecision(3)+" Years");
-                }
-                }
-                else {
-                  $("#age").val("Years") ;
-                }
-        };
 
 /*------------------------------------------------------------------------------
 *Function For Date POP UP
@@ -275,6 +297,9 @@ function selectDate(d,m,y) {
       break;
       case "day" :
         changeDay(eventData);
+      break;
+      case "residence1" :
+        clickResidence1(eventData);
       break;
       default:
     }
