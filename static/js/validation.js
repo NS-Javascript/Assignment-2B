@@ -174,8 +174,68 @@
         }
     }
 
+
+
 listYear("#year",1976); //call to Year Generation Method
 
+
+
+/*Year Chnage Click Event----------------------------------------------------------------*/
+  var changeYear =function(eventData){
+      selectDate($("#day").attr("id"),$("#month").attr("id"),$("#year").attr("id"));
+    };
+
+
+
+/*Month Chnage Click Event----------------------------------------------------------------*/
+    var changeMonth =function(eventData){
+        selectDate($("#day").attr("id"),$("#month").attr("id"),$("#year").attr("id"));
+      };
+
+/*Day Chnage Click and Age Calculation-----------------------------------------------------*/
+  var changeDay =function(eventData){
+
+    var y=parseInt($("#year").val());
+    var m=parseInt($("#month").val());
+    var d=parseInt($("#day").val());
+
+      if ($("#day").value!="select" &&
+          $("#year").value!="select" &&
+          $("#month").value!="select"){
+                var dob = new Date(y,m,d);
+                var today = new Date();
+                var diffDate = Math.abs(dob.getTime() - today.getTime());
+                var diff = parseFloat(Math.abs(diffDate / (1000 * 60 * 60 * 24 * 365.25)));
+                if(diff!="NaN"){
+                  $("#age").val(diff.toPrecision(3)+" Years");
+                }
+                }
+                else {
+                  $("#age").val("Years") ;
+                }
+        };
+
+/*------------------------------------------------------------------------------
+*Function For Date POP UP
+* Month Start with 0 -1 -2 -....11
+* Common Fuction For Month And Year change
+* When You Select Year and Month Properly Then Days will Populated
+*-------------------------------------------------------------------------------*/
+function selectDate(d,m,y) {
+  var dy=document.getElementById(d);
+  var mth=document.getElementById(m);
+  var yr=document.getElementById(y);
+  dy.options.length=1;
+    if (mth.value && yr.value) {
+      var days=new Date(yr.value,mth.value,1,-1).getDate(); //var d = new Date(year, month, day, hours) Give Actual No Of Days
+                                                            // the first day of the next month minus 1 hour
+      for (var i=1; i<=days; i++) {                         // Create Days Options Dynamically
+          dy.options[i] = new Option(i,i);                  //new Option([text, [value, [defaultSelected, [selected]]]]);
+        }
+      dy.selectedIndex = 0;
+      $("#day").val('select').change();                      //Reset Days Option
+    }
+}
 
 /*Blur Events and associated Methods ----------------------------------------- */
     var handleBlurEvent = function (eventSource, eventData) {
@@ -204,10 +264,31 @@ listYear("#year",1976); //call to Year Generation Method
     };
 
 
-/*Click Events and associated Methods ----------------------------------------- */
-    var handleClickEvent = function (eventSource, eventData) {
+/* Click Events and associated Methods ----------------------------------------- */
+  var handleClickEvent = function (eventSource, eventData) {
+    switch (eventSource) {
+      case "year" :
+        changeYear(eventData);
+      break;
+      case "month" :
+        changeMonth(eventData);
+      break;
+      case "day" :
+        changeDay(eventData);
+      break;
+      default:
+    }
+  };
 
-    };
+/* Change Events and associated Methods ----------------------------------------- */
+var handleChangeEvent = function (eventSource, eventData) {
+  switch (eventSource) {
+    default:
+
+  }
+};
+
+
 
 
 /*Check Event ----------------------------------------- ------------------------*/
