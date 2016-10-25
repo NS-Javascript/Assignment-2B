@@ -26,7 +26,7 @@
 
 
 /*validation First Name Blur------------------------------------------------------ */
-var validateFirstName = function (eventData) {
+    var validateFirstName = function (eventData) {
     var eventTag=eventData.delegateTarget;
     var length=eventTag.value.length;
         if(length==0) {
@@ -79,24 +79,44 @@ var validateFirstName = function (eventData) {
           }
       }
 
-      /*validation Office No Blur ------------------------------------------------------*/
-        /*Office Empty + Pattern--------------------------------------------------- */
-          var validateOffice = function (eventData) {
-          var eventTag=eventData.delegateTarget;
-          var length=eventTag.value.length;
+/*validation Office No Blur ------------------------------------------------------*/
+    /*Office Empty + Pattern--------------------------------------------------- */
+      var validateOffice = function (eventData) {
+      var eventTag=eventData.delegateTarget;
+      var length=eventTag.value.length;
 
-            if (length==0 || (!eventTag.value.match(/^([0-9]){8,8}$/)) ) {
-                if(eventData.currentTarget.parentElement.childElementCount==2) {
-                    $(eventData.delegateTarget).after
-                      ('<span class="office-error-span"  style="display : table-row-group">Please Fill Valid 8 Digit Office Number</span>');
-                    return false;
-                }
-            }
-            else {
+        if (length==0 || (!eventTag.value.match(/^([0-9]){8,8}$/)) ) {
+            if(eventData.currentTarget.parentElement.childElementCount==2) {
+              $(eventData.delegateTarget).after
+              ('<span class="office-error-span"  style="display : table-row-group">Please Fill Valid 8 Digit Office Number</span>');
+              return false;
+              }
+          }
+          else {
                   $(".office-error-span").remove();
                   return true;
-                }
+              }
+      }
+
+/*validation Password Blur ------------------------------------------------------*/
+    /*Password Pattern--------------------------------------------------- */
+      var validatePass = function (eventData) {
+      var eventTag=eventData.delegateTarget;
+      var length=eventTag.value.length;
+
+        if (length==0 || (!eventTag.value.match(/^([0-9]){4,4}$/)) ) {
+          if(eventData.currentTarget.parentElement.childElementCount==2) {
+              $(eventData.delegateTarget).after
+              ('<span class="pass-error-span"  style="display : table-row-group">Please Fill Valid 4 Digit Password</span>');
+              return false;
             }
+        }
+          else {
+                $(".pass-error-span").remove();
+                return true;
+              }
+    }
+
 
 
 
@@ -115,6 +135,9 @@ var validateFirstName = function (eventData) {
         break;
         case "office" :
           validateOffice(eventData);
+        break;
+        case "password" :
+          validatePass(eventData);
         break;
         default:
 
