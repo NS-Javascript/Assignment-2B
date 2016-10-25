@@ -25,7 +25,7 @@
     ];
 
 
-/*validation First Name------------------------------------------------------ */
+/*validation First Name Blur------------------------------------------------------ */
 var validateFirstName = function (eventData) {
     var eventTag=eventData.delegateTarget;
     var length=eventTag.value.length;
@@ -39,11 +39,12 @@ var validateFirstName = function (eventData) {
               $("#ediv1").remove();
               return true;
             }
-}
+        }
 
 
-/*validation Last Name-------------------------------------------------------- */
-var validateLastName = function (eventData) {
+/*validation Last Name Blur-------------------------------------------------------- */
+  /*Last Name Empty-------------------------------------------------------- */
+      var validateLastName = function (eventData) {
       var eventTag=eventData.delegateTarget;
       var length=eventTag.value.length;
           if(length==0) {
@@ -56,91 +57,76 @@ var validateLastName = function (eventData) {
         $("#ediv2").remove();
         return true;
         }
-}
+      }
 
 
-/*validation Phone ------------------------------------------------------------*/
-  /*Phone -Empty--------------------------------------------------- */
+/*validation Phone Blur ------------------------------------------------------------*/
+  /*Phone Empty + Pattern--------------------------------------------------- */
     var validatePhone = function (eventData) {
     var eventTag=eventData.delegateTarget;
-    console.log(eventTag.value);
     var length=eventTag.value.length;
-        if(length==0) {
-        if(eventData.currentTarget.parentElement.childElementCount==2)
-        $(eventData.delegateTarget).after
-        ('<span class="error-message" id="ediv3" style="display : table-row-group">Please Fill Phone Name</span>');
-          return false;
-        }
-    else {
-    $("#ediv3").remove();
-    return true;
-    }
-  /*Phone -10 digit Validation--------------------------------------------------- */
-      var patt = /^([0-9]){10,10}$/;
-      console.log(eventTag.value);
-        if(true){
-            if(eventData.currentTarget.parentElement.childElementCount==2)
+
+      if (length==0 || (!eventTag.value.match(/^([0-9]){10,10}$/)) ) {
+          if(eventData.currentTarget.parentElement.childElementCount==2) {
               $(eventData.delegateTarget).after
-                ('<span class="error-message" id="ediv3" style="display : table-row-group">Please Fill 10 Digits Phone Name</span>');
-                return false;
-            }
-          else {
-          $("#ediv3").remove();
-          return true;
+                ('<span class="phone-error-span"  style="display : table-row-group">Please Fill Valid 10 Digit Phone Name</span>');
+              return false;
           }
-        }
-
-if (true) {
-
-} else if (true) {
-
-} {
-
-}
+      }
+      else {
+            $(".phone-error-span").remove();
+            return true;
+          }
+      }
 
 
 
 
-
+/*Blur Events and associated Methods ----------------------------------------- */
     var handleBlurEvent = function (eventSource, eventData) {
       switch (eventSource) {
         case "firstname":
           validateFirstName(eventData);
-          break;
+        break;
         case "lastname":
           validateLastName(eventData);
-          break;
-          case "phone" :
+        break;
+        case "phone" :
           validatePhone(eventData);
-          break;
+        break;
         default:
 
       }
     };
 
+
+/*Click Events and associated Methods ----------------------------------------- */
     var handleClickEvent = function (eventSource, eventData) {
 
     };
 
+
+/*Check Event ----------------------------------------- ------------------------*/
     var hadleEvent = function (eventType, eventSource, eventData) {
       switch (eventType) {
         case "blur":
-        handleBlurEvent(eventSource, eventData);
-          break;
+          handleBlurEvent(eventSource, eventData);
+        break;
         case "click":
-        handleClickEvent(eventSource, eventData);
-          break;
+          handleClickEvent(eventSource, eventData);
+        break;
         default:
 
       }
 
     };
 
+/*Capure ID ----------------------------------------- ------------------------*/
     for (var i = 0; i < validationOnIDs.length; i++) {
       $("#" + validationOnIDs[i]).on("blur click", function (event) {
-        var eventType = event.type;
-        var eventSource = event.delegateTarget.id;
-        hadleEvent(eventType, eventSource, event);
+          var eventType = event.type;
+          var eventSource = event.delegateTarget.id;
+          hadleEvent(eventType, eventSource, event);
       });
     }
   });
