@@ -285,14 +285,14 @@ console.log(eventData.currentTarget.parentElement.offsetParent.childNodes[1]);
 var male;
 var female;
  var validateResidence1 = function(eventData) {
-
-console.log(eventData.currentTarget.checked);
-male=eventData.currentTarget.checked;
+console.log("in gender");
+console.log($("#residence1")["0"].checked);
+male=$("#residence1")["0"].checked;
 console.log(male);
 //console.log(female);
-if (male==true) {
-  console.log(  $($(eventData.currentTarget.parentElement.parentElement).previousSibling));
-  $(eventData.delegateTarget.parentElement.parentElement.previousSibling).append(" <span id='sGender' style='color:red'>Please Fill the About_you</span>");
+if (male==false) {
+  console.log(  $($($("#residence1")["0"].parentElement)["0"].parentElement)["0"].previousElementSibling);
+$($($($("#residence1")["0"].parentElement)["0"].parentElement)["0"].previousElementSibling).append(" <span id='sGender' style='color:red'>Please Fill the About_you</span>");
 
 //  console.log($(eventData.delegateTarget.parentElement.parentElement.previousSibling).context.childElementCount);
   return false;
@@ -300,7 +300,7 @@ if (male==true) {
 
 } else {
 {
-  $("#sGender").remove();
+ $("#sGender").remove();
 
 //  console.log($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount);
   return true;
@@ -313,20 +313,66 @@ if (male==true) {
 
 
  var validateResidence2 = function(eventData) {
+   console.log($("#residence2")["0"].checked);
+   female=$("#residence2")["0"].checked;
+   console.log(male);
+   //console.log(female);
+   if (female==false) {
+     console.log(  $($($("#residence2")["0"].parentElement)["0"].parentElement)["0"].previousElementSibling);
+$($($($("#residence2")["0"].parentElement)["0"].parentElement)["0"].previousElementSibling).append(" <span id='sGender' style='color:red'>Please Fill the About_you</span>");
 
-console.log(eventData.currentTarget.checked);
-female=eventData.currentTarget.checked;
-console.log(female);
-console.log(male);
+   //  console.log($(eventData.delegateTarget.parentElement.parentElement.previousSibling).context.childElementCount);
+     return false;
+
+
+   } else {
+   {
+     $("#sGender").remove();
+
+   //  console.log($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount);
+     return true;
+
+   }
+   }
  };
+
+
+ function Dob() {
+     if (validateMonth()==false || validateDay()==false || validateYear()==false) {
+ console.log($("#bdname")["0"].childElementCount);
+       if ($("#bdname")["0"].childElementCount == 0) {
+           $("#bdname").append(" <span id='sdob' style='color:red'>*Please select Dob ! </span>");
+
+
+           return false;
+       }
+       return false;
+
+       } else {
+
+           $("#sdob").remove();
+
+             Agecal();
+           return true;
+
+       }
+     };
+
+
 function validateGender() {
-  if(male==false || female==false){
-
-  }else {
-
+  if($("#residence1")["0"].checked==false && $("#residence2")["0"].checked==false){
+      if ( $($($($("#residence1")["0"].parentElement)["0"].parentElement)["0"].previousElementSibling)["0"].childElementCount == 0) {
+   $($($($("#residence1")["0"].parentElement)["0"].parentElement)["0"].previousElementSibling).append(" <span id='sGender' style='color:red'>Please Fill the About_you</span>");
+    return false;
+  }
+return false;
+}
+  else {
+ $("#sGender").remove();
+ return true;
   }
 
-}
+};
  var validateMonth = function(eventData) {
 //console.log(eventData.delegateTarget.value);
 var month=$("#month").val();
@@ -396,38 +442,49 @@ var year=$("#year").val();
 }
 };
 
-var validateStep2 = function (eventData) {
-  console.log(eventData);
-  if (validateFirstName() && validateLastName() && validatePhoneNo() && validateOfficeNo() && validateEmail() && validatePass() &&
+function Agecal() {
+  console.log($("#month"));
+    var by = $("#year").val();
+    var bm =$("#month").context.nodeType-1;
+    var date = new Date();
+    var cy = date.getFullYear();
+    //alert(cy);
+    var cm = date.getMonth() + 1;
+    //   alert(cm);
+    var y = cy - by;
+    var bmon = parseInt(bm) * 0.083;
+    //   alert(bmon);
+    var cmon = parseInt(cm) * 0.083;
+    //     alert(cmon);
+    var m = cmon - bmon;
+    //   alert(m);
+    var ag = y + m;
+    //alert(ag);
+  $("#age").val(ag);
+    // var y = (cy + (cm / 12)) - (by + (bm / 12));
+    //   alert(y);
+
+}
+
+
+function validateStep2() {
+  console.log("hiiiiiiii");
+  if(validateGender() && dob() )
+  {
+    return false;
+} else {
+  alert("Please fill all the details")
+  return false;
+}
+}
+
+
+  //console.log(eventData);
+  /*if (validateFirstName() && validateLastName() && validatePhoneNo() && validateOfficeNo() && validateEmail() && validatePass() &&
       validateConfirm_password() && Dob()) {
-      return true;
-  } else {
-      alert("Please fill all the details")
-      return false;
-  }
-
-};
-
-function Dob() {
-    if (validateMonth()==false || validateDay()==false || validateYear()==false) {
-console.log($("#bdname").context.childElementCount);
-      if ($("#bdname").context.childElementCount == 1) {
-          $("#bdname").append(" <span id='sdob' style='color:red'>*Please select Dob ! </span>");
+      return true;*/
 
 
-          return false;
-      }
-      return false;
-
-      } else {
-
-          $("#sdob").remove();
-
-
-          return true;
-
-      }
-    };
 
 
 
@@ -451,10 +508,10 @@ console.log($("#bdname").context.childElementCount);
         var handleBlurEvent = function(eventSource, eventData) {
             switch (eventSource) {
                 case "firstname":
-                    validateFirstName(eventData);
+                     return validateFirstName(eventData);
                     break;
                 case "lastname":
-                    validateLastName(eventData);
+                  return  validateLastName(eventData);
                     break;
                 case "phone":
                     validatePhoneNo(eventData);
@@ -481,15 +538,22 @@ console.log($("#bdname").context.childElementCount);
 
         var handleClickEvent = function(eventSource, eventData) {
           switch (eventSource) {
+          //  return true;
             case "month":
                 validateMonth(eventData);
+                Dob();
+
                 break;
                 case "day":
                     validateDay(eventData);
+                    Dob();
+
                     break;
                     case "year":
                         validateYear(eventData);
                         Dob();
+                        validateGender();
+
 
                         break;
               case "residence1":
@@ -498,9 +562,9 @@ console.log($("#bdname").context.childElementCount);
                   case "residence2":
                       validateResidence2(eventData);
                       break;
-                      case "nextStep":
+                      /*case "nextStep":
                           validateStep2(eventData);
-                          break;
+                          break;*/
 
                       default:
                 }
