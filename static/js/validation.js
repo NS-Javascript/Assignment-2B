@@ -1,11 +1,9 @@
 (function() {
   'use strict';
-
   $(document).ready(function (event) {
 years_drop();
+var flag=["0","0"];
 
-var flag=0;
-console.log(flag);
     var validationOnIDs = [
       "firstname",
       "lastname",
@@ -37,15 +35,18 @@ console.log(flag);
               if(eventData.delegateTarget.parentElement.childElementCount==2){
                     sp.html("enter first name");
                     $("#firstname").after(sp);
-                    flag=0;
+                    flag[0]=0;
                     console.log(flag);
-                    //return false;
+                    return false;
           }
+          return false;
         }
         else{
               $("#first_span").remove();
-                    flag=1;
+                    flag[0]=1;
                     console.log(flag);
+                    return true;
+
       }
     };
 
@@ -53,14 +54,20 @@ console.log(flag);
     var validateLastName = function (eventData) {
       var sp= $('<span />').attr({'class':'error-msg', 'id':'last_span' });
         if($("#lastname").val()==""){
-              if(eventData.delegateTarget.parentElement.childElementCount==2){
-                    sp.html("enter last name");
+            //  if(eventData.delegateTarget.parentElement.childElementCount==2){
+            if($("#lastname+span").length==0)
+                {    sp.html("enter last name");
                     $("#lastname").after(sp);
+                    //return false;
+                    flag[1]=0;
                     return false;
           }
+          return false();
         }
         else{
               $("#last_span").remove();
+                    //return true;
+                    flag[1]=1;
                     return true;
       }
     };
@@ -71,11 +78,14 @@ console.log(flag);
       var pat1 = /^\d{10,10}$/;
       var b = $("#phone").val();
         if(!pat1.test(b)){
-              if(eventData.delegateTarget.parentElement.childElementCount==2){
+            //  if(eventData.delegateTarget.parentElement.childElementCount==2)
+  if($("#phone+span").length==0)
+            {
                     sp.html("enter 10 digit phone number");
                     $("#phone").after(sp);
                     return false;
           }
+          return false;
         }
         else{
               $("#phone_span").remove();
@@ -187,6 +197,7 @@ function year_change(){
 function pop(a) {
   var i;
 var select2 = $("#day");
+$("#day").val("select").change();
 if(select2["0"].length>1){
 for(i = select2["0"].length - 1 ; i >= 0 ; i--)
 {
@@ -205,7 +216,6 @@ for(i = select2["0"].length - 1 ; i >= 0 ; i--)
 function day_drop() {
     var a;
     var mon = $("#month").val();
-      // var b = document.getElementById("year").value;
     if (mon == "2") {
         a = 29;
         pop(a);
@@ -230,7 +240,6 @@ function day_drop() {
               opt.val(i);
               select2.append(opt);
           }
-
     }
 
 // age
@@ -253,7 +262,7 @@ function dob(eventData) {
   var d =$("#day").val();
   var m =$("#month").val();
   var y =$("#year").val();
-    if (d == "select"&&y == "volvo"&&m == "select"){
+    if (d == "select"&&y == "select"&&m == "select"){
           if(eventData.delegateTarget.parentElement.childElementCount==2){
                 sp.html("plz select date of birth");
                 $("#year").after(sp);
@@ -268,39 +277,39 @@ function dob(eventData) {
 
 //gender
 var validateGender = function (eventData) {
-var a=$("#residence1");
-var b=$("#residence2");
-var sp= $('<span />').attr({'class':'error-msg', 'id':'radio_span' });
-//console.log(b["0"].checked);
-if(!a["0"].checked && !b["0"].checked){
-  //f(eventData.delegateTarget.parentElement.childElementCount==2){
+  var a=$("#residence1");
+  var b=$("#residence2");
+  var sp= $('<span />').attr({'class':'error-msg', 'id':'radio_span' });
+  //console.log(b["0"].checked);
+  if(!a["0"].checked && !b["0"].checked){
+    //f(eventData.delegateTarget.parentElement.childElementCount==2){
         sp.html("select gender ");
         $("#residence1").before(sp);
         return false;
-}
-else{
+      }
+  else{
       $("#radio_span").remove();
             return true;
-    }
-};
+          }
+        };
 
 //Interest
 var validateInterest=function (){
-  var sp= $('<span />').attr({'class':'error-msg', 'id':'check_span' });
-  var a=$("#checkbox_sample18");
-  var b=$("#checkbox_sample19");
-  var c=$("#checkbox_sample20");
-  console.log(a["0"].checked);
-  if(!a["0"].checked && !b["0"].checked && !c["0"].checked){
-    sp.html("select Interest");
-    $("#checkbox_sample18").before(sp);
-    return false;
-  }
-  else {
-    $("#check_span").remove();
-          return true;
-  }
-};
+    var sp= $('<span />').attr({'class':'error-msg', 'id':'check_span' });
+    var a=$("#checkbox_sample18");
+    var b=$("#checkbox_sample19");
+    var c=$("#checkbox_sample20");
+    //console.log(a["0"].checked);
+    if(!a["0"].checked && !b["0"].checked && !c["0"].checked){
+      sp.html("select Interest");
+      $("#checkbox_sample18").before(sp);
+      return false;
+    }
+    else {
+      $("#check_span").remove();
+            return true;
+          }
+        };
 
 //aboutyou
 var validateAboutyou = function (eventData) {
@@ -318,10 +327,33 @@ var validateAboutyou = function (eventData) {
   }
 };
 
-    var handleBlurEvent = function (eventSource, eventData) {
+
+//final
+function final(eventData) {
+//var fun=[validatePhone(event),validateLastName(event)];
+var i;
+alert("hii");
+$("#firstname").trigger("blur");
+
+$("#lastname").trigger("blur");
+var a=$("#phone").trigger("blur");
+console.log(a);
+//console.log(eventData);
+//   for(i=0;i<2;i++)
+//   {
+//     console.log(flag[i]);
+// // if(flag[i]==0){
+// //   fun[i];
+// // }
+//   }
+  alert("hisdfi");
+  return false;
+}
+
+    var handleBlurEvent =function (eventSource, eventData) {
       switch (eventSource) {
         case "firstname":
-          validateFirstName(eventData);
+      return  validateFirstName(eventData);
           validateGender(eventData);
           validateInterest(eventData);
           break;
@@ -345,6 +377,7 @@ var validateAboutyou = function (eventData) {
           break;
         case "month":
           validateMonth(eventData);
+          dob(eventData);
           age();
           break;
         case "day":
@@ -386,6 +419,10 @@ var validateAboutyou = function (eventData) {
 
       case "checkbox_sample20":
         validateInterest(eventData);
+        return final(eventData);
+        break;
+      case "nextStep":
+        final(eventData);
         break;
       }
     };
@@ -393,22 +430,26 @@ var validateAboutyou = function (eventData) {
     var hadleEvent = function (eventType, eventSource, eventData) {
       switch (eventType) {
         case "blur":
-        handleBlurEvent(eventSource, eventData);
+        return handleBlurEvent(eventSource, eventData);
           break;
         case "click":
         handleClickEvent(eventSource, eventData);
           break;
+          case "chnage":
+          handleChangeEvent(eventSource, eventData);
+            break;
         default:
       }
     };
 
     for (var i = 0; i < validationOnIDs.length; i++) {
-      $("#" + validationOnIDs[i]).on("blur click", function (event) {
+      $("#" + validationOnIDs[i]).on("blur click chnage", function (event) {
         var eventType = event.type;
         var eventSource = event.delegateTarget.id;
         //console.log(eventSource);
         //console.log(eventType);
-        hadleEvent(eventType, eventSource, event);
+        var ani=hadleEvent(eventType, eventSource, event);
+        console.log(ani);
       });
     }
   });
