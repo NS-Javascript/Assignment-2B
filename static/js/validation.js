@@ -30,8 +30,9 @@ var cc=[];
 ###########################################################################################/*
 /*validation First Name Blur------------------------------------------------------ */
 
-console.log(validateFirstName);
     var validateFirstName = function (eventData) {
+      //console.log(eventData);
+      //console.log(eventData.type);
     var eventTag=eventData.delegateTarget;
     var length=eventTag.value.length;
         if(length==0) {
@@ -82,7 +83,7 @@ console.log(validateFirstName);
             $(".phone-error-span").remove();
             return true;
           }
-      }
+      };
 
 /*validation Office No Blur ------------------------------------------------------*/
     /*Office Empty + Pattern--------------------------------------------------- */
@@ -101,7 +102,7 @@ console.log(validateFirstName);
                   $(".office-error-span").remove();
                   return true;
               }
-      }
+      };
 
 /*validation Password Blur ------------------------------------------------------*/
     /*Password Pattern--------------------------------------------------- */
@@ -120,7 +121,7 @@ console.log(validateFirstName);
                 $(".pass-error-span").remove();
                 return true;
               }
-    }
+    };
 
 /*validation Password Blur ------------------------------------------------------*/
     /*Password Pattern--------------------------------------------------- */
@@ -139,7 +140,7 @@ console.log(validateFirstName);
                 $(".pass-error-span").remove();
                 return true;
               }
-    }
+    };
 
 
 /*validation Confirm Password Blur ------------------------------------------------------*/
@@ -161,7 +162,7 @@ console.log(validateFirstName);
                 $(".cpass-error-span").remove();
                 return true;
               }
-    }
+    };
 
 /*validation Password Blur ------------------------------------------------------*/
   /*Password Pattern--------------------------------------------------- */
@@ -181,7 +182,7 @@ console.log(validateFirstName);
             return true;
         }
 
-    }
+    };
 
 
 
@@ -209,28 +210,88 @@ Click Methods
     var clickResidence1= function (eventData) {
       console.log(eventData);
       var eventTag=eventData.delegateTarget;
-      console.log(eventTag);
-      console.log(eventData.currentTarget);
-      console.log(eventData.currentTarget.parentElement);
-      console.log(eventData.currentTarget.parentElement.childElementCount);
-        if(eventData.currentTarget.parentElement.childElementCount==3){
+      //console.log(eventTag);
+      //console.log(eventData.currentTarget);
+      //console.log(eventData.currentTarget.parentElement);
+      //console.log(eventData.currentTarget.parentElement.childElementCount);
+
+console.log(eventData.currentTarget.checked);
+        if(eventData.currentTarget.checked==true){
           $(".residence-error-span").remove();                                  //Dont FORGET tO INCLUDE .residence-error-span FINAL SUBMISSION
         return true;
       }
+      else {
+        $(eventData.delegateTarget.parentElement.parentElement).after
+        ('<span class="residence-error-span"  style="display : table-row-group">Check Gender</span>');
+        return false;
+
+console.log($(eventData.delegateTarget.parentElement.parentElement));
+         }
+//return checkRadio(eventData);
+
   };
   var clickResidence2= function (eventData) {
-    console.log(eventData);
+    //console.log(eventData);
     var eventTag=eventData.delegateTarget;
-    console.log(eventTag);
-    console.log(eventData.currentTarget);
-    console.log(eventData.currentTarget.parentElement.parentElement.childElementCount);  //3
-    console.log(eventData.currentTarget.parentElement.childElementCount);
-      if(eventData.currentTarget.parentElement.childElementCount==3){
-        $(".residence-error-span").remove();                                    //Dont FORGET tO INCLUDE .residence-error-span FINAL SUBMISSION
-      return true;
-    }
+    //console.log(eventTag);
+    //console.log(eventData.currentTarget);
+    //console.log(eventData.currentTarget.parentElement.parentElement.childElementCount);  //3
+    //console.log(eventData.currentTarget.parentElement.childElementCount);
+
+  console.log(eventData.currentTarget.parentElement.parentElement.childElementCount);
+    if(eventData.currentTarget.checked==true){
+        if(eventData.currentTarget.parentElement.childElementCount==3){
+      $(".residence-error-span").remove();                                  //Dont FORGET tO INCLUDE .residence-error-span FINAL SUBMISSION
+    return true;
+  }
+  }
+  else {
+    $(eventData.delegateTarget.parentElement.parentElement).after
+    ('<span class="residence-error-span"  style="display : table-row-group">Check Gender</span>');
+    return false;
+
+  console.log($(eventData.delegateTarget.parentElement.parentElement));
+     }
+
+
+
+
+
+
+
+
+
+
+//       if(eventData.currentTarget.parentElement.childElementCount==3){
+//         $(".residence-error-span").remove();                                    //Dont FORGET tO INCLUDE .residence-error-span FINAL SUBMISSION
+//       return true;
+//     }
+//     else {
+//       $(eventData.delegateTarget.parentElement.parentElement).after
+//       ('<span class="residence-error-span"  style="display : table-row-group">Check Gender</span>');
+//       return false;
+//
+// console.log($(eventData.delegateTarget.parentElement.parentElement));
+//        }
+  //  return checkRadio(eventData);
   };
 
+
+function checkRadio(eventData) {
+  console.log(eventData);
+  //var chkedLength = $("input[id^=residence]:checked" ).length;
+  //console.log(chkedLength);
+  if($('input[id^=residence]:checked').length<=0)
+{
+        $("#residence2").after
+        ('<span class="checkbox-error-span"  style="display : table-row-group">Please check atleast 1 Interest</span>');
+        return false;
+      }
+      else {
+        $(".checkbox-error-span").remove();
+        return true;
+      }
+  };
 
 
 
@@ -291,13 +352,12 @@ function checkBox(eventData) {
 var clickNextStep = function (eventData) {
   for (var i = 0; i < validationOnIDs.length; i++) {
     $("#" + validationOnIDs[i]).trigger("blur");
+    // $("#" + validationOnIDs[i]).trigger("click");
+      //$("#" + validationOnIDs[i]).trigger("change");
+
   }
-  for (var i = 0; i < validationOnIDs.length; i++) {
-    $("#" + validationOnIDs[i]).trigger("click");
-  }
-  for (var i = 0; i < validationOnIDs.length; i++) {
-    $("#" + validationOnIDs[i]).trigger("change");
-  }
+  $("#residence1").trigger("click");
+  $("#residence2").trigger("click");
 };
 
 
@@ -324,7 +384,7 @@ Other Methods
                 $(target).append(opt);
             }
         }
-    }
+    };
 
 
 
