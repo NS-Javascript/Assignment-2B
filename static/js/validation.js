@@ -1,9 +1,10 @@
 (function() {
     'use strict';
-
+var rahul=[];
 
     $(document).ready(function(event) {
      dyanmicyear();
+
         var validationOnIDs = [
             "firstname",
             "lastname",
@@ -504,14 +505,12 @@ function Agecal() {
 }
 
 
-function validateStep2() {
+var validateStep2=function(eventData) {
   console.log("hiiiiiiii");
-  if(validateGender() && dob() )
-  {
-    return false;
-} else {
-  alert("Please fill all the details")
-  return false;
+  for (var j = 0; j < rahul.length; j++) {
+    console.log("awsfsadfs"+rahul[j]);
+    //alert("vaibhav");
+
 }
 }
 
@@ -578,6 +577,17 @@ function validateStep2() {
         var handleClickEvent = function(eventSource, eventData) {
           switch (eventSource) {
           //  return true;
+          case "firstname":
+               return 123;
+              break;
+          case "lastname":
+            return  123;
+              break;
+
+
+
+
+
             case "month":
                 validateMonth(eventData);
                 Dob();
@@ -610,9 +620,9 @@ function validateStep2() {
                   case "residence2":
                       validateResidence2(eventData);
                       break;
-                      /*case "nextStep":
+                      case "nextStep":
                           validateStep2(eventData);
-                          break;*/
+                          break;
 
                       default:
                 }
@@ -637,13 +647,15 @@ function validateStep2() {
             $("#" + validationOnIDs[i]).on("blur click", function(event) {
                 var eventType = event.type;
                 var eventSource = event.delegateTarget.id;
-              var rahul = hadleEvent(eventType, eventSource, event);
+               rahul[i] = hadleEvent(eventType, eventSource, event);
           //    console.log("dfdfgd");
-            //  console.log(rahul);
+              console.log(rahul[i]);
+              console.log(i);
 
 
             });
         }
+
 
     });
 }());
