@@ -199,7 +199,7 @@ var b;
             }
         };
 
-        function daycalculator() {
+    /*    function daycalculator() {
           //  var monthcal = document.getElementById("month").value;
         //    var yearcal = document.getElementById("year").value;
         var monthcal=month;
@@ -359,6 +359,43 @@ $($($($("#residence2")["0"].parentElement)["0"].parentElement)["0"].previousElem
      };
 
 
+
+     /*
+     function Intrest() {
+         var bike = document.getElementById('checkbox_sample18').checked;
+         // alert(bike);
+         var read = document.getElementById('checkbox_sample19').checked;
+         var play = document.getElementById('checkbox_sample20').checked;
+         if (bike || read || play) {
+             document.getElementById("Interestname").innerHTML = "";
+             return true;
+
+
+         } else {
+             document.getElementById("Interestname").innerHTML = ("*please select intrest");
+             return false;
+
+         }
+
+
+     }
+     */
+     var validateIntrest=function(eventData) {
+       if($("#checkbox_sample18")["0"].checked==false && $("#checkbox_sample19")["0"].checked==false && $("#checkbox_sample20")["0"].checked==false){
+       if ( $($($($("#checkbox_sample18")["0"].parentElement)["0"].parentElement)["0"].previousElementSibling)["0"].childElementCount == 0) {
+     $($($($("#checkbox_sample18")["0"].parentElement)["0"].parentElement)["0"].previousElementSibling).append(" <span id='sCheckbox' style='color:red'>Please Fill the About_you</span>");
+     return false;
+     }
+     return false;
+     }
+     else {
+    $("#sCheckbox").remove();
+    return true;
+     }
+
+   };
+
+
 function validateGender() {
   if($("#residence1")["0"].checked==false && $("#residence2")["0"].checked==false){
       if ( $($($($("#residence1")["0"].parentElement)["0"].parentElement)["0"].previousElementSibling)["0"].childElementCount == 0) {
@@ -505,6 +542,8 @@ function validateStep2() {
 
 }*/
 
+
+
         var handleBlurEvent = function(eventSource, eventData) {
             switch (eventSource) {
                 case "firstname":
@@ -544,6 +583,15 @@ function validateStep2() {
                 Dob();
 
                 break;
+                case   "checkbox_sample18":
+                  validateIntrest(eventData);
+                  break;
+                  case   "checkbox_sample19":
+                    validateIntrest(eventData);
+                    break;
+                    case   "checkbox_sample20":
+                      validateIntrest(eventData);
+                      break;
                 case "day":
                     validateDay(eventData);
                     Dob();
