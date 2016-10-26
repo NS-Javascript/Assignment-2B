@@ -2,6 +2,7 @@
   'use strict';
 
   $(document).ready(function (event) {
+var cc=[];
 
     var validationOnIDs = [
       "firstname",
@@ -28,6 +29,8 @@
  *Blur Methods
 ###########################################################################################/*
 /*validation First Name Blur------------------------------------------------------ */
+
+console.log(validateFirstName);
     var validateFirstName = function (eventData) {
     var eventTag=eventData.delegateTarget;
     var length=eventTag.value.length;
@@ -256,6 +259,50 @@ Click Methods
                 }
           };
 
+
+/*CheckBox Validation click---------------------------------*/
+var clickCheck18 = function (eventData) {
+  return checkBox(eventData);
+};
+var clickCheck19 = function (eventData) {
+
+   return checkBox(eventData);
+};
+var clickCheck20 = function (eventData) {
+    return checkBox(eventData);
+};
+
+function checkBox(eventData) {
+  var chkedLength = $( "input[id^=check]:checked" ).length;
+    if (chkedLength==0){
+        $(eventData.currentTarget.parentElement.parentElement).after
+        ('<span class="checkbox-error-span"  style="display : table-row-group">Please check atleast 1 Interest</span>');
+      return false;
+    }
+    else {
+      $(".checkbox-error-span").remove();
+      return true;
+    }
+};
+
+
+
+/*final Validation- All At ONCE------------------------------------------------------------*/
+var clickNextStep = function (eventData) {
+  for (var i = 0; i < validationOnIDs.length; i++) {
+    $("#" + validationOnIDs[i]).trigger("blur");
+  }
+  for (var i = 0; i < validationOnIDs.length; i++) {
+    $("#" + validationOnIDs[i]).trigger("click");
+  }
+  for (var i = 0; i < validationOnIDs.length; i++) {
+    $("#" + validationOnIDs[i]).trigger("change");
+  }
+};
+
+
+
+
 /*########################################################################################*/
 
 
@@ -358,7 +405,20 @@ function selectDate(d,m,y) {
       case "residence2" :
         clickResidence2(eventData);
       break;
+      case "checkbox_sample18" :
+        clickCheck18(eventData);
+      break;
+      case "checkbox_sample19" :
+        clickCheck19(eventData);
+      break;
+      case "checkbox_sample20" :
+        clickCheck20(eventData);
+      break;
+      case "nextStep" :
+        clickNextStep(eventData);
+      break;
       default:
+
     }
   };
 
