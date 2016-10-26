@@ -27,6 +27,10 @@ var rahul=[];
             "About_you"
         ];
 
+
+
+
+
         function dyanmicyear() {
             var myDate = new Date();
             console.log(myDate);
@@ -506,9 +510,29 @@ function Agecal() {
 
 
 var validateStep2=function(eventData) {
+
   $("#firstname").trigger("blur");
   $("#lastname").trigger("blur");
-  if(($("#firstname").trigger("blur")["0"].value)=="" || ($("#firstname").trigger("blur")["0"].value)==""){
+    $("#office").trigger("blur");
+      $("#email").trigger("blur");
+        $("#password").trigger("blur");
+          $("#Confirm_password").trigger("blur");
+            $("#About_you").trigger("blur");
+              $("#phone").trigger("blur");
+                $("#month").trigger("click");
+                  $("#day").trigger("click");
+                    $("#year").trigger("click");
+
+                            validateGender();
+                              validateIntrest(eventData);
+
+
+
+
+
+
+
+  if(($("#firstname").trigger("blur")["0"].value)=="" || ($("#lastname").trigger("blur")["0"].value)=="" || ($("#phone").trigger("blur")["0"].value)=="" || ($("#office").trigger("blur")["0"].value)==""){
     console.log("andyaaa");
   //  console.log($("#nextStep").attr("disabled"));
       console.log($("#nextStep").prop('onclick'));
@@ -568,16 +592,16 @@ var validateStep2=function(eventData) {
         var handleBlurEvent = function(eventSource, eventData) {
             switch (eventSource) {
                 case "firstname":
-                     return validateFirstName(eventData);
+                      validateFirstName(eventData);
                     break;
                 case "lastname":
-                  return  validateLastName(eventData);
+                    validateLastName(eventData);
                     break;
                 case "phone":
-                    validatePhoneNo(eventData);
+                     validatePhoneNo(eventData);
                     break;
                 case "office":
-                    validateOfficeNo(eventData);
+                     validateOfficeNo(eventData);
                     break;
                 case "email":
                     validateEmail(eventData);
@@ -625,7 +649,7 @@ var validateStep2=function(eventData) {
                     case "year":
                         validateYear(eventData);
                         Dob();
-                        validateGender();
+
 
 
                         break;
