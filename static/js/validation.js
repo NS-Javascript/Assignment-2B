@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 var rahul=[];
-
+  var rahul1 ;
     $(document).ready(function(event) {
      dyanmicyear();
 
@@ -232,7 +232,7 @@ var b;
                 document.getElementById("30").style.visibility = "visible";
                 console.log("else");
             }
-        }
+        }*/
         var validateAbout_you = function(eventData) {
 
             if (eventData.delegateTarget.value == "" || eventData.delegateTarget.value == null) {
@@ -506,12 +506,34 @@ function Agecal() {
 
 
 var validateStep2=function(eventData) {
-  console.log("hiiiiiiii");
-  for (var j = 0; j < rahul.length; j++) {
-    console.log("awsfsadfs"+rahul[j]);
+  $("#firstname").trigger("blur");
+  $("#lastname").trigger("blur");
+  if(($("#firstname").trigger("blur")["0"].value)=="" || ($("#firstname").trigger("blur")["0"].value)==""){
+    console.log("andyaaa");
+  //  console.log($("#nextStep").attr("disabled"));
+      console.log($("#nextStep").prop('onclick'));
+//document.getElementById("step2").disabled = true;
+    // $("#nextStep").disabled=true;
+    $("#step2").attr({
+           "href" : "#"
+
+       });
+        console.log($("#nextStep").prop('onclick'));
+  //   $("#nextStep").attr({"disabled"});
+  }
+  else {
+    console.log("patel");
+  }
+//if(  ($("#firstname").trigger("blur")["0"].value)
+//  var abc=rahul1;
+//  console.log(abc);
+//  $("#lastname").trigger("blur");
+//  var abc1=rahul1;
+  //console.log(abc1);
+
     //alert("vaibhav");
 
-}
+
 }
 
 
@@ -577,13 +599,6 @@ var validateStep2=function(eventData) {
         var handleClickEvent = function(eventSource, eventData) {
           switch (eventSource) {
           //  return true;
-          case "firstname":
-               return 123;
-              break;
-          case "lastname":
-            return  123;
-              break;
-
 
 
 
@@ -647,10 +662,9 @@ var validateStep2=function(eventData) {
             $("#" + validationOnIDs[i]).on("blur click", function(event) {
                 var eventType = event.type;
                 var eventSource = event.delegateTarget.id;
-               rahul[i] = hadleEvent(eventType, eventSource, event);
+              var rahul1 = hadleEvent(eventType, eventSource, event);
+              console.log(rahul1);
           //    console.log("dfdfgd");
-              console.log(rahul[i]);
-              console.log(i);
 
 
             });
