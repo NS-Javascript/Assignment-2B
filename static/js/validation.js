@@ -159,6 +159,31 @@ Blur Methods
                 return true;
               }
     }
+
+/*validation Password Blur ------------------------------------------------------*/
+  /*Password Pattern--------------------------------------------------- */
+    var validateEmail =function (eventData) {
+    var eventTag=eventData.delegateTarget;
+    var length=eventTag.value.length;
+
+      if (length==0 || (!eventTag.value.match(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)) ) {
+        if(eventData.currentTarget.parentElement.childElementCount==2) {
+          $(eventData.delegateTarget).after
+          ('<span class="email-error-span"  style="display : table-row-group">Please Fill Valid Email  eg vaibhav.khot@gmail.com Special Symbols ._- only allowed</span>');
+          return false;
+        }
+    }
+    else {
+            $(".email-error-span").remove();
+            return true;
+        }
+
+    }
+
+
+
+
+
 /*##########################################################################################*/
 
 
@@ -280,7 +305,11 @@ function selectDate(d,m,y) {
         case "cpassword" :
           validateConPass(eventData);
         break;
+        case "email" :
+          validateEmail(eventData);
+        break;
         default:
+
 
       }
     };
