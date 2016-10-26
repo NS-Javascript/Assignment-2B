@@ -25,7 +25,7 @@
     ];
 
 /*##########################################################################################
-Blur Methods
+ *Blur Methods
 ###########################################################################################/*
 /*validation First Name Blur------------------------------------------------------ */
     var validateFirstName = function (eventData) {
@@ -204,8 +204,33 @@ Click Methods
 
 /*validation Gender Click------------------------------------------------------ */
     var clickResidence1= function (eventData) {
-
+      console.log(eventData);
+      var eventTag=eventData.delegateTarget;
+      console.log(eventTag);
+      console.log(eventData.currentTarget);
+      console.log(eventData.currentTarget.parentElement);
+      console.log(eventData.currentTarget.parentElement.childElementCount);
+        if(eventData.currentTarget.parentElement.childElementCount==3){
+          $(".residence-error-span").remove();                                  //Dont FORGET tO INCLUDE .residence-error-span FINAL SUBMISSION
+        return true;
+      }
   };
+  var clickResidence2= function (eventData) {
+    console.log(eventData);
+    var eventTag=eventData.delegateTarget;
+    console.log(eventTag);
+    console.log(eventData.currentTarget);
+    console.log(eventData.currentTarget.parentElement.parentElement.childElementCount);  //3
+    console.log(eventData.currentTarget.parentElement.childElementCount);
+      if(eventData.currentTarget.parentElement.childElementCount==3){
+        $(".residence-error-span").remove();                                    //Dont FORGET tO INCLUDE .residence-error-span FINAL SUBMISSION
+      return true;
+    }
+  };
+
+
+
+
 
 
   /*Day Chnage Click and Age Calculation-----------------------------------------------------*/
@@ -329,6 +354,9 @@ function selectDate(d,m,y) {
       break;
       case "residence1" :
         clickResidence1(eventData);
+      break;
+      case "residence2" :
+        clickResidence2(eventData);
       break;
       default:
     }
