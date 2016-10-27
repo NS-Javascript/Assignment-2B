@@ -127,7 +127,7 @@ if(eventData.currentTarget.value=="Select Country")
    {
   //    console.log(eventData.currentTarget.parentElement.firstElementChild);
 if(eventData.currentTarget.parentElement.firstElementChild.childElementCount==0){
-          $(eventData.currentTarget.parentElement.firstElementChild).append(" <span id='sCountry' style='color:red'>Please Fill the First name</span>");
+          $(eventData.currentTarget.parentElement.firstElementChild).append(" <span id='sCountry' style='color:red'>*Please Select Your Country</span>");
 
         //  console.log($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount);
           return false;
@@ -193,7 +193,7 @@ if(eventData.currentTarget.value=="Select State")
     //console.log("909641008");
     // console.log(eventData);
 if(eventData.currentTarget.parentElement.firstElementChild.childElementCount==0){
-         $(eventData.currentTarget.parentElement.firstElementChild).append(" <span id='sState' style='color:red'>Please Fill the First name</span>");
+         $(eventData.currentTarget.parentElement.firstElementChild).append(" <span id='sState' style='color:red'>*Please Select your State</span>");
 
        //  console.log($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount);
          return false;
@@ -202,9 +202,10 @@ return false;
   }
 else {
    $("#sState").remove();
-
-  // $("#city3").remove();
-  //$("#city4").remove();
+   $("#city1").remove();
+   $("#city2").remove();
+   $("#city3").remove();
+  $("#city4").remove();
 
   if($("#state").val() == "State 1 USA"){
     $("#city1").remove();
@@ -258,11 +259,11 @@ $("#city8").remove();
 };
 
 var validatecity = function(eventData) {
-
+console.log(eventData.currentTarget.value);
 if(eventData.currentTarget.value=="Select City")
   {
 if(eventData.currentTarget.parentElement.firstElementChild.childElementCount==0){
-         $(eventData.currentTarget.parentElement.firstElementChild).append(" <span id='sCity' style='color:red'>Please Fill the First name</span>");
+         $(eventData.currentTarget.parentElement.firstElementChild).append(" <span id='sCity' style='color:red'>*Please Select your City</span>");
 
 
          return false;
@@ -297,7 +298,7 @@ console.log(_.values(myJson) );
 
             if (eventData.delegateTarget.value == "" || eventData.delegateTarget.value == null) {
                 if ($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount == 0) {
-                    $(eventData.delegateTarget.previousSibling.previousElementSibling).append(" <span id='s1' style='color:red'>Please Fill the First name</span>");
+                    $(eventData.delegateTarget.previousSibling.previousElementSibling).append(" <span id='s1' style='color:red'>*Please Fill the First name</span>");
 
                   //  console.log($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount);
                     return false;
@@ -320,7 +321,7 @@ console.log(_.values(myJson) );
 
             if (eventData.delegateTarget.value == "" || eventData.delegateTarget.value == null) {
                 if ($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount == 0) {
-                    $(eventData.delegateTarget.previousSibling.previousElementSibling).append(" <span id='s2' style='color:red'>Please Fill the Last name</span>");
+                    $(eventData.delegateTarget.previousSibling.previousElementSibling).append(" <span id='s2' style='color:red'>*Please Fill the Last name</span>");
 
                     console.log($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount);
                     return false;
@@ -406,10 +407,10 @@ console.log(_.values(myJson) );
 var b;
         var validatePass = function(eventData) {
           b=eventData.delegateTarget.value;
-            var pattern = /^((?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])){6,16}/;
+            var pattern = /^((?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])){3,16}/;
             if (!pattern.test(eventData.delegateTarget.value)) {
                 if ($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount == 0) {
-                    $(eventData.delegateTarget.previousSibling.previousElementSibling).append(" <span id='s6' style='color:red'>*Use 8 characters with min 1 lower 1 upper case & digit! </span>");
+                    $(eventData.delegateTarget.previousSibling.previousElementSibling).append(" <span id='s6' style='color:red'>*Use 3 characters with min 1 lower 1 upper case & digit! </span>");
 
                     console.log($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount);
                     return false;
@@ -488,7 +489,7 @@ var b;
 
             if (eventData.delegateTarget.value == "" || eventData.delegateTarget.value == null) {
                 if ($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount == 0) {
-                    $(eventData.delegateTarget.previousSibling.previousElementSibling).append(" <span id='s8' style='color:red'>Please Fill the About_you</span>");
+                    $(eventData.delegateTarget.previousSibling.previousElementSibling).append(" <span id='s8' style='color:red'>*Please Tell me Something About_you</span>");
 
                     console.log($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount);
                     return false;
@@ -507,33 +508,7 @@ var b;
         };
 
 
-            /*    var validateResidence1 = function(eventData) {
-                  console.log(eventData.currentTarget.parentElement.nextElementSibling.children.residence2.checked);
-console.log(eventData.delegateTarget.value);
-console.log(eventData.currentTarget.parentElement.offsetParent.childNodes[1]);
-                  //  if (eventData.delegateTarget.value == "off" )
-                  if (eventData.delegateTarget.value == "off" || eventData.currentTarget.parentElement.nextElementSibling.children.residence2.checked == true ) {
-                        if ($(eventData.currentTarget.parentElement.offsetParent.childNodes[1]).context.childElementCount == 0) {
-                            $(eventData.currentTarget.parentElement.offsetParent.childNodes[1]).append(" <span id='s9' style='color:red'>Please Fill the About_you</span>");
 
-                            console.log($(eventData.currentTarget.parentElement.offsetParent.childNodes[1]).context.childElementCount);
-                            return false;
-                        }
-                        return false;
-
-                    } else {
-
-                        {
-                            $("#s9").remove();
-
-                          //  console.log($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount);
-                            return true;
-
-                        }
-                    }
-                };
-
-*/
 var male;
 var female;
  var validateResidence1 = function(eventData) {
@@ -544,7 +519,7 @@ console.log(male);
 //console.log(female);
 if (male==false) {
   console.log(  $($($("#residence1")["0"].parentElement)["0"].parentElement)["0"].previousElementSibling);
-$($($($("#residence1")["0"].parentElement)["0"].parentElement)["0"].previousElementSibling).append(" <span id='sGender' style='color:red'>Please Fill the About_you</span>");
+$($($($("#residence1")["0"].parentElement)["0"].parentElement)["0"].previousElementSibling).append(" <span id='sGender' style='color:red'>*Please choose your Gender</span>");
 
 //  console.log($(eventData.delegateTarget.parentElement.parentElement.previousSibling).context.childElementCount);
   return false;
@@ -571,7 +546,7 @@ $($($($("#residence1")["0"].parentElement)["0"].parentElement)["0"].previousElem
    //console.log(female);
    if (female==false) {
      console.log(  $($($("#residence2")["0"].parentElement)["0"].parentElement)["0"].previousElementSibling);
-$($($($("#residence2")["0"].parentElement)["0"].parentElement)["0"].previousElementSibling).append(" <span id='sGender' style='color:red'>Please Fill the About_you</span>");
+$($($($("#residence2")["0"].parentElement)["0"].parentElement)["0"].previousElementSibling).append(" <span id='sGender' style='color:red'>*Please choose your Gender</span>");
 
    //  console.log($(eventData.delegateTarget.parentElement.parentElement.previousSibling).context.childElementCount);
      return false;
@@ -611,30 +586,10 @@ $($($($("#residence2")["0"].parentElement)["0"].parentElement)["0"].previousElem
 
 
 
-     /*
-     function Intrest() {
-         var bike = document.getElementById('checkbox_sample18').checked;
-         // alert(bike);
-         var read = document.getElementById('checkbox_sample19').checked;
-         var play = document.getElementById('checkbox_sample20').checked;
-         if (bike || read || play) {
-             document.getElementById("Interestname").innerHTML = "";
-             return true;
-
-
-         } else {
-             document.getElementById("Interestname").innerHTML = ("*please select intrest");
-             return false;
-
-         }
-
-
-     }
-     */
      var validateIntrest=function(eventData) {
        if($("#checkbox_sample18")["0"].checked==false && $("#checkbox_sample19")["0"].checked==false && $("#checkbox_sample20")["0"].checked==false){
        if ( $($($($("#checkbox_sample18")["0"].parentElement)["0"].parentElement)["0"].previousElementSibling)["0"].childElementCount == 0) {
-     $($($($("#checkbox_sample18")["0"].parentElement)["0"].parentElement)["0"].previousElementSibling).append(" <span id='sCheckbox' style='color:red'>Please Fill the About_you</span>");
+     $($($($("#checkbox_sample18")["0"].parentElement)["0"].parentElement)["0"].previousElementSibling).append(" <span id='sCheckbox' style='color:red'>*Please Share your Intrest</span>");
      return false;
      }
      return false;
@@ -645,12 +600,49 @@ $($($($("#residence2")["0"].parentElement)["0"].parentElement)["0"].previousElem
      }
 
    };
+   /*
+function validateJson() {
+  if ($("#country").val()=="Select Country" || $("#state").val()=="Select State" || $("#city").val()=="Select City") {
+
+
+      //    console.log(eventData.currentTarget.parentElement.firstElementChild);
+      console.log($("#country")["0"].parentElement.firstElementChild);
+    if($("#country")["0"].parentElement.firstElementChild.childElementCount==0){
+              $($("#country")["0"].parentElement.firstElementChild).append(" <span id='sCountry' style='color:red'>Please Fill the First name</span>");
+
+            //  console.log($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount);
+              return false;
+    }
+    if($("#state")["0"].parentElement.firstElementChild.childElementCount==0){
+              $($("#state")["0"].parentElement.firstElementChild).append(" <span id='sState' style='color:red'>Please Fill the First name</span>");
+
+            //  console.log($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount);
+              return false;
+    }
+    if($("#city")["0"].parentElement.firstElementChild.childElementCount==0){
+              $($("#city")["0"].parentElement.firstElementChild).append(" <span id='sCity' style='color:red'>Please Fill the First name</span>");
+
+            //  console.log($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount);
+              return false;
+    }
+    return false;
+       }
+    else {
+
+        $("#sCountry").remove();
+          $("#sState").remove();
+            $("#sCity").remove();
+        return true;
+}
+
+  }*/
+
 
 
 function validateGender() {
   if($("#residence1")["0"].checked==false && $("#residence2")["0"].checked==false){
       if ( $($($($("#residence1")["0"].parentElement)["0"].parentElement)["0"].previousElementSibling)["0"].childElementCount == 0) {
-   $($($($("#residence1")["0"].parentElement)["0"].parentElement)["0"].previousElementSibling).append(" <span id='sGender' style='color:red'>Please Fill the About_you</span>");
+   $($($($("#residence1")["0"].parentElement)["0"].parentElement)["0"].previousElementSibling).append(" <span id='sGender' style='color:red'>*Please choose your Gender </span>");
     return false;
   }
 return false;
@@ -749,8 +741,7 @@ function Agecal() {
     var ag = y + m;
     //alert(ag);
   $("#age").val(ag);
-    // var y = (cy + (cm / 12)) - (by + (bm / 12));
-    //   alert(y);
+
 
 }
 
@@ -768,10 +759,6 @@ var validateStep2=function(eventData) {
                 $("#month").trigger("click");
                   $("#day").trigger("click");
                     $("#year").trigger("click");
-                      $("#country").trigger("change");
-                       $("#state").trigger("change");
-                        $("#city").trigger("change");
-
 
 
                             validateGender();
@@ -780,8 +767,7 @@ var validateStep2=function(eventData) {
   if(($("#firstname").trigger("blur")["0"].value)=="" || ($("#lastname").trigger("blur")["0"].value)=="" ||
   ($("#phone").trigger("blur")["0"].value)=="" || ($("#office").trigger("blur")["0"].value)=="" || ($("#email").trigger("blur")["0"].value)=="" ||
  ($("#password").trigger("blur")["0"].value)=="" || ($("#Confirm_password").trigger("blur")["0"].value)=="" ||
- ($("#About_you").trigger("blur")["0"].value)=="" || ($("#country").trigger("change")["0"].value)==" Select Country" || ( $("#state").trigger("change")["0"].value)==" Select State" ||
- ($("#city").trigger("change")["0"].value)==" Select City"     || !validateGender() || !validateIntrest(eventData) || !Dob())
+ ($("#About_you").trigger("blur")["0"].value)=="" || !validateGender() || !validateIntrest(eventData) || !Dob())
 
 
 
@@ -833,6 +819,7 @@ var validateStep2=function(eventData) {
                     case "About_you":
                         validateAbout_you(eventData);
                         break;
+
                 default:
 
             }
@@ -889,6 +876,7 @@ var validateStep2=function(eventData) {
 
         var handleChangeEvent = function(eventSource, eventData) {
           switch (eventSource) {
+
             case "country":
                 validatecountry(eventData);
                 break;
@@ -898,7 +886,6 @@ var validateStep2=function(eventData) {
                    case "city":
                         validatecity(eventData);
                         break;
-
 
 
             default:
@@ -929,8 +916,6 @@ var validateStep2=function(eventData) {
                 var eventType = event.type;
                 var eventSource = event.delegateTarget.id;
               var rahul1 = hadleEvent(eventType, eventSource, event);
-              console.log(rahul1);
-          //    console.log("dfdfgd");
 
 
             });
