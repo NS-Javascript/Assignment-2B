@@ -2,7 +2,91 @@
   'use strict';
   $(document).ready(function (event) {
 years_drop();
-var flag=["0","0"];
+
+//json data
+var text1 ={
+    "country": [
+        {
+            "name": "United States",
+            "id": "usa",
+            "states": [
+                {
+                    "name": "State 1 USA",
+                    "id": "usaState1",
+                    "cities": [
+                        {
+                            "name": "City 1",
+                            "id": "usaState1City1",
+                            "area": "12345 sqkm"
+                        },
+                        {
+                            "name": "City 2",
+                            "id": "usaState1City2",
+                            "area": "12345 sqkm"
+                        }
+                    ]
+                },
+                {
+                    "name": "State 2 USA",
+                    "id": "usaState2",
+                    "cities": [
+                        {
+                            "name": "City 3",
+                            "id": "usaState2City3",
+                            "area": "12345 sqkm"
+                        },
+                        {
+                            "name": "City 4",
+                            "id": "usaState2City4",
+                            "area": "12345 sqkm"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Australia",
+            "id": "aus",
+            "states": [
+                {
+                    "name": "State 1 Australia",
+                    "id": "ausState1",
+                    "cities": [
+                        {
+                            "name": "City 5",
+                            "id": "ausState1City5",
+                            "area": "12345 sqkm"
+                        },
+                        {
+                            "name": "City 6",
+                            "id": "ausState1City6",
+                            "area": "12345 sqkm"
+                        }
+                    ]
+                },
+                {
+                    "name": "State 2 Australia",
+                    "id": "ausState2",
+                    "cities": [
+                        {
+                            "name": "City 7",
+                            "id": "ausState2City7",
+                            "area": "12345 sqkm"
+                        },
+                        {
+                            "name": "City 8",
+                            "id": "ausState2City8",
+                            "area": "12345 sqkm"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+};
+
+//validation flags
+var flag=["0","0","0","0","0","0","0","0","0","0","0","0"];
 
     var validationOnIDs = [
       "firstname",
@@ -23,30 +107,25 @@ var flag=["0","0"];
       "checkbox_sample20",
       "aboutyou",
       "gender",
+      "country",
+      "state",
       "nextStep"
     ];
 
 //fisrt name
     var validateFirstName = function (eventData) {
       var sp= $('<span />').attr({'class':'error-msg', 'id':'first_span' });
-      //console.log(eventData);
-      //console.log(eventData.delegateTarget.parentElement.childElementCount);
         if($("#firstname").val()==""){
               if(eventData.delegateTarget.parentElement.childElementCount==2){
                     sp.html("enter first name");
                     $("#firstname").after(sp);
                     flag[0]=0;
-                    console.log(flag);
-                    return false;
           }
           return false;
         }
         else{
               $("#first_span").remove();
                     flag[0]=1;
-                    console.log(flag);
-                    return true;
-
       }
     };
 
@@ -54,21 +133,16 @@ var flag=["0","0"];
     var validateLastName = function (eventData) {
       var sp= $('<span />').attr({'class':'error-msg', 'id':'last_span' });
         if($("#lastname").val()==""){
-            //  if(eventData.delegateTarget.parentElement.childElementCount==2){
-            if($("#lastname+span").length==0)
+             if(eventData.delegateTarget.parentElement.childElementCount==2)
+            //if($("#lastname+span").length==0)
                 {    sp.html("enter last name");
                     $("#lastname").after(sp);
-                    //return false;
-                    flag[1]=0;
-                    return false;
-          }
-          return false();
+                                flag[1]=0;
+                          }
         }
         else{
               $("#last_span").remove();
-                    //return true;
-                    flag[1]=1;
-                    return true;
+                               flag[1]=1;
       }
     };
 
@@ -79,17 +153,17 @@ var flag=["0","0"];
       var b = $("#phone").val();
         if(!pat1.test(b)){
             //  if(eventData.delegateTarget.parentElement.childElementCount==2)
-  if($("#phone+span").length==0)
-            {
+      if($("#phone+span").length==0)
+                {
                     sp.html("enter 10 digit phone number");
                     $("#phone").after(sp);
-                    return false;
+                    flag[2]=0;
           }
           return false;
         }
         else{
               $("#phone_span").remove();
-                    return true;
+                    flag[2]=1;
       }
     };
 
@@ -102,12 +176,12 @@ var validateOffice=function(eventData){
           if(eventData.delegateTarget.parentElement.childElementCount==2){
                 sp.html("only numbers allowed");
                 $("#office").after(sp);
-                return false;
+                flag[3]=0;
       }
     }
     else{
           $("#office_span").remove();
-                return true;
+          flag[3]=1;
   }
 };
 
@@ -120,12 +194,12 @@ var validateEmail=function(eventData){
           if(eventData.delegateTarget.parentElement.childElementCount==2){
                 sp.html("enter valid email id");
                 $("#email").after(sp);
-                return false;
+                flag[4]=0;
       }
     }
     else{
           $("#email_span").remove();
-                return true;
+          flag[4]=1;
   }
 };
 
@@ -138,29 +212,38 @@ var validatePassword = function (eventData) {
           if(eventData.delegateTarget.parentElement.childElementCount==2){
                 sp.html("enter 8 characters password");
                 $("#password").after(sp);
-                return false;
+                flag[5]=0;
       }
     }
     else{
           $("#password_span").remove();
-                return true;
+          flag[5]=1;
   }
 };
 
 //Confirmpassword
 var validateConfirmpassword=function (eventData){
   var b = $("#password").val();
+  //alert("confirm ");
   var sp= $('<span />').attr({'class':'error-msg', 'id':'Confirmpassword_span' });
+  var d=$("#confirmpassword").val();
+  console.log(d);
   if($("#confirmpassword").val()!=b){
         if(eventData.delegateTarget.parentElement.childElementCount==2){
               sp.html("password not matched");
               $("#confirmpassword").after(sp);
-              return false;
+              flag[6]=0;
+    }}
+  else if (d=="") {
+      if(eventData.delegateTarget.parentElement.childElementCount==2){
+            sp.html("can not be empty");
+            $("#confirmpassword").after(sp);
+            flag[6]=0;
     }
   }
   else{
         $("#Confirmpassword_span").remove();
-              return true;
+        flag[6]=1;
 }
 };
 
@@ -171,13 +254,11 @@ var validateMonth=function (eventData){
           if(eventData.delegateTarget.parentElement.childElementCount==2){
                 sp.html("select month");
                 $("#year").after(sp);
-                return false;
       }
     }
     else{
           $("#month_span").remove();
           day_drop();
-                return true;
   }
 };
 
@@ -263,15 +344,16 @@ function dob(eventData) {
   var m =$("#month").val();
   var y =$("#year").val();
     if (d == "select"&&y == "select"&&m == "select"){
-          if(eventData.delegateTarget.parentElement.childElementCount==2){
+if($(".dob_fileds  span").length==3)
+    {
                 sp.html("plz select date of birth");
-                $("#year").after(sp);
-                return false;
+                $(".dob_fileds>label").after(sp);
+                flag[7]=0;
       }
     }
     else{
           $("#birth_span").remove();
-                return true;
+          flag[7]=1;
         }
       }
 
@@ -282,14 +364,17 @@ var validateGender = function (eventData) {
   var sp= $('<span />').attr({'class':'error-msg', 'id':'radio_span' });
   //console.log(b["0"].checked);
   if(!a["0"].checked && !b["0"].checked){
-    //f(eventData.delegateTarget.parentElement.childElementCount==2){
+  //  if(eventData.delegateTarget.parentElement.childElementCount==2)
+if($(".gender_fileds span").length==0)
+    {
         sp.html("select gender ");
-        $("#residence1").before(sp);
-        return false;
+        $(".gender_fileds>label").after(sp);
+        flag[8]=0;
       }
+    }
   else{
       $("#radio_span").remove();
-            return true;
+      flag[8]=1;
           }
         };
 
@@ -299,15 +384,16 @@ var validateInterest=function (){
     var a=$("#checkbox_sample18");
     var b=$("#checkbox_sample19");
     var c=$("#checkbox_sample20");
-    //console.log(a["0"].checked);
     if(!a["0"].checked && !b["0"].checked && !c["0"].checked){
+if($(".interest_fileds span").length==0){
       sp.html("select Interest");
-      $("#checkbox_sample18").before(sp);
-      return false;
+      $(".interest_fileds>label").after(sp);
+      flag[9]=0;
+    }
     }
     else {
       $("#check_span").remove();
-            return true;
+      flag[9]=1;
           }
         };
 
@@ -317,45 +403,130 @@ var validateAboutyou = function (eventData) {
     if($("#aboutyou").val()==""){
           if(eventData.delegateTarget.parentElement.childElementCount==2){
                 sp.html("enter about you");
-                $("#aboutyou").after(sp);
-                return false;
+                $(".about_you_fileds>label").after(sp);
+                flag[10]=0;
       }
     }
     else{
           $("#about_span").remove();
-                return true;
+          flag[10]=1;
   }
 };
 
+//dropdowns state
+var co;
+function state(){
+  var b=$("#country").val();
+  if(b=="USA"){
+  co=0;
+  }
+  if(b=="Australia"){
+  co=1;
+  }
+  popstate(co);
+}
+
+//populate state
+function popstate(c){
+  $("#state").val("select").change();
+var select2 = $("#state");
+  if(select2["0"].length>1){
+  for(i = select2["0"].length - 1 ; i >= 0 ; i--)
+  {
+    select2["0"].remove(i);
+  }
+  }
+  for(var i=0;i<text1.country[c].states.length;i++)
+  {
+    var opt = $('<option/>');
+    opt.html(text1.country[c].states[i].name);
+    opt.val(text1.country[c].states[i].name);
+    select2.append(opt);
+  }
+}
+
+//City
+function city(){
+  var st;
+  var b=$("#state").val();
+if(b=="State 1 USA"){
+st=0;
+}
+  if(b=="State 2 USA")
+  { st=1;}
+  if(b=="State 1 Australia")
+  { st=0;}
+  if(b=="State 2 Australia")
+  { st=1;}
+  popcity(st,co);
+}
+
+//populate city
+function popcity(s,c){
+  $("#city").val("select").change();
+  var select2 = $("#city");
+     if(select2["0"].length>1){
+          for(i = select2["0"].length - 1 ; i >= 0 ; i--)
+                   {
+                    select2["0"].remove(i);
+                   }
+              }
+      for(var i=0;i<text1.country[c].states[s].cities.length;i++)
+         {
+          var opt = $('<option/>');
+           opt.html(text1.country[c].states[s].cities[i].name);
+            opt.val(text1.country[c].states[s].cities[i].name);
+             select2.append(opt);
+         }
+     }
+
+//drop-down validation
+var validatecountry = function (eventData) {
+  var sp= $('<span />').attr({'class':'error-msg', 'id':'country_span' });
+    if($("#country").val()=="Select Country"||$("#state").val()=="Select Country"||$("#city").val()=="Select"){
+        if($("#ct span").length==1)
+            {    sp.html("select country state and city");
+                $("#city").after(sp);
+                            flag[11]=0;
+                      }
+    }
+    else{
+          $("#country_span").remove();
+                          flag[11]=1;
+                    }
+};
 
 //final
 function final(eventData) {
-//var fun=[validatePhone(event),validateLastName(event)];
-var i;
-alert("hii");
-$("#firstname").trigger("blur");
-
-$("#lastname").trigger("blur");
-var a=$("#phone").trigger("blur");
-console.log(a);
-//console.log(eventData);
-//   for(i=0;i<2;i++)
-//   {
-//     console.log(flag[i]);
-// // if(flag[i]==0){
-// //   fun[i];
-// // }
-//   }
-  alert("hisdfi");
-  return false;
+      $("a").removeAttr("href");
+      $("#firstname").trigger("blur");
+      $("#lastname").trigger("blur");
+      $("#phone").trigger("blur");
+      $("#office").trigger("blur");
+      $("#email").trigger("blur");
+      $("#password").trigger("blur");
+      $("#confirmpassword").trigger("blur");
+      $("#year").trigger("blur");
+      $("#aboutyou").trigger("blur");
+      var k=1;
+  for(var i=0;i<12;i++)
+  {
+    k=k*flag[i];
+  //  console.log(k);
+  }
+ if(k==1){
+  // alert("put");
+   $("a").prop("href", "partners_preference_form.html");
 }
+  }
+
 
     var handleBlurEvent =function (eventSource, eventData) {
       switch (eventSource) {
         case "firstname":
-      return  validateFirstName(eventData);
-          validateGender(eventData);
-          validateInterest(eventData);
+         validateFirstName(eventData);
+        //  validateGender(eventData);
+        //  validateInterest(eventData);
           break;
         case "lastname":
           validateLastName(eventData);
@@ -388,6 +559,13 @@ console.log(a);
           year_change();
           age();
           break;
+        case  "country":
+          state();
+          break;
+          case  "state":
+            city();
+            break;
+
         case  "aboutyou":
           validateAboutyou(eventData);
           break;
@@ -401,27 +579,26 @@ console.log(a);
       case "residence1":
        validateGender(eventData);
        break;
-
       case "residence2":
         validateGender(eventData);
         break;
-
       case "year":
         dob(eventData);
         break;
       case "checkbox_sample18":
         validateInterest(eventData);
         break;
-
       case "checkbox_sample19":
         validateInterest(eventData);
         break;
-
       case "checkbox_sample20":
         validateInterest(eventData);
-        return final(eventData);
         break;
       case "nextStep":
+        validateGender(eventData);
+        validateInterest(eventData);
+        validatecountry();
+        dob(eventData);
         final(eventData);
         break;
       }
@@ -435,9 +612,6 @@ console.log(a);
         case "click":
         handleClickEvent(eventSource, eventData);
           break;
-          case "chnage":
-          handleChangeEvent(eventSource, eventData);
-            break;
         default:
       }
     };
@@ -448,8 +622,8 @@ console.log(a);
         var eventSource = event.delegateTarget.id;
         //console.log(eventSource);
         //console.log(eventType);
-        var ani=hadleEvent(eventType, eventSource, event);
-        console.log(ani);
+        hadleEvent(eventType, eventSource, event);
+
       });
     }
   });
