@@ -1,19 +1,18 @@
   var ferror=[];
 
 
-$(document).ready(function () {
-  var a=[]
-  $.getJSON("country.json",function (data) {
-    console.log(data);
-    console.log(_.values(data));
-    var dd=_.values(data)
-    console.log(data.country);
-    console.log(data.country["0"].id);
-    console.log(data.country["0"].name);
-    console.log(dd["0"]["0"].name);
-  })
-});
-
+// $(document).ready(function () {
+//   var a=[]
+//   $.getJSON("country.json",function (data) {
+//     console.log(data);
+//     console.log(_.pick(data,"name"));
+//     var dd=_.object(data)
+//     console.log(data.country);
+//     console.log(data.country["0"].id);
+//     console.log(data.country["0"].name);
+//     console.log(dd);
+//   })
+// });
 (function() {
   'use strict';
 
@@ -38,7 +37,8 @@ var cc=[];
       "checkbox_sample19",
       "checkbox_sample20",
       "gender",
-      "nextStep"
+      "nextStep",
+      "country1"
     ];
 
 /*##########################################################################################
@@ -117,8 +117,7 @@ ferror.push("false");
           }
           else {
                   $(".office-error-span").remove();
-
-              }
+                }
       };
 
 /*validation Password Blur ------------------------------------------------------*/
@@ -157,7 +156,6 @@ ferror.push("false");
         }
           else {
                 $(".cpass-error-span").remove();
-
               }
     };
 
@@ -187,9 +185,29 @@ ferror.push("false");
 /*##########################################################################################*/
 
 
-/*##########################################################################################
-Click Methods
-###########################################################################################/*
+
+
+/*##########################################################################################*/
+//change Methods
+/*###########################################################################################*/
+var changeCountry=function(eventData) {
+
+  var a = $.getJSON( "country.json", function(data) {
+     console.log(data);
+     console.log(_.values(data));
+     var dd=_.object(data)
+        console.log(data.country);
+        console.log(data.country["0"].id);
+        console.log(data.country["0"].name);
+        console.log(dd);
+    console.log( "success" );
+  });
+console.log(_.values(a));
+};
+
+/*##########################################################################################*/
+//Click Methods
+/*###########################################################################################/*
 /*Year Chnage Click Event----------------------------------------------------------------*/
   var changeYear =function(eventData){
       selectDate($("#day").attr("id"),$("#month").attr("id"),$("#year").attr("id"));
@@ -398,6 +416,9 @@ function selectDate(d,m,y) {
         case "checkbox_sample20" :
           clickCheck20(eventData);//
         break;
+        case "country1" :
+          changeCountry(eventData);//
+        break;
         default:
       }
     };
@@ -433,6 +454,9 @@ function selectDate(d,m,y) {
       case "residence2" :
         clickblurResidence2(eventData);//
       break;
+      case "country1" :
+        changeCountry(eventData);//
+      break;
       default:
 
     }
@@ -441,6 +465,7 @@ function selectDate(d,m,y) {
 /* Change Events and associated Methods ----------------------------------------- */
 var handleChangeEvent = function (eventSource, eventData) {
   switch (eventSource) {
+
     default:
 
   }
