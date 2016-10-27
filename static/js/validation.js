@@ -1,3 +1,19 @@
+  var ferror=[];
+
+
+$(document).ready(function () {
+  var a=[]
+  $.getJSON("country.json",function (data) {
+    console.log(data);
+    console.log(_.values(data));
+    var dd=_.values(data)
+    console.log(data.country);
+    console.log(data.country["0"].id);
+    console.log(data.country["0"].name);
+    console.log(dd["0"]["0"].name);
+  })
+});
+
 (function() {
   'use strict';
 
@@ -36,14 +52,14 @@ var cc=[];
     var eventTag=eventData.delegateTarget;
     var length=eventTag.value.length;
         if(length==0) {
-          if(eventData.currentTarget.parentElement.childElementCount==2)
+          if(eventData.currentTarget.parentElement.childElementCount==2){
               $(eventData.delegateTarget).after
               ('<span class="error-message" id="ediv1" style="display : table-row-group">Please Fill First Name</span>');
-              return 200000000000;
-                      }
+ferror.push("false");
+            }}
           else {
               $("#ediv1").remove();
-              return 100000000000;
+    ferror.push("true");
             }
         }
 
@@ -54,14 +70,15 @@ var cc=[];
       var eventTag=eventData.delegateTarget;
       var length=eventTag.value.length;
           if(length==0) {
-            if(eventData.currentTarget.parentElement.childElementCount==2)
+            if(eventData.currentTarget.parentElement.childElementCount==2){
             $(eventData.delegateTarget).after
             ('<span class="error-message" id="ediv2" style="display : table-row-group">Please Fill Last Name</span>');
-              return false;
-            }
+            //  return false;
+ferror.push("false");
+          }}
         else {
         $("#ediv2").remove();
-        return true;
+      ferror.push("true");
         }
       }
 
@@ -76,12 +93,12 @@ var cc=[];
           if(eventData.currentTarget.parentElement.childElementCount==2) {
               $(eventData.delegateTarget).after
                 ('<span class="phone-error-span"  style="display : table-row-group">Please Fill Valid 10 Digit Phone Number</span>');
-              return false;
+              return ferror= false;
           }
       }
       else {
             $(".phone-error-span").remove();
-            return true;
+
           }
       };
 
@@ -95,12 +112,12 @@ var cc=[];
             if(eventData.currentTarget.parentElement.childElementCount==2) {
               $(eventData.delegateTarget).after
               ('<span class="office-error-span"  style="display : table-row-group">Please Fill Valid 8 Digit Office Number</span>');
-              return false;
+              return ferror= false;
               }
           }
           else {
                   $(".office-error-span").remove();
-                  return true;
+
               }
       };
 
@@ -114,34 +131,14 @@ var cc=[];
           if(eventData.currentTarget.parentElement.childElementCount==2) {
               $(eventData.delegateTarget).after
               ('<span class="pass-error-span"  style="display : table-row-group">Please Fill Valid 4 Digit Password</span>');
-              return false;
+
             }
         }
           else {
                 $(".pass-error-span").remove();
-                return true;
+
               }
     };
-
-/*validation Password Blur ------------------------------------------------------*/
-    /*Password Pattern--------------------------------------------------- */
-      var validatePass = function (eventData) {
-      var eventTag=eventData.delegateTarget;
-      var length=eventTag.value.length;
-
-        if (length==0 || (!eventTag.value.match(/^([0-9]){4,4}$/)) ) {
-          if(eventData.currentTarget.parentElement.childElementCount==2) {
-              $(eventData.delegateTarget).after
-              ('<span class="pass-error-span"  style="display : table-row-group">Please Fill Valid 4 Digit Password</span>');
-              return false;
-            }
-        }
-          else {
-                $(".pass-error-span").remove();
-                return true;
-              }
-    };
-
 
 /*validation Confirm Password Blur ------------------------------------------------------*/
     /*Confirm Password Pattern + Password and Confirm Password Match------------------ */
@@ -155,12 +152,12 @@ var cc=[];
           if(eventData.currentTarget.parentElement.childElementCount==2) {
               $(eventData.delegateTarget).after
               ('<span class="cpass-error-span"  style="display : table-row-group">Please Fill Valid Same 4 Digit Password</span>');
-              return false;
+
             }
         }
           else {
                 $(".cpass-error-span").remove();
-                return true;
+
               }
     };
 
@@ -174,12 +171,12 @@ var cc=[];
         if(eventData.currentTarget.parentElement.childElementCount==2) {
           $(eventData.delegateTarget).after
           ('<span class="email-error-span"  style="display : table-row-group">Please Fill Valid Email  eg vaibhav.khot@gmail.com Special Symbols ._- only allowed</span>');
-          return false;
+
         }
     }
     else {
             $(".email-error-span").remove();
-            return true;
+
         }
     };
 
@@ -212,13 +209,7 @@ Click Methods
 
 
 /*validation Gender Click------------------------------------------------------ */
-  // var blurResidence1= function (eventData) {
-  //     return checkRadio(eventData);
-  //
-  // };
-  // var blurResidence2= function (eventData) {
-  //     return checkRadio(eventData);
-  // };
+
   var clickblurResidence1= function (eventData) {
     return checkRadio(eventData);
 
@@ -234,11 +225,11 @@ function checkRadio(eventData) {
         var a=_.last($("#gender_ul"))                                                 //USE OF UNDERSCORE.JS
                 $($(a)).append
                 ("<li><span class='radio-error-span'  style='display : table-row-group'>Please Check one</span></li>");
-              return false;
+
 }}
       else {
         $(".radio-error-span").remove();
-        return true;
+
       }
   };
 
@@ -271,7 +262,7 @@ function checkRadio(eventData) {
 
 /*CheckBox Validation click---------------------------------*/
 var clickCheck18 = function (eventData) {
-  return checkBox(eventData);
+   return checkBox(eventData);
 };
 var clickCheck19 = function (eventData) {
 
@@ -291,10 +282,11 @@ function checkBox(eventData) {
         var compiled = _.template("<%= name %>");                              // UNDERSCOREJS TEMPLATE USE
         $($(a)).append(compiled({name:
           '<li class="checkbox-error-span"><span  style="display : table-row-group">Please check atleast 1 Interest</span></li>'}));
+
         }
       } else {
       $(".checkbox-error-span").remove();
-      return true;
+
     }
 };
 
@@ -302,13 +294,13 @@ function checkBox(eventData) {
 
 /*final Validation- All At ONCE------------------------------------------------------------*/
 var clickNextStep = function (eventData) {
-console.log(eventData.result);
 eventData.preventDefault();
 
    for (var i = 0; i < validationOnIDs.length; i++) {
     var a = $("#" + validationOnIDs[i]).trigger("blur");
-console.log(a);
+
    }
+   console.log(ferror);
 };
 
 
@@ -371,40 +363,40 @@ function selectDate(d,m,y) {
     var handleBlurEvent = function (eventSource, eventData) {
       switch (eventSource) {
         case "firstname":
-        validateFirstName(eventData);
+        validateFirstName(eventData);//
         break;
         case "lastname":
-          validateLastName(eventData);
+          validateLastName(eventData);//
         break;
         case "phone" :
-          validatePhone(eventData);
+          validatePhone(eventData);//
         break;
         case "office" :
-          validateOffice(eventData);
+          validateOffice(eventData);//
         break;
         case "password" :
-          validatePass(eventData);
+          validatePass(eventData);//
         break;
         case "cpassword" :
-          validateConPass(eventData);
+          validateConPass(eventData);//
         break;
         case "email" :
-          validateEmail(eventData);
+          validateEmail(eventData);//
         break;
         case "residence1" :
-          clickblurResidence1(eventData);
+          clickblurResidence1(eventData);//
         break;
         case "residence2" :
-          clickblurResidence2(eventData);
+          clickblurResidence2(eventData);//
         break;
         case "checkbox_sample18" :
-          clickCheck18(eventData);
+          clickCheck18(eventData);//
         break;
         case "checkbox_sample19" :
-          clickCheck19(eventData);
+          clickCheck19(eventData);//
         break;
         case "checkbox_sample20" :
-          clickCheck20(eventData);
+          clickCheck20(eventData);//
         break;
         default:
       }
@@ -424,22 +416,22 @@ function selectDate(d,m,y) {
         changeDay(eventData);
       break;
       case "checkbox_sample18" :
-        clickCheck18(eventData);
+        clickCheck18(eventData);//
       break;
       case "checkbox_sample19" :
-        clickCheck19(eventData);
+        clickCheck19(eventData);//
       break;
       case "checkbox_sample20" :
-        clickCheck20(eventData);
+        clickCheck20(eventData);//
       break;
       case "nextStep" :
         clickNextStep(eventData);
       break;
       case "residence1" :
-        clickblurResidence1(eventData);
+        clickblurResidence1(eventData);//
       break;
       case "residence2" :
-        clickblurResidence2(eventData);
+        clickblurResidence2(eventData);//
       break;
       default:
 
