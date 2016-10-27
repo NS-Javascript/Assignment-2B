@@ -190,19 +190,28 @@ ferror.push("false");
 /*##########################################################################################*/
 //change Methods
 /*###########################################################################################*/
+
+/*JSON DATA GET LOADED---------------------------------------------------------------------*/
+var ccc=[];
+$.getJSON( "country.json", function(data) {
+  $.each(data,function (index,value) {
+    ccc[index]=value;
+  })
+console.log("suceess");
+console.log(ccc);
+});
+
+
+/* country Change State Populated  -----------------------------------------------*/
 var changeCountry=function(eventData) {
 
-  var a = $.getJSON( "country.json", function(data) {
-     console.log(data);
-     console.log(_.values(data));
-     var dd=_.object(data)
-        console.log(data.country);
-        console.log(data.country["0"].id);
-        console.log(data.country["0"].name);
-        console.log(dd);
-    console.log( "success" );
-  });
-console.log(_.values(a));
+  console.log(ccc);
+  console.log(ccc.country["0"].id);
+if ($("#country1").val()=="usa") {
+  $("#state1").append('<option>'+ccc.country["0"].states["0"].name+'</option>');
+  $("#state1").append('<option>'+ccc.country["0"].states[1].name+'</option>');
+}
+
 };
 
 /*##########################################################################################*/
