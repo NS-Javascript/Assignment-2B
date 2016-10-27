@@ -116,22 +116,33 @@ var rahul=[];
 
           //      console.log(_.values(myJson)["0"]["0"].name);
 //console.log(_.values(myJson));
-console.log(_.values(myJson) );
+//console.log(_.values(myJson) );
  var validatecountry = function(eventData) {
-   console.log("dfajsh1454");
-   console.log(eventData.currentTarget.value);
+   //console.log("dfajsh1454");
+  // console.log(eventData.currentTarget.value);
+  console.log(eventData);
+  console.log("11111");
+  console.log(eventData.currentTarget.parentElement.firstElementChild.childElementCount);
 if(eventData.currentTarget.value=="Select Country")
    {
-      console.log(eventData.currentTarget.parentElement.firstElementChild);
-
+  //    console.log(eventData.currentTarget.parentElement.firstElementChild);
+if(eventData.currentTarget.parentElement.firstElementChild.childElementCount==0){
           $(eventData.currentTarget.parentElement.firstElementChild).append(" <span id='sCountry' style='color:red'>Please Fill the First name</span>");
 
         //  console.log($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount);
           return false;
-
+}
+return false;
    }
 else {
+
     $("#sCountry").remove();
+    $("#usa1").remove();
+    $("#usa2").remove();
+    $("#city1").remove();
+    $("#city2").remove();
+    $("#city3").remove();
+    $("#city4").remove();
    if($("#country").val() == "USA"){
      $("#state").append($('<option id="usa1"></option>').val(_.values(myJson)["0"]["0"].states["0"].name).html(_.values(myJson)["0"]["0"].states["0"].name));
       $("#state").append($('<option id="usa2"></option>').val(_.values(myJson)["0"]["0"].states["1"].name).html(_.values(myJson)["0"]["0"].states["1"].name));
@@ -170,32 +181,34 @@ else {
 
 }
 }
-console.log(_.values(myJson)["0"]["0"].name );
-  /*  $("#country").append($('<option></option>').val(_.values(myJson)["0"]["0"].name).html(_.values(myJson)["0"]["0"].name));
+//console.log(_.values(myJson)["0"]["0"].name );
 
-$('#country').change(function () {
-    alert($(this).val());
-    //Code to select image based on selected car id
-});*/
 };
 
 var validatestate = function(eventData) {
-  console.log("dfajsh1454");
-  console.log(eventData.currentTarget.value);
+//  console.log("dfajsh1454");
+//  console.log(eventData.currentTarget.value);
 if(eventData.currentTarget.value=="Select State")
   {
-     console.log(eventData.currentTarget.parentElement.firstElementChild);
-
+    //console.log("909641008");
+    // console.log(eventData);
+if(eventData.currentTarget.parentElement.firstElementChild.childElementCount==0){
          $(eventData.currentTarget.parentElement.firstElementChild).append(" <span id='sState' style='color:red'>Please Fill the First name</span>");
 
        //  console.log($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount);
          return false;
-
+}
+return false;
   }
 else {
    $("#sState").remove();
-  if($("#state").val() == "State 1 USA"){
 
+  // $("#city3").remove();
+  //$("#city4").remove();
+
+  if($("#state").val() == "State 1 USA"){
+    $("#city1").remove();
+    $("#city2").remove();
      $("#city").append($('<option id="city1"></option>').val(_.values(myJson)["0"]["0"].states["0"].cities["0"].name).html(_.values(myJson)["0"]["0"].states["0"].cities["0"].name));
       $("#city").append($('<option id="city2"></option>').val(_.values(myJson)["0"]["0"].states["0"].cities["1"].name).html(_.values(myJson)["0"]["0"].states["0"].cities["1"].name));
   }
@@ -216,29 +229,53 @@ else {
  $("#city4").remove();
 
 }
+if($("#state").val() == "State 1 Australia"){
+  $("#city5").remove();
+  $("#city6").remove();
+  $("#city").append($('<option id="city5"></option>').val(_.values(myJson)["0"]["1"].states["0"].cities["0"].name).html(_.values(myJson)["0"]["1"].states["0"].cities["0"].name));
+   $("#city").append($('<option id="city6"></option>').val(_.values(myJson)["0"]["1"].states["0"].cities["1"].name).html(_.values(myJson)["0"]["1"].states["0"].cities["1"].name));
+}
+else {
 
-/*
-$("#state").append($('<option id="aus1"></option>').val(_.values(myJson)["0"]["1"].states["0"].name).html(_.values(myJson)["0"]["1"].states["0"].name));
- $("#state").append($('<option id="aus2"></option>').val(_.values(myJson)["0"]["1"].states["1"].name).html(_.values(myJson)["0"]["1"].states["1"].name));
- $("#city").append($('<option id="city5"></option>').val(_.values(myJson)["0"]["1"].states["0"].cities["0"].name).html(_.values(myJson)["0"]["1"].states["0"].cities["0"].name));
-  $("#city").append($('<option id="city6"></option>').val(_.values(myJson)["0"]["1"].states["0"].cities["1"].name).html(_.values(myJson)["0"]["1"].states["0"].cities["1"].name));
+  $("#city5").remove();
+  $("#city6").remove();
+
+}
+if($("#state").val() == "State 2 Australia"){
+
   $("#city").append($('<option id="city7"></option>').val(_.values(myJson)["0"]["1"].states["1"].cities["0"].name).html(_.values(myJson)["0"]["1"].states["1"].cities["0"].name));
    $("#city").append($('<option id="city8"></option>').val(_.values(myJson)["0"]["1"].states["1"].cities["1"].name).html(_.values(myJson)["0"]["1"].states["1"].cities["1"].name));
-   $("#aus1").remove();
-   $("#aus2").remove();
-   $("#city5").remove();
-   $("#city6").remove();
-   $("#city7").remove();
-   $("#city8").remove();*/
-}
-console.log(_.values(myJson)["0"]["0"].name );
- /*  $("#country").append($('<option></option>').val(_.values(myJson)["0"]["0"].name).html(_.values(myJson)["0"]["0"].name));
 
-$('#country').change(function () {
-   alert($(this).val());
-   //Code to select image based on selected car id
-});*/
+}
+else {
+$("#city7").remove();
+$("#city8").remove();
+
+}
+
+}
+
 };
+
+var validatecity = function(eventData) {
+
+if(eventData.currentTarget.value=="Select City")
+  {
+if(eventData.currentTarget.parentElement.firstElementChild.childElementCount==0){
+         $(eventData.currentTarget.parentElement.firstElementChild).append(" <span id='sCity' style='color:red'>Please Fill the First name</span>");
+
+
+         return false;
+}
+return false;
+  }
+else {
+   $("#sCity").remove();
+
+}
+
+};
+
 
         function dyanmicyear() {
             var myDate = new Date();
@@ -250,7 +287,8 @@ $('#country').change(function () {
                 var elementy = $("#year");
                 elementy.append(opt);
             }
-
+            console.log("ritu");
+console.log(_.values(myJson) );
         }
 
 
@@ -557,7 +595,6 @@ $($($($("#residence2")["0"].parentElement)["0"].parentElement)["0"].previousElem
        if ($("#bdname")["0"].childElementCount == 0) {
            $("#bdname").append(" <span id='sdob' style='color:red'>*Please select Dob ! </span>");
 
-
            return false;
        }
        return false;
@@ -731,63 +768,42 @@ var validateStep2=function(eventData) {
                 $("#month").trigger("click");
                   $("#day").trigger("click");
                     $("#year").trigger("click");
+                      $("#country").trigger("change");
+                       $("#state").trigger("change");
+                        $("#city").trigger("change");
+
+
 
                             validateGender();
                               validateIntrest(eventData);
 
-  if(($("#firstname").trigger("blur")["0"].value)=="" || ($("#lastname").trigger("blur")["0"].value)=="" || ($("#phone").trigger("blur")["0"].value)=="" || ($("#office").trigger("blur")["0"].value)==""){
+  if(($("#firstname").trigger("blur")["0"].value)=="" || ($("#lastname").trigger("blur")["0"].value)=="" ||
+  ($("#phone").trigger("blur")["0"].value)=="" || ($("#office").trigger("blur")["0"].value)=="" || ($("#email").trigger("blur")["0"].value)=="" ||
+ ($("#password").trigger("blur")["0"].value)=="" || ($("#Confirm_password").trigger("blur")["0"].value)=="" ||
+ ($("#About_you").trigger("blur")["0"].value)=="" || ($("#country").trigger("change")["0"].value)==" Select Country" || ( $("#state").trigger("change")["0"].value)==" Select State" ||
+ ($("#city").trigger("change")["0"].value)==" Select City"     || !validateGender() || !validateIntrest(eventData) || !Dob())
+
+
+
+
+  {
     console.log("andyaaa");
-  //  console.log($("#nextStep").attr("disabled"));
-      console.log($("#nextStep").prop('onclick'));
-//document.getElementById("step2").disabled = true;
-    // $("#nextStep").disabled=true;
+
     $("#step2").attr({
            "href" : "#"
        });
-        console.log($("#nextStep").prop('onclick'));
-  //   $("#nextStep").attr({"disabled"});
+
   }
   else {
     console.log("patel");
+    $("#step2").attr({
+           "href" : "partners_preference_form.html"
+       });
   }
-//if(  ($("#firstname").trigger("blur")["0"].value)
-//  var abc=rahul1;
-//  console.log(abc);
-//  $("#lastname").trigger("blur");
-//  var abc1=rahul1;
-  //console.log(abc1);
-
-    //alert("vaibhav");
 
 
 }
 
-
-  //console.log(eventData);
-  /*if (validateFirstName() && validateLastName() && validatePhoneNo() && validateOfficeNo() && validateEmail() && validatePass() &&
-      validateConfirm_password() && Dob()) {
-      return true;*/
-
-
-
-
-
-
-
-
-  /*      document.getElementById("bdname").innerHTML = "";
-        month();
-        year();
-        Agecal();
-        return true;
-    } else {
-        //  document.getElementById("Agename").innerHTML = ("Please select birthdate first");
-        document.getElementById('age').value = "Please select birthdate first";
-        return false;
-
-    }
-
-}*/
 
 
 
@@ -879,10 +895,10 @@ var validateStep2=function(eventData) {
                case "state":
                     validatestate(eventData);
                     break;
-              /*      case "city":
+                   case "city":
                         validatecity(eventData);
                         break;
-                  */
+
 
 
             default:
