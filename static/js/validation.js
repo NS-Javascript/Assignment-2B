@@ -111,7 +111,15 @@ var rahul=[];
             "city"
         ];
 
-
+        $("#password").attr({
+               "type" : "password"
+           });
+           $("#Confirm_password").attr({
+                  "type" : "password"
+              });
+              $("#age").attr({
+                     "disabled":true
+                 });
 
 
           //      console.log(_.values(myJson)["0"]["0"].name);
@@ -406,6 +414,7 @@ console.log(_.values(myJson) );
         };
 var b;
         var validatePass = function(eventData) {
+
           b=eventData.delegateTarget.value;
             var pattern = /^((?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])){3,16}/;
             if (!pattern.test(eventData.delegateTarget.value)) {
