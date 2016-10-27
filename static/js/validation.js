@@ -39,11 +39,11 @@ var cc=[];
           if(eventData.currentTarget.parentElement.childElementCount==2)
               $(eventData.delegateTarget).after
               ('<span class="error-message" id="ediv1" style="display : table-row-group">Please Fill First Name</span>');
-              return false;
+              return 200000000000;
                       }
           else {
               $("#ediv1").remove();
-              return true;
+              return 100000000000;
             }
         }
 
@@ -181,7 +181,6 @@ var cc=[];
             $(".email-error-span").remove();
             return true;
         }
-
     };
 
 
@@ -206,93 +205,42 @@ Click Methods
         selectDate($("#day").attr("id"),$("#month").attr("id"),$("#year").attr("id"));
       };
 
+
+
+
+
+
+
 /*validation Gender Click------------------------------------------------------ */
-    var clickResidence1= function (eventData) {
-      console.log(eventData);
-      var eventTag=eventData.delegateTarget;
-      //console.log(eventTag);
-      //console.log(eventData.currentTarget);
-      //console.log(eventData.currentTarget.parentElement);
-      //console.log(eventData.currentTarget.parentElement.childElementCount);
-
-console.log(eventData.currentTarget.checked);
-        if(eventData.currentTarget.checked==true){
-          $(".residence-error-span").remove();                                  //Dont FORGET tO INCLUDE .residence-error-span FINAL SUBMISSION
-        return true;
-      }
-      else {
-        $(eventData.delegateTarget.parentElement.parentElement).after
-        ('<span class="residence-error-span"  style="display : table-row-group">Check Gender</span>');
-        return false;
-
-console.log($(eventData.delegateTarget.parentElement.parentElement));
-         }
-//return checkRadio(eventData);
+  // var blurResidence1= function (eventData) {
+  //     return checkRadio(eventData);
+  //
+  // };
+  // var blurResidence2= function (eventData) {
+  //     return checkRadio(eventData);
+  // };
+  var clickblurResidence1= function (eventData) {
+    return checkRadio(eventData);
 
   };
-  var clickResidence2= function (eventData) {
-    //console.log(eventData);
-    var eventTag=eventData.delegateTarget;
-    //console.log(eventTag);
-    //console.log(eventData.currentTarget);
-    //console.log(eventData.currentTarget.parentElement.parentElement.childElementCount);  //3
-    //console.log(eventData.currentTarget.parentElement.childElementCount);
-
-  console.log(eventData.currentTarget.parentElement.parentElement.childElementCount);
-    if(eventData.currentTarget.checked==true){
-        if(eventData.currentTarget.parentElement.childElementCount==3){
-      $(".residence-error-span").remove();                                  //Dont FORGET tO INCLUDE .residence-error-span FINAL SUBMISSION
-    return true;
-  }
-  }
-  else {
-    $(eventData.delegateTarget.parentElement.parentElement).after
-    ('<span class="residence-error-span"  style="display : table-row-group">Check Gender</span>');
-    return false;
-
-  console.log($(eventData.delegateTarget.parentElement.parentElement));
-     }
-
-
-
-
-
-
-
-
-
-
-//       if(eventData.currentTarget.parentElement.childElementCount==3){
-//         $(".residence-error-span").remove();                                    //Dont FORGET tO INCLUDE .residence-error-span FINAL SUBMISSION
-//       return true;
-//     }
-//     else {
-//       $(eventData.delegateTarget.parentElement.parentElement).after
-//       ('<span class="residence-error-span"  style="display : table-row-group">Check Gender</span>');
-//       return false;
-//
-// console.log($(eventData.delegateTarget.parentElement.parentElement));
-//        }
-  //  return checkRadio(eventData);
+  var clickblurResidence2= function (eventData) {
+    return checkRadio(eventData);
   };
-
 
 function checkRadio(eventData) {
-  console.log(eventData);
-  //var chkedLength = $("input[id^=residence]:checked" ).length;
-  //console.log(chkedLength);
-  if($('input[id^=residence]:checked').length<=0)
-{
-        $("#residence2").after
-        ('<span class="checkbox-error-span"  style="display : table-row-group">Please check atleast 1 Interest</span>');
-        return false;
-      }
+  if($('input[name="radio"]:checked').length==0)
+    {
+      if ($("#gender_ul li").size()==2) {
+        var a=_.last($("#gender_ul"))                                                 //USE OF UNDERSCORE.JS
+                $($(a)).append
+                ("<li><span class='radio-error-span'  style='display : table-row-group'>Please Check one</span></li>");
+              return false;
+}}
       else {
-        $(".checkbox-error-span").remove();
+        $(".radio-error-span").remove();
         return true;
       }
   };
-
 
 
 
@@ -333,14 +281,18 @@ var clickCheck20 = function (eventData) {
     return checkBox(eventData);
 };
 
+
+
 function checkBox(eventData) {
-  var chkedLength = $( "input[id^=check]:checked" ).length;
+    var chkedLength = $( "input[name='interest']:checked" ).length;
     if (chkedLength==0){
-        $(eventData.currentTarget.parentElement.parentElement).after
-        ('<span class="checkbox-error-span"  style="display : table-row-group">Please check atleast 1 Interest</span>');
-      return false;
-    }
-    else {
+      if ($("#checkbox_ul li").size()==3) {
+        var a=_.last($("#checkbox_ul"));
+        var compiled = _.template("<%= name %>");                              // UNDERSCOREJS TEMPLATE USE
+        $($(a)).append(compiled({name:
+          '<li class="checkbox-error-span"><span  style="display : table-row-group">Please check atleast 1 Interest</span></li>'}));
+        }
+      } else {
       $(".checkbox-error-span").remove();
       return true;
     }
@@ -350,14 +302,13 @@ function checkBox(eventData) {
 
 /*final Validation- All At ONCE------------------------------------------------------------*/
 var clickNextStep = function (eventData) {
-  for (var i = 0; i < validationOnIDs.length; i++) {
-    $("#" + validationOnIDs[i]).trigger("blur");
-    // $("#" + validationOnIDs[i]).trigger("click");
-      //$("#" + validationOnIDs[i]).trigger("change");
+console.log(eventData.result);
+eventData.preventDefault();
 
-  }
-  $("#residence1").trigger("click");
-  $("#residence2").trigger("click");
+   for (var i = 0; i < validationOnIDs.length; i++) {
+    var a = $("#" + validationOnIDs[i]).trigger("blur");
+console.log(a);
+   }
 };
 
 
@@ -420,7 +371,7 @@ function selectDate(d,m,y) {
     var handleBlurEvent = function (eventSource, eventData) {
       switch (eventSource) {
         case "firstname":
-          validateFirstName(eventData);
+        validateFirstName(eventData);
         break;
         case "lastname":
           validateLastName(eventData);
@@ -440,9 +391,22 @@ function selectDate(d,m,y) {
         case "email" :
           validateEmail(eventData);
         break;
+        case "residence1" :
+          clickblurResidence1(eventData);
+        break;
+        case "residence2" :
+          clickblurResidence2(eventData);
+        break;
+        case "checkbox_sample18" :
+          clickCheck18(eventData);
+        break;
+        case "checkbox_sample19" :
+          clickCheck19(eventData);
+        break;
+        case "checkbox_sample20" :
+          clickCheck20(eventData);
+        break;
         default:
-
-
       }
     };
 
@@ -459,12 +423,6 @@ function selectDate(d,m,y) {
       case "day" :
         changeDay(eventData);
       break;
-      case "residence1" :
-        clickResidence1(eventData);
-      break;
-      case "residence2" :
-        clickResidence2(eventData);
-      break;
       case "checkbox_sample18" :
         clickCheck18(eventData);
       break;
@@ -476,6 +434,12 @@ function selectDate(d,m,y) {
       break;
       case "nextStep" :
         clickNextStep(eventData);
+      break;
+      case "residence1" :
+        clickblurResidence1(eventData);
+      break;
+      case "residence2" :
+        clickblurResidence2(eventData);
       break;
       default:
 
@@ -497,7 +461,7 @@ var handleChangeEvent = function (eventSource, eventData) {
     var hadleEvent = function (eventType, eventSource, eventData) {
       switch (eventType) {
         case "blur":
-          handleBlurEvent(eventSource, eventData);
+        handleBlurEvent(eventSource, eventData);
         break;
         case "click":
           handleClickEvent(eventSource, eventData);
