@@ -1,6 +1,87 @@
 (function() {
     'use strict';
 var rahul=[];
+
+                var myJson = {
+                    "country": [
+                        {
+                            "name": "United States",
+                            "id": "usa",
+                            "states": [
+                                {
+                                    "name": "State 1 USA",
+                                    "id": "usaState1",
+                                    "cities": [
+                                        {
+                                            "name": "City 1",
+                                            "id": "usaState1City1",
+                                            "area": "12345 sqkm"
+                                        },
+                                        {
+                                            "name": "City 2",
+                                            "id": "usaState1City2",
+                                            "area": "12345 sqkm"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "State 2 USA",
+                                    "id": "usaState2",
+                                    "cities": [
+                                        {
+                                            "name": "City 3",
+                                            "id": "usaState2City3",
+                                            "area": "12345 sqkm"
+                                        },
+                                        {
+                                            "name": "City 4",
+                                            "id": "usaState2City4",
+                                            "area": "12345 sqkm"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Australia",
+                            "id": "aus",
+                            "states": [
+                                {
+                                    "name": "State 1 Australia",
+                                    "id": "ausState1",
+                                    "cities": [
+                                        {
+                                            "name": "City 5",
+                                            "id": "ausState1City5",
+                                            "area": "12345 sqkm"
+                                        },
+                                        {
+                                            "name": "City 6",
+                                            "id": "ausState1City6",
+                                            "area": "12345 sqkm"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "State 2 Australia",
+                                    "id": "ausState2",
+                                    "cities": [
+                                        {
+                                            "name": "City 7",
+                                            "id": "ausState2City7",
+                                            "area": "12345 sqkm"
+                                        },
+                                        {
+                                            "name": "City 8",
+                                            "id": "ausState2City8",
+                                            "area": "12345 sqkm"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
   var rahul1 ;
     $(document).ready(function(event) {
      dyanmicyear();
@@ -24,12 +105,140 @@ var rahul=[];
             "checkbox_sample20",
             "gender",
             "nextStep",
-            "About_you"
+            "About_you",
+            "country",
+            "state",
+            "city"
         ];
 
 
 
 
+          //      console.log(_.values(myJson)["0"]["0"].name);
+//console.log(_.values(myJson));
+console.log(_.values(myJson) );
+ var validatecountry = function(eventData) {
+   console.log("dfajsh1454");
+   console.log(eventData.currentTarget.value);
+if(eventData.currentTarget.value=="Select Country")
+   {
+      console.log(eventData.currentTarget.parentElement.firstElementChild);
+
+          $(eventData.currentTarget.parentElement.firstElementChild).append(" <span id='sCountry' style='color:red'>Please Fill the First name</span>");
+
+        //  console.log($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount);
+          return false;
+
+   }
+else {
+    $("#sCountry").remove();
+   if($("#country").val() == "USA"){
+     $("#state").append($('<option id="usa1"></option>').val(_.values(myJson)["0"]["0"].states["0"].name).html(_.values(myJson)["0"]["0"].states["0"].name));
+      $("#state").append($('<option id="usa2"></option>').val(_.values(myJson)["0"]["0"].states["1"].name).html(_.values(myJson)["0"]["0"].states["1"].name));
+      $("#city").append($('<option id="city1"></option>').val(_.values(myJson)["0"]["0"].states["0"].cities["0"].name).html(_.values(myJson)["0"]["0"].states["0"].cities["0"].name));
+       $("#city").append($('<option id="city2"></option>').val(_.values(myJson)["0"]["0"].states["0"].cities["1"].name).html(_.values(myJson)["0"]["0"].states["0"].cities["1"].name));
+       $("#city").append($('<option id="city3"></option>').val(_.values(myJson)["0"]["0"].states["1"].cities["0"].name).html(_.values(myJson)["0"]["0"].states["1"].cities["0"].name));
+        $("#city").append($('<option id="city4"></option>').val(_.values(myJson)["0"]["0"].states["1"].cities["1"].name).html(_.values(myJson)["0"]["0"].states["1"].cities["1"].name));
+
+   }
+   else {
+     $("#usa1").remove();
+     $("#usa2").remove();
+     $("#city1").remove();
+     $("#city2").remove();
+     $("#city3").remove();
+     $("#city4").remove();
+
+   }
+   if($("#country").val() == "Australia"){
+     $("#state").append($('<option id="aus1"></option>').val(_.values(myJson)["0"]["1"].states["0"].name).html(_.values(myJson)["0"]["1"].states["0"].name));
+      $("#state").append($('<option id="aus2"></option>').val(_.values(myJson)["0"]["1"].states["1"].name).html(_.values(myJson)["0"]["1"].states["1"].name));
+      $("#city").append($('<option id="city5"></option>').val(_.values(myJson)["0"]["1"].states["0"].cities["0"].name).html(_.values(myJson)["0"]["1"].states["0"].cities["0"].name));
+       $("#city").append($('<option id="city6"></option>').val(_.values(myJson)["0"]["1"].states["0"].cities["1"].name).html(_.values(myJson)["0"]["1"].states["0"].cities["1"].name));
+       $("#city").append($('<option id="city7"></option>').val(_.values(myJson)["0"]["1"].states["1"].cities["0"].name).html(_.values(myJson)["0"]["1"].states["1"].cities["0"].name));
+        $("#city").append($('<option id="city8"></option>').val(_.values(myJson)["0"]["1"].states["1"].cities["1"].name).html(_.values(myJson)["0"]["1"].states["1"].cities["1"].name));
+
+
+}
+else {
+  $("#aus1").remove();
+  $("#aus2").remove();
+  $("#city5").remove();
+  $("#city6").remove();
+  $("#city7").remove();
+  $("#city8").remove();
+
+}
+}
+console.log(_.values(myJson)["0"]["0"].name );
+  /*  $("#country").append($('<option></option>').val(_.values(myJson)["0"]["0"].name).html(_.values(myJson)["0"]["0"].name));
+
+$('#country').change(function () {
+    alert($(this).val());
+    //Code to select image based on selected car id
+});*/
+};
+
+var validatestate = function(eventData) {
+  console.log("dfajsh1454");
+  console.log(eventData.currentTarget.value);
+if(eventData.currentTarget.value=="Select State")
+  {
+     console.log(eventData.currentTarget.parentElement.firstElementChild);
+
+         $(eventData.currentTarget.parentElement.firstElementChild).append(" <span id='sState' style='color:red'>Please Fill the First name</span>");
+
+       //  console.log($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount);
+         return false;
+
+  }
+else {
+   $("#sState").remove();
+  if($("#state").val() == "State 1 USA"){
+
+     $("#city").append($('<option id="city1"></option>').val(_.values(myJson)["0"]["0"].states["0"].cities["0"].name).html(_.values(myJson)["0"]["0"].states["0"].cities["0"].name));
+      $("#city").append($('<option id="city2"></option>').val(_.values(myJson)["0"]["0"].states["0"].cities["1"].name).html(_.values(myJson)["0"]["0"].states["0"].cities["1"].name));
+  }
+  else {
+
+    $("#city1").remove();
+    $("#city2").remove();
+
+  }
+  if($("#state").val() == "State 2 USA"){
+
+         $("#city").append($('<option id="city3"></option>').val(_.values(myJson)["0"]["0"].states["1"].cities["0"].name).html(_.values(myJson)["0"]["0"].states["1"].cities["0"].name));
+          $("#city").append($('<option id="city4"></option>').val(_.values(myJson)["0"]["0"].states["1"].cities["1"].name).html(_.values(myJson)["0"]["0"].states["1"].cities["1"].name));
+
+}
+else {
+  $("#city3").remove();
+ $("#city4").remove();
+
+}
+
+/*
+$("#state").append($('<option id="aus1"></option>').val(_.values(myJson)["0"]["1"].states["0"].name).html(_.values(myJson)["0"]["1"].states["0"].name));
+ $("#state").append($('<option id="aus2"></option>').val(_.values(myJson)["0"]["1"].states["1"].name).html(_.values(myJson)["0"]["1"].states["1"].name));
+ $("#city").append($('<option id="city5"></option>').val(_.values(myJson)["0"]["1"].states["0"].cities["0"].name).html(_.values(myJson)["0"]["1"].states["0"].cities["0"].name));
+  $("#city").append($('<option id="city6"></option>').val(_.values(myJson)["0"]["1"].states["0"].cities["1"].name).html(_.values(myJson)["0"]["1"].states["0"].cities["1"].name));
+  $("#city").append($('<option id="city7"></option>').val(_.values(myJson)["0"]["1"].states["1"].cities["0"].name).html(_.values(myJson)["0"]["1"].states["1"].cities["0"].name));
+   $("#city").append($('<option id="city8"></option>').val(_.values(myJson)["0"]["1"].states["1"].cities["1"].name).html(_.values(myJson)["0"]["1"].states["1"].cities["1"].name));
+   $("#aus1").remove();
+   $("#aus2").remove();
+   $("#city5").remove();
+   $("#city6").remove();
+   $("#city7").remove();
+   $("#city8").remove();*/
+}
+console.log(_.values(myJson)["0"]["0"].name );
+ /*  $("#country").append($('<option></option>').val(_.values(myJson)["0"]["0"].name).html(_.values(myJson)["0"]["0"].name));
+
+$('#country').change(function () {
+   alert($(this).val());
+   //Code to select image based on selected car id
+});*/
+};
 
         function dyanmicyear() {
             var myDate = new Date();
@@ -526,12 +735,6 @@ var validateStep2=function(eventData) {
                             validateGender();
                               validateIntrest(eventData);
 
-
-
-
-
-
-
   if(($("#firstname").trigger("blur")["0"].value)=="" || ($("#lastname").trigger("blur")["0"].value)=="" || ($("#phone").trigger("blur")["0"].value)=="" || ($("#office").trigger("blur")["0"].value)==""){
     console.log("andyaaa");
   //  console.log($("#nextStep").attr("disabled"));
@@ -540,7 +743,6 @@ var validateStep2=function(eventData) {
     // $("#nextStep").disabled=true;
     $("#step2").attr({
            "href" : "#"
-
        });
         console.log($("#nextStep").prop('onclick'));
   //   $("#nextStep").attr({"disabled"});
@@ -668,6 +870,27 @@ var validateStep2=function(eventData) {
 
         };
 
+
+        var handleChangeEvent = function(eventSource, eventData) {
+          switch (eventSource) {
+            case "country":
+                validatecountry(eventData);
+                break;
+               case "state":
+                    validatestate(eventData);
+                    break;
+              /*      case "city":
+                        validatecity(eventData);
+                        break;
+                  */
+
+
+            default:
+      }
+
+};
+
+
         var hadleEvent = function(eventType, eventSource, eventData) {
             switch (eventType) {
                 case "blur":
@@ -676,6 +899,9 @@ var validateStep2=function(eventData) {
                 case "click":
                   return handleClickEvent(eventSource, eventData);
                     break;
+                    case "change":
+                      return handleChangeEvent(eventSource, eventData);
+                        break;
                 default:
 
             }
@@ -683,7 +909,7 @@ var validateStep2=function(eventData) {
         };
 
         for (var i = 0; i < validationOnIDs.length; i++) {
-            $("#" + validationOnIDs[i]).on("blur click", function(event) {
+            $("#" + validationOnIDs[i]).on("blur click change", function(event) {
                 var eventType = event.type;
                 var eventSource = event.delegateTarget.id;
               var rahul1 = hadleEvent(eventType, eventSource, event);
