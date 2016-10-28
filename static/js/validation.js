@@ -6,37 +6,30 @@ years_drop();
 //json data
 var text1 ={
     "country": [
-        {
-            "name": "United States",
+        {   "name": "United States",
             "id": "usa",
             "states": [
-                {
-                    "name": "State 1 USA",
+                {  "name": "State 1 USA",
                     "id": "usaState1",
                     "cities": [
-                        {
-                            "name": "City 1",
+                        {   "name": "City 1",
                             "id": "usaState1City1",
                             "area": "12345 sqkm"
                         },
-                        {
-                            "name": "City 2",
+                        {   "name": "City 2",
                             "id": "usaState1City2",
                             "area": "12345 sqkm"
                         }
                     ]
                 },
-                {
-                    "name": "State 2 USA",
+                {   "name": "State 2 USA",
                     "id": "usaState2",
                     "cities": [
-                        {
-                            "name": "City 3",
+                        {   "name": "City 3",
                             "id": "usaState2City3",
                             "area": "12345 sqkm"
                         },
-                        {
-                            "name": "City 4",
+                        {   "name": "City 4",
                             "id": "usaState2City4",
                             "area": "12345 sqkm"
                         }
@@ -48,33 +41,27 @@ var text1 ={
             "name": "Australia",
             "id": "aus",
             "states": [
-                {
-                    "name": "State 1 Australia",
+                {   "name": "State 1 Australia",
                     "id": "ausState1",
                     "cities": [
-                        {
-                            "name": "City 5",
+                        {   "name": "City 5",
                             "id": "ausState1City5",
                             "area": "12345 sqkm"
                         },
-                        {
-                            "name": "City 6",
+                        {   "name": "City 6",
                             "id": "ausState1City6",
                             "area": "12345 sqkm"
                         }
                     ]
                 },
-                {
-                    "name": "State 2 Australia",
+                {  "name": "State 2 Australia",
                     "id": "ausState2",
                     "cities": [
-                        {
-                            "name": "City 7",
+                        {  "name": "City 7",
                             "id": "ausState2City7",
                             "area": "12345 sqkm"
                         },
-                        {
-                            "name": "City 8",
+                        {   "name": "City 8",
                             "id": "ausState2City8",
                             "area": "12345 sqkm"
                         }
@@ -89,57 +76,37 @@ var text1 ={
 var flag=["0","0","0","0","0","0","0","0","0","0","0","0"];
 
     var validationOnIDs = [
-      "firstname",
-      "lastname",
-      "phone",
-      "office",
-      "email",
-      "password",
-      "confirmpassword",
-      "month",
-      "day",
-      "year",
-      "age",
-      "residence1",
-      "residence2",
-      "checkbox_sample18",
-      "checkbox_sample19",
-      "checkbox_sample20",
-      "aboutyou",
-      "gender",
-      "country",
-      "state",
-      "city",
-      "nextStep"
+      "firstname","lastname","phone","office","email","password",
+      "confirmpassword","month","day","year","age","residence1",
+      "residence2","checkbox_sample18","checkbox_sample19",
+      "checkbox_sample20","aboutyou","gender","country",
+      "state","city","nextStep"
     ];
 
-//error msg
+/******************************* error msg ************************************/
 function erromsg(eventData){
   var sp= $('<span />').attr({'class':'error-msg'});
   sp.html("plz enter "+$("#"+eventData.target.getAttribute('id')).prev().html());
 $("#"+eventData.target.getAttribute('id')).after(sp);
 }
 
-//remove error msg
+/**************************remove error msg function**************************/
 function removemsg(eventData)
 {$("#"+eventData.target.getAttribute('id')+"+span").remove();}
 
-//fisrt name
+/***********************fisrt name validation function************************/
     var validateFirstName = function (eventData) {
         if($("#firstname").val()==""){
               if(eventData.delegateTarget.parentElement.childElementCount==2){
                    erromsg(eventData);
-                    flag[0]=0;
-          }
-          return false;
+                  flag[0]=0; }
         }
         else{
               removemsg(eventData);
-                    flag[0]=1;
-      }
+              flag[0]=1; }
     };
 
-// last name
+/*************************** last name validation function *****************/
     var validateLastName = function (eventData) {
         if($("#lastname").val()==""){
              if(eventData.delegateTarget.parentElement.childElementCount==2)
@@ -148,83 +115,71 @@ function removemsg(eventData)
         }
         else{
               removemsg(eventData);
-                               flag[1]=1;}
+              flag[1]=1; }
     };
 
-//phone
+/********************** phone validation function****************************/
     var validatePhone=function(eventData){
       var pat1 = /^\d{10,10}$/;
         if(!pat1.test($("#phone").val())){
-            //  if(eventData.delegateTarget.parentElement.childElementCount==2)
-      if($("#phone+span").length==0)
-                { erromsg(eventData);
-                    flag[2]=0;}
+            if($("#phone+span").length==0)
+                { $("#phone").after("<span class='error-msg' id='phone_err'>plz enter 10 digit phone</span>");
+                    flag[2]=0; }
         }
         else{
-              removemsg(eventData);
+              $("#phone_err").remove();
                     flag[2]=1;}
     };
 
-//office
+/********************** office validation function****************************/
 var validateOffice=function(eventData){
   var pat1 = /\d/;
     if(!pat1.test($("#office").val())){
           if(eventData.delegateTarget.parentElement.childElementCount==2){
                erromsg(eventData);
-                flag[3]=0;}
+                flag[3]=0; }
     }
     else{
           removemsg(eventData);
           flag[3]=1;}
 };
 
-//email
+/********************** email validation function****************************/
 var validateEmail=function(eventData){
   var pat1 = /\w*\.?\w+@[a-zA-Z]+\.[a-z]{2,4}/;
     if(!pat1.test($("#email").val())){
           if(eventData.delegateTarget.parentElement.childElementCount==2){
          erromsg(eventData);
-                flag[4]=0;}
+                flag[4]=0; }
     }
     else{
           removemsg(eventData);
           flag[4]=1;}
 };
 
-//password
+/********************** password validation function**************************/
 var validatePassword = function (eventData) {
   var pat1 = /^\w{8,12}$/;
     if(!pat1.test($("#password").val())){
           if(eventData.delegateTarget.parentElement.childElementCount==2){
-                 erromsg(eventData);
-                flag[5]=0;
-      }
+         $("#password").after("<span class='error-msg' id='pass'>plz enter 8 digit password</span>");
+          flag[5]=0;}
     }
     else{
-          removemsg(eventData);
-          flag[5]=1;
-  }
+          $("#pass").remove();
+          flag[5]=1;}
 };
 
-//Confirmpassword
+/********************** Confirmpassword validation function********************/
 var validateConfirmpassword=function (eventData){
   var b = $("#password").val();
-  if($("#confirmpassword").val()!=b){
+  if(b!=$("#confirmpassword").val()){
         if(eventData.delegateTarget.parentElement.childElementCount==2){
-              sp.html("password not matched");
-              $("#confirmpassword").after(sp);
+              $("#confirmpassword").after("<span class='error-msg' id='conf_pass'>not matched with password</span>");
               flag[6]=0;
     }}
-  else if ($("#confirmpassword").val()=="") {
-      if(eventData.delegateTarget.parentElement.childElementCount==2){
-             erromsg(eventData);
-            flag[6]=0;
-    }
-  }
-  else{
-        removemsg(eventData);
-        flag[6]=1;
-}
+  else{ $("#conf_pass").remove();
+        flag[6]=1;}
 };
 
 //Month
@@ -233,13 +188,11 @@ var validateMonth=function (eventData){
     if($("#month").val()=="select"){
           if(eventData.delegateTarget.parentElement.childElementCount==2){
                 sp.html("select month");
-                $("#year").after(sp);
-      }
+                $("#year").after(sp);}
     }
     else{
           $("#month_span").remove();
-          day_drop();
-  }
+          day_drop();}
 };
 
 //drop-down year
@@ -250,8 +203,7 @@ function year_change(){
     pop(30);
   }
   else if(b=="2"){
-    pop(29);
-  }
+    pop(29);}
 }
 
 //day_pop
@@ -261,9 +213,7 @@ var select2 = $("#day");
 $("#day").val("select").change();
 if(select2["0"].length>1){
 for(i = select2["0"].length - 1 ; i >= 0 ; i--)
-{
-  select2["0"].remove(i);
-}
+{ select2["0"].remove(i);}
 }
   for (i = 1; i < a; i++) {
       var opt = $('<option/>');
@@ -279,16 +229,14 @@ function day_drop() {
     var mon = $("#month").val();
     if (mon == "2") {
         a = 29;
-        pop(a);
-    }
+        pop(a); }
      else if (mon == "4" || mon == "6" || mon == "9" || mon == "11") {
         a = 31;
         pop(a);
     } else {
         a = 32;
-        pop(a);
-    }
-}
+        pop(a);}
+  }
 
 //yeras on load
     function years_drop() {
@@ -299,8 +247,7 @@ function day_drop() {
               var opt = $('<option/>');
               opt.html(i);
               opt.val(i);
-              select2.append(opt);
-          }
+              select2.append(opt);}
     }
 
 // age
@@ -312,10 +259,10 @@ function day_drop() {
         var totalmonths = (parseInt((today.getFullYear()) - y) * 12);
         var d = (totalmonths + m);
         age = d * 0.083;
-        document.getElementById("age").value = age.toFixed(2);
+        $("#age").val(age.toFixed(2));
         }
 
-// date of birth
+/********************** date of birth validation function********************/
 function dob(eventData) {
   var sp= $('<span />').attr({'class':'error-msg', 'id':'birth_span' });
   var d =$("#day").val();
@@ -323,38 +270,32 @@ function dob(eventData) {
   var y =$("#year").val();
     if (y == "select" || d == "select" || m == "select"){
 if($(".dob_fileds  span").length==3)
-    {
-                sp.html("plz select date of birth");
+    {           sp.html("plz select date of birth");
                 $(".dob_fileds>label").after(sp);
-                flag[7]=0;
-      }
+                flag[7]=0;}
     }
     else{
           $("#birth_span").remove();
-          flag[7]=1;
-        }
+          flag[7]=1;}
       }
 
-//gender
+/********************** gender validation function****************************/
 var validateGender = function (eventData) {
   var a=$("#residence1");
   var b=$("#residence2");
   var sp= $('<span />').attr({'class':'error-msg', 'id':'radio_span' });
   if(!a["0"].checked && !b["0"].checked){
 if($(".gender_fileds span").length==0)
-    {
-        sp.html("select gender ");
+    {   sp.html("select gender ");
         $(".gender_fileds>label").after(sp);
-        flag[8]=0;
-      }
+        flag[8]=0;}
     }
   else{
       $("#radio_span").remove();
-      flag[8]=1;
-          }
+      flag[8]=1;}
         };
 
-//Interest
+/********************** Interest validation function**************************/
 var validateInterest=function (){
     var sp= $('<span />').attr({'class':'error-msg', 'id':'check_span' });
     var a=$("#checkbox_sample18");
@@ -364,27 +305,23 @@ var validateInterest=function (){
 if($(".interest_fileds span").length==0){
       sp.html("select Interest");
       $(".interest_fileds>label").after(sp);
-      flag[9]=0;
-         }
+      flag[9]=0;}
       }
     else {
       $("#check_span").remove();
-      flag[9]=1;
-          }
+      flag[9]=1; }
         };
 
-//aboutyou
+/********************** about you validation function *************************/
 var validateAboutyou = function (eventData) {
     if($("#aboutyou").val()==""){
           if(eventData.delegateTarget.parentElement.childElementCount==2){
-                 erromsg(eventData);
-                flag[10]=0;
-      }
+                erromsg(eventData);
+                flag[10]=0; }
     }
     else{
           removemsg(eventData);
-          flag[10]=1;
-  }
+          flag[10]=1; }
 };
 
 //dropdowns state
@@ -401,18 +338,16 @@ function state(){
 //populate state
 function popstate(c){
   $("#state").val("select").change();
-var select2 = $("#state");
+  var select2 = $("#state");
   if(select2["0"].length>1){
   for(i = select2["0"].length - 1 ; i >= 0 ; i--)
-  { select2["0"].remove(i);}
+  { select2["0"].remove(i); }
       }
   for(var i=0;i<text1.country[c].states.length;i++)
-  {
-    var opt = $('<option/>');
+  { var opt = $('<option/>');
     opt.html(text1.country[c].states[i].name);
     opt.val(text1.country[c].states[i].name);
-    select2.append(opt);
-  }
+    select2.append(opt); }
 }
 
 //City
@@ -439,31 +374,27 @@ function popcity(s,c){
                    { select2["0"].remove(i); }
               }
       for(var i=0;i<text1.country[c].states[s].cities.length;i++)
-         {
-          var opt = $('<option/>');
+         {var opt = $('<option/>');
            opt.html(text1.country[c].states[s].cities[i].name);
             opt.val(text1.country[c].states[s].cities[i].name);
-             select2.append(opt);
-         }
+             select2.append(opt); }
      }
 
-//drop-down validation
+/********************** drop-down validation function****************************/
 var validatecountry = function (eventData) {
   var sp= $('<span />').attr({'class':'error-msg', 'id':'country_span' });
     if($("#country").val()=="Select Country"||$("#state").val()=="Select Country"||$("#city").val()=="Select"){
         if($("#ct span").length==1)
             {    sp.html("select country state and city");
                 $(".city_fileds").after(sp);
-                            flag[11]=0;
-                      }
+                            flag[11]=0; }
     }
     else{
           $("#country_span").remove();
-                          flag[11]=1;
-                    }
+                          flag[11]=1; }
 };
 
-//final
+/***************** final function on submit button****************************/
 function final(eventData) {
       $("a").removeAttr("href");
       $("#firstname").trigger("blur");
@@ -477,21 +408,15 @@ function final(eventData) {
       $("#aboutyou").trigger("blur");
       var k=1;
   for(var i=0;i<12;i++)
-  {
-    k=k*flag[i];
-  }
+  { k=k*flag[i]; }
  if(k==1){
-   $("a").prop("href", "partners_preference_form.html");
-}
+   $("a").prop("href", "partners_preference_form.html"); }
   }
-
 
     var handleBlurEvent =function (eventSource, eventData) {
       switch (eventSource) {
         case "firstname":
          validateFirstName(eventData);
-        //  validateGender(eventData);
-        //  validateInterest(eventData);
           break;
         case "lastname":
           validateLastName(eventData);
@@ -512,7 +437,7 @@ function final(eventData) {
           validateConfirmpassword(eventData);
           break;
         case "month":
-         validateMonth(eventData);
+          validateMonth(eventData);
           dob(eventData);
           age();
           break;
@@ -590,7 +515,6 @@ function final(eventData) {
         //console.log(eventSource);
         //console.log(eventType);
         hadleEvent(eventType, eventSource, event);
-
       });
     }
   });
