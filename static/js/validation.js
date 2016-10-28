@@ -109,6 +109,7 @@ var flag=["0","0","0","0","0","0","0","0","0","0","0","0"];
       "gender",
       "country",
       "state",
+      "city",
       "nextStep"
     ];
 
@@ -134,7 +135,6 @@ var flag=["0","0","0","0","0","0","0","0","0","0","0","0"];
       var sp= $('<span />').attr({'class':'error-msg', 'id':'last_span' });
         if($("#lastname").val()==""){
              if(eventData.delegateTarget.parentElement.childElementCount==2)
-            //if($("#lastname+span").length==0)
                 {    sp.html("enter last name");
                     $("#lastname").after(sp);
                                 flag[1]=0;
@@ -159,7 +159,6 @@ var flag=["0","0","0","0","0","0","0","0","0","0","0","0"];
                     $("#phone").after(sp);
                     flag[2]=0;
           }
-          return false;
         }
         else{
               $("#phone_span").remove();
@@ -224,7 +223,6 @@ var validatePassword = function (eventData) {
 //Confirmpassword
 var validateConfirmpassword=function (eventData){
   var b = $("#password").val();
-  //alert("confirm ");
   var sp= $('<span />').attr({'class':'error-msg', 'id':'Confirmpassword_span' });
   var d=$("#confirmpassword").val();
   console.log(d);
@@ -343,7 +341,7 @@ function dob(eventData) {
   var d =$("#day").val();
   var m =$("#month").val();
   var y =$("#year").val();
-    if (d == "select"&&y == "select"&&m == "select"){
+    if (y == "select" || d == "select" || m == "select"){
 if($(".dob_fileds  span").length==3)
     {
                 sp.html("plz select date of birth");
@@ -362,9 +360,7 @@ var validateGender = function (eventData) {
   var a=$("#residence1");
   var b=$("#residence2");
   var sp= $('<span />').attr({'class':'error-msg', 'id':'radio_span' });
-  //console.log(b["0"].checked);
   if(!a["0"].checked && !b["0"].checked){
-  //  if(eventData.delegateTarget.parentElement.childElementCount==2)
 if($(".gender_fileds span").length==0)
     {
         sp.html("select gender ");
@@ -389,8 +385,8 @@ if($(".interest_fileds span").length==0){
       sp.html("select Interest");
       $(".interest_fileds>label").after(sp);
       flag[9]=0;
-    }
-    }
+         }
+      }
     else {
       $("#check_span").remove();
       flag[9]=1;
@@ -417,12 +413,10 @@ var validateAboutyou = function (eventData) {
 var co;
 function state(){
   var b=$("#country").val();
-  if(b=="USA"){
-  co=0;
-  }
-  if(b=="Australia"){
-  co=1;
-  }
+  if(b=="USA")
+  { co=0;}
+  if(b=="Australia")
+  { co=1;}
   popstate(co);
 }
 
@@ -449,9 +443,8 @@ var select2 = $("#state");
 function city(){
   var st;
   var b=$("#state").val();
-if(b=="State 1 USA"){
-st=0;
-}
+if(b=="State 1 USA")
+  { st=0;}
   if(b=="State 2 USA")
   { st=1;}
   if(b=="State 1 Australia")
@@ -467,9 +460,7 @@ function popcity(s,c){
   var select2 = $("#city");
      if(select2["0"].length>1){
           for(i = select2["0"].length - 1 ; i >= 0 ; i--)
-                   {
-                    select2["0"].remove(i);
-                   }
+                   { select2["0"].remove(i); }
               }
       for(var i=0;i<text1.country[c].states[s].cities.length;i++)
          {
@@ -486,7 +477,7 @@ var validatecountry = function (eventData) {
     if($("#country").val()=="Select Country"||$("#state").val()=="Select Country"||$("#city").val()=="Select"){
         if($("#ct span").length==1)
             {    sp.html("select country state and city");
-                $("#city").after(sp);
+                $(".city_fileds").after(sp);
                             flag[11]=0;
                       }
     }
@@ -512,10 +503,8 @@ function final(eventData) {
   for(var i=0;i<12;i++)
   {
     k=k*flag[i];
-  //  console.log(k);
   }
  if(k==1){
-  // alert("put");
    $("a").prop("href", "partners_preference_form.html");
 }
   }
@@ -547,7 +536,7 @@ function final(eventData) {
           validateConfirmpassword(eventData);
           break;
         case "month":
-          validateMonth(eventData);
+         validateMonth(eventData);
           dob(eventData);
           age();
           break;
@@ -562,10 +551,12 @@ function final(eventData) {
         case  "country":
           state();
           break;
-          case  "state":
-            city();
-            break;
-
+        case  "state":
+          city();
+          break;
+        case  "city":
+          validatecountry();
+          break;
         case  "aboutyou":
           validateAboutyou(eventData);
           break;
