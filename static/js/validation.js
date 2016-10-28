@@ -301,51 +301,25 @@ console.log(_.values(myJson) );
         }
 
 
-        var validateFirstName = function(eventData) {
+        var validateCompulsery = function(eventData) {
             //  console.log(eventData);
 
             if (eventData.delegateTarget.value == "" || eventData.delegateTarget.value == null) {
                 if ($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount == 0) {
-                    $(eventData.delegateTarget.previousSibling.previousElementSibling).append(" <span id='s1' style='color:red'>*Please Fill the First name</span>");
+                    $(eventData.delegateTarget.previousSibling.previousElementSibling).append(" <span id='sCompulsury' style='color:red'>*This Field is Compulsury</span>");
 
-                  //  console.log($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount);
-                    return false;
                 }
-                  return false;
 
             } else {
                 {
-                    $("#s1").remove();
-
-                  //  console.log($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount);
-                    return true;
+                    $("#sCompulsury").remove();
 
                 }
             }
 
         };
 
-        var validateLastName = function(eventData) {
 
-            if (eventData.delegateTarget.value == "" || eventData.delegateTarget.value == null) {
-                if ($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount == 0) {
-                    $(eventData.delegateTarget.previousSibling.previousElementSibling).append(" <span id='s2' style='color:red'>*Please Fill the Last name</span>");
-
-                    console.log($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount);
-                    return false;
-                }
-                return false;
-
-            } else {
-                {
-                    $("#s2").remove();
-
-                    console.log($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount);
-                    return true;
-
-                }
-            }
-        };
 
         var validatePhoneNo = function(eventData) {
             var pattern = /^\d{10}$/;
@@ -494,27 +468,7 @@ var b;
                 console.log("else");
             }
         }*/
-        var validateAbout_you = function(eventData) {
-
-            if (eventData.delegateTarget.value == "" || eventData.delegateTarget.value == null) {
-                if ($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount == 0) {
-                    $(eventData.delegateTarget.previousSibling.previousElementSibling).append(" <span id='s8' style='color:red'>*Please Tell me Something About_you</span>");
-
-                    console.log($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount);
-                    return false;
-                }
-                return false;
-
-            } else {
-                {
-                    $("#s8").remove();
-
-                    console.log($(eventData.delegateTarget.previousSibling.previousElementSibling).context.childElementCount);
-                    return true;
-
-                }
-            }
-        };
+      
 
 
 
@@ -805,10 +759,10 @@ var validateStep2=function(eventData) {
         var handleBlurEvent = function(eventSource, eventData) {
             switch (eventSource) {
                 case "firstname":
-                      validateFirstName(eventData);
+                      validateCompulsery(eventData);
                     break;
                 case "lastname":
-                    validateLastName(eventData);
+                      validateCompulsery(eventData);
                     break;
                 case "phone":
                      validatePhoneNo(eventData);
@@ -826,7 +780,7 @@ var validateStep2=function(eventData) {
                     validateConfirm_password(eventData);
                     break;
                     case "About_you":
-                        validateAbout_you(eventData);
+                        validateCompulsery(eventData);
                         break;
 
                 default:
