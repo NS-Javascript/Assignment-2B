@@ -206,23 +206,75 @@ var changeCountry=function(eventData) {
 
   console.log(ccc);
   console.log(ccc.country["0"].id);
-var con =$("#country1").val();
+  var con =$("#country1").val();
   switch (con) {
     case "usa" :
       $(".states").remove();
-      $("#state1").append('<option class="states">'+ccc.country["0"].states["0"].name+'</option>');
-      $("#state1").append('<option class="states">'+ccc.country["0"].states[1].name+'</option>');
+      $("#state1").val('select').change(); //reset seletion
+      $("#state1").append('<option class="states" value="'+ccc.country["0"].states["0"].name+'">'+ccc.country["0"].states["0"].name+'</option>');
+      $("#state1").append('<option class="states" value="'+ccc.country["0"].states[1].name+'">'+ccc.country["0"].states[1].name+'</option>');
     break;
     case "aus" :
       $(".states").remove();
-      $("#state1").append('<option class="states">'+ccc.country[1].states["0"].name+'</option>');
-      $("#state1").append('<option class="states">'+ccc.country[1].states[1].name+'</option>');
+      $("#state1").val('select').change(); //reset seletion
+      $("#state1").append('<option class="states" value="'+ccc.country[1].states["0"].name+'">'+ccc.country[1].states["0"].name+'</option>');
+      $("#state1").append('<option class="states" value="'+ccc.country[1].states[1].name+'">'+ccc.country[1].states[1].name+'</option>');
     break;
     default:
       $(".states").remove();
+      $("#state1").val('select').change(); //reset seletion
   }
 };
 
+/*State Change city Populated */
+var changeState = function (eventData) {
+console.log(ccc);
+console.log(ccc.country["0"].states["0"].cities); // City1 2
+console.log(ccc.country["0"].states[1].cities); // city 2 3
+console.log(ccc.country[1].states["0"].cities); // city 4 5
+console.log(ccc.country[1].states[1].cities); // city 5 6
+var us1c = ccc.country["0"].states["0"].cities;
+var us2c = ccc.country["0"].states[1].cities;
+var as1c = ccc.country[1].states["0"].cities;
+var as2c = ccc.country[1].states[1].cities;
+
+   var st =$("#state1").val();
+ switch (st) {
+   case "State 1 USA" :
+   $(".cities").remove();
+   $("#city1").val('select').change(); //reset seletion
+   $("#city1").append('<option class="cities" value="'+us1c["0"].name+'">'+us1c["0"].name+'</option>');
+   $("#city1").append('<option class="cities" value="'+us1c[1].name+'">'+us1c[1].name+'</option>');
+
+    break;
+   case "State 2 USA" :
+   $(".cities").remove();
+   $("#city1").val('select').change(); //reset seletion
+   $("#city1").append('<option class="cities" value="'+us2c["0"].name+'">'+us2c["0"].name+'</option>');
+   $("#city1").append('<option class="cities" value="'+us2c[1].name+'">'+us2c[1].name+'</option>');
+
+    break;
+    case "State 1 Australia" :
+    $(".cities").remove();
+    $("#city1").val('select').change(); //reset seletion
+    $("#city1").append('<option class="cities" value="'+as1c["0"].name+'">'+as1c["0"].name+'</option>');
+    $("#city1").append('<option class="cities" value="'+as1c[1].name+'">'+as1c[1].name+'</option>');
+
+    break;
+    case "State 2 Australia" :
+    $(".cities").remove();
+    $("#city1").val('select').change(); //reset seletion
+    $("#city1").append('<option class="cities" value="'+as2c["0"].name+'">'+as2c["0"].name+'</option>');
+    $("#city1").append('<option class="cities" value="'+as2c[1].name+'">'+as2c[1].name+'</option>');
+
+    break;
+   default:
+   $(".cities").remove();
+   $("#city1").val('select').change();
+
+ }
+
+};
 /*##########################################################################################*/
 //Click Methods
 /*###########################################################################################/*
@@ -497,9 +549,7 @@ var handleChangeEvent = function (eventSource, eventData) {
           handleChangeEvent(eventSource, eventData);
         break;
         default:
-
       }
-
     };
 
 /*Capure ID ----------------------------------------- ------------------------*/
