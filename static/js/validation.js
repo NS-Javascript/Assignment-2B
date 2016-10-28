@@ -38,7 +38,8 @@ var cc=[];
       "checkbox_sample20",
       "gender",
       "nextStep",
-      "country1"
+      "country1",
+      "state1"
     ];
 
 /*##########################################################################################
@@ -47,8 +48,6 @@ var cc=[];
 /*validation First Name Blur------------------------------------------------------ */
 
     var validateFirstName = function (eventData) {
-      //console.log(eventData);
-      //console.log(eventData.type);
     var eventTag=eventData.delegateTarget;
     var length=eventTag.value.length;
         if(length==0) {
@@ -207,11 +206,21 @@ var changeCountry=function(eventData) {
 
   console.log(ccc);
   console.log(ccc.country["0"].id);
-if ($("#country1").val()=="usa") {
-  $("#state1").append('<option>'+ccc.country["0"].states["0"].name+'</option>');
-  $("#state1").append('<option>'+ccc.country["0"].states[1].name+'</option>');
-}
-
+var con =$("#country1").val();
+  switch (con) {
+    case "usa" :
+      $(".states").remove();
+      $("#state1").append('<option class="states">'+ccc.country["0"].states["0"].name+'</option>');
+      $("#state1").append('<option class="states">'+ccc.country["0"].states[1].name+'</option>');
+    break;
+    case "aus" :
+      $(".states").remove();
+      $("#state1").append('<option class="states">'+ccc.country[1].states["0"].name+'</option>');
+      $("#state1").append('<option class="states">'+ccc.country[1].states[1].name+'</option>');
+    break;
+    default:
+      $(".states").remove();
+  }
 };
 
 /*##########################################################################################*/
@@ -228,12 +237,6 @@ if ($("#country1").val()=="usa") {
     var changeMonth =function(eventData){
         selectDate($("#day").attr("id"),$("#month").attr("id"),$("#year").attr("id"));
       };
-
-
-
-
-
-
 
 /*validation Gender Click------------------------------------------------------ */
 
@@ -252,8 +255,7 @@ function checkRadio(eventData) {
         var a=_.last($("#gender_ul"))                                                 //USE OF UNDERSCORE.JS
                 $($(a)).append
                 ("<li><span class='radio-error-span'  style='display : table-row-group'>Please Check one</span></li>");
-
-}}
+              }}
       else {
         $(".radio-error-span").remove();
 
@@ -325,8 +327,7 @@ eventData.preventDefault();
 
    for (var i = 0; i < validationOnIDs.length; i++) {
     var a = $("#" + validationOnIDs[i]).trigger("blur");
-
-   }
+  }
    console.log(ferror);
 };
 
@@ -425,9 +426,9 @@ function selectDate(d,m,y) {
         case "checkbox_sample20" :
           clickCheck20(eventData);//
         break;
-        case "country1" :
-          changeCountry(eventData);//
-        break;
+      //  case "country1" :
+          //changeCountry(eventData);//
+    //    break;
         default:
       }
     };
@@ -466,6 +467,9 @@ function selectDate(d,m,y) {
       case "country1" :
         changeCountry(eventData);//
       break;
+      case "state1" :
+        changeState(eventData);//
+      break;
       default:
 
     }
@@ -479,9 +483,6 @@ var handleChangeEvent = function (eventSource, eventData) {
 
   }
 };
-
-
-
 
 /*Check Event ----------------------------------------- ------------------------*/
     var hadleEvent = function (eventType, eventSource, eventData) {
