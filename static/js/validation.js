@@ -113,109 +113,95 @@ var flag=["0","0","0","0","0","0","0","0","0","0","0","0"];
       "nextStep"
     ];
 
+//error msg
+function erromsg(eventData){
+  var sp= $('<span />').attr({'class':'error-msg'});
+  sp.html("plz enter "+$("#"+eventData.target.getAttribute('id')).prev().html());
+$("#"+eventData.target.getAttribute('id')).after(sp);
+}
+
+//remove error msg
+function removemsg(eventData)
+{$("#"+eventData.target.getAttribute('id')+"+span").remove();}
+
 //fisrt name
     var validateFirstName = function (eventData) {
-      var sp= $('<span />').attr({'class':'error-msg', 'id':'first_span' });
         if($("#firstname").val()==""){
               if(eventData.delegateTarget.parentElement.childElementCount==2){
-                    sp.html("enter first name");
-                    $("#firstname").after(sp);
+                   erromsg(eventData);
                     flag[0]=0;
           }
           return false;
         }
         else{
-              $("#first_span").remove();
+              removemsg(eventData);
                     flag[0]=1;
       }
     };
 
 // last name
     var validateLastName = function (eventData) {
-      var sp= $('<span />').attr({'class':'error-msg', 'id':'last_span' });
         if($("#lastname").val()==""){
              if(eventData.delegateTarget.parentElement.childElementCount==2)
-                {    sp.html("enter last name");
-                    $("#lastname").after(sp);
-                                flag[1]=0;
-                          }
+                {      erromsg(eventData);
+                        flag[1]=0; }
         }
         else{
-              $("#last_span").remove();
-                               flag[1]=1;
-      }
+              removemsg(eventData);
+                               flag[1]=1;}
     };
 
 //phone
     var validatePhone=function(eventData){
-      var sp= $('<span />').attr({'class':'error-msg', 'id':'phone_span' });
       var pat1 = /^\d{10,10}$/;
-      var b = $("#phone").val();
-        if(!pat1.test(b)){
+        if(!pat1.test($("#phone").val())){
             //  if(eventData.delegateTarget.parentElement.childElementCount==2)
       if($("#phone+span").length==0)
-                {
-                    sp.html("enter 10 digit phone number");
-                    $("#phone").after(sp);
-                    flag[2]=0;
-          }
+                { erromsg(eventData);
+                    flag[2]=0;}
         }
         else{
-              $("#phone_span").remove();
-                    flag[2]=1;
-      }
+              removemsg(eventData);
+                    flag[2]=1;}
     };
 
 //office
 var validateOffice=function(eventData){
-  var sp= $('<span />').attr({'class':'error-msg', 'id':'office_span' });
   var pat1 = /\d/;
-  var b = $("#office").val();
-    if(!pat1.test(b)){
+    if(!pat1.test($("#office").val())){
           if(eventData.delegateTarget.parentElement.childElementCount==2){
-                sp.html("only numbers allowed");
-                $("#office").after(sp);
-                flag[3]=0;
-      }
+               erromsg(eventData);
+                flag[3]=0;}
     }
     else{
-          $("#office_span").remove();
-          flag[3]=1;
-  }
+          removemsg(eventData);
+          flag[3]=1;}
 };
 
 //email
 var validateEmail=function(eventData){
-  var sp= $('<span />').attr({'class':'error-msg', 'id':'email_span' });
   var pat1 = /\w*\.?\w+@[a-zA-Z]+\.[a-z]{2,4}/;
-  var b = $("#email").val();
-    if(!pat1.test(b)){
+    if(!pat1.test($("#email").val())){
           if(eventData.delegateTarget.parentElement.childElementCount==2){
-                sp.html("enter valid email id");
-                $("#email").after(sp);
-                flag[4]=0;
-      }
+         erromsg(eventData);
+                flag[4]=0;}
     }
     else{
-          $("#email_span").remove();
-          flag[4]=1;
-  }
+          removemsg(eventData);
+          flag[4]=1;}
 };
 
 //password
 var validatePassword = function (eventData) {
   var pat1 = /^\w{8,12}$/;
-  var sp= $('<span />').attr({'class':'error-msg', 'id':'password_span' });
-  var b = $("#password").val();
-    if(!pat1.test(b)){
+    if(!pat1.test($("#password").val())){
           if(eventData.delegateTarget.parentElement.childElementCount==2){
-                sp.html("enter 8 characters password");
-                $("#password").after(sp);
+                 erromsg(eventData);
                 flag[5]=0;
       }
     }
     else{
-          $("#password_span").remove();
+          removemsg(eventData);
           flag[5]=1;
   }
 };
@@ -223,24 +209,20 @@ var validatePassword = function (eventData) {
 //Confirmpassword
 var validateConfirmpassword=function (eventData){
   var b = $("#password").val();
-  var sp= $('<span />').attr({'class':'error-msg', 'id':'Confirmpassword_span' });
-  var d=$("#confirmpassword").val();
-  console.log(d);
   if($("#confirmpassword").val()!=b){
         if(eventData.delegateTarget.parentElement.childElementCount==2){
               sp.html("password not matched");
               $("#confirmpassword").after(sp);
               flag[6]=0;
     }}
-  else if (d=="") {
+  else if ($("#confirmpassword").val()=="") {
       if(eventData.delegateTarget.parentElement.childElementCount==2){
-            sp.html("can not be empty");
-            $("#confirmpassword").after(sp);
+             erromsg(eventData);
             flag[6]=0;
     }
   }
   else{
-        $("#Confirmpassword_span").remove();
+        removemsg(eventData);
         flag[6]=1;
 }
 };
@@ -323,10 +305,8 @@ function day_drop() {
 
 // age
     function age() {
-        var m = parseInt(document.getElementById("month").value);
-        console.log(m);
+        var m = parseInt($("#month").val());
         var y = $("#year").val();
-        console.log(y);
         var today = new Date();
         var age;
         var totalmonths = (parseInt((today.getFullYear()) - y) * 12);
@@ -395,16 +375,14 @@ if($(".interest_fileds span").length==0){
 
 //aboutyou
 var validateAboutyou = function (eventData) {
-  var sp= $('<span />').attr({'class':'error-msg', 'id':'about_span' });
     if($("#aboutyou").val()==""){
           if(eventData.delegateTarget.parentElement.childElementCount==2){
-                sp.html("enter about you");
-                $(".about_you_fileds>label").after(sp);
+                 erromsg(eventData);
                 flag[10]=0;
       }
     }
     else{
-          $("#about_span").remove();
+          removemsg(eventData);
           flag[10]=1;
   }
 };
@@ -426,10 +404,8 @@ function popstate(c){
 var select2 = $("#state");
   if(select2["0"].length>1){
   for(i = select2["0"].length - 1 ; i >= 0 ; i--)
-  {
-    select2["0"].remove(i);
-  }
-  }
+  { select2["0"].remove(i);}
+      }
   for(var i=0;i<text1.country[c].states.length;i++)
   {
     var opt = $('<option/>');
