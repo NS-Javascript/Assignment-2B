@@ -1,4 +1,4 @@
-  var ferror=[];
+
 
 
 // $(document).ready(function () {
@@ -41,6 +41,8 @@ var cc=[];
       "country1",
       "state1"
     ];
+
+      var ferror=[];
 
 /*##########################################################################################
  *Blur Methods
@@ -223,6 +225,8 @@ var changeCountry=function(eventData) {
     default:
       $(".states").remove();
       $("#state1").val('select').change(); //reset seletion
+      $(".cities").remove();
+      $("#city1").val('select').change();
   }
 };
 
@@ -271,6 +275,8 @@ var as2c = ccc.country[1].states[1].cities;
    default:
    $(".cities").remove();
    $("#city1").val('select').change();
+   $(".states").remove();
+   $("#state1").val('select').change();
 
  }
 
@@ -278,12 +284,11 @@ var as2c = ccc.country[1].states[1].cities;
 /*##########################################################################################*/
 //Click Methods
 /*###########################################################################################/*
+
 /*Year Chnage Click Event----------------------------------------------------------------*/
   var changeYear =function(eventData){
       selectDate($("#day").attr("id"),$("#month").attr("id"),$("#year").attr("id"));
     };
-
-
 
 /*Month Chnage Click Event----------------------------------------------------------------*/
     var changeMonth =function(eventData){
@@ -291,11 +296,10 @@ var as2c = ccc.country[1].states[1].cities;
       };
 
 /*validation Gender Click------------------------------------------------------ */
-
   var clickblurResidence1= function (eventData) {
     return checkRadio(eventData);
-
   };
+
   var clickblurResidence2= function (eventData) {
     return checkRadio(eventData);
   };
@@ -336,9 +340,9 @@ function checkRadio(eventData) {
                   }
                 }
                 else {
-                    $("#age").val("Years") ;
+                    $("#age").html("Please enter valid date");
                 }
-          };
+              };
 
 
 /*CheckBox Validation click---------------------------------*/
@@ -374,8 +378,8 @@ function checkBox(eventData) {
 
 
 /*final Validation- All At ONCE------------------------------------------------------------*/
-var clickNextStep = function (eventData) {
-eventData.preventDefault();
+  var clickNextStep = function (eventData) {
+  eventData.preventDefault();
 
    for (var i = 0; i < validationOnIDs.length; i++) {
     var a = $("#" + validationOnIDs[i]).trigger("blur");
@@ -383,11 +387,7 @@ eventData.preventDefault();
    console.log(ferror);
 };
 
-
-
-
 /*########################################################################################*/
-
 
 /*##########################################################################################
 Other Methods
@@ -409,13 +409,7 @@ Other Methods
         }
     };
 
-
-
 listYear("#year",1976); //call to Year Generation Method
-
-
-
-
 
 /*------------------------------------------------------------------------------
 *Function For Date POP UP
@@ -429,6 +423,7 @@ function selectDate(d,m,y) {
   var yr=document.getElementById(y);
   dy.options.length=1;
     if (mth.value && yr.value) {
+
       var days=new Date(yr.value,mth.value,1,-1).getDate(); //var d = new Date(year, month, day, hours) Give Actual No Of Days
                                                             // the first day of the next month minus 1 hour
       for (var i=1; i<=days; i++) {                         // Create Days Options Dynamically
@@ -436,8 +431,26 @@ function selectDate(d,m,y) {
         }
       dy.selectedIndex = 0;
       $("#day").val('select').change();                      //Reset Days Option
+
     }
+// if (mth.value=="select" && yr.value=="select" && dy.value=="select") {
+//   if ($("#date_ul li").size()==3) {
+//     var a=_.last($("#date_ul"));
+//     var compiled = _.template("<%= name %>");                              // UNDERSCOREJS TEMPLATE USE
+//     $($(a)).append(compiled({name:
+//       '<li class="date-error-span"><span  style="display : table-row-group">Please select Date Properly</span></li>'}));
+//
+//     }
+//    else {
+//   $(".date-error-span").remove();
+//       }
+//     }
 }
+
+
+
+
+
 
 /*Blur Events and associated Methods ----------------------------------------- */
     var handleBlurEvent = function (eventSource, eventData) {
@@ -478,9 +491,18 @@ function selectDate(d,m,y) {
         case "checkbox_sample20" :
           clickCheck20(eventData);//
         break;
-      //  case "country1" :
-          //changeCountry(eventData);//
-    //    break;
+        case "country1" :
+          changeCountry(eventData);//
+        break;
+        case "year" :
+          changeYear(eventData);
+        break;
+        case "month" :
+          changeMonth(eventData);
+        break;
+        case "day" :
+          changeDay(eventData);
+        break;
         default:
       }
     };
