@@ -1,18 +1,3 @@
-
-
-
-// $(document).ready(function () {
-//   var a=[]
-//   $.getJSON("country.json",function (data) {
-//     console.log(data);
-//     console.log(_.pick(data,"name"));
-//     var dd=_.object(data)
-//     console.log(data.country);
-//     console.log(data.country["0"].id);
-//     console.log(data.country["0"].name);
-//     console.log(dd);
-//   })
-// });
 (function() {
   'use strict';
 
@@ -175,8 +160,7 @@ ferror.push("false");
     }
     else {
             $(".email-error-span").remove();
-
-        }
+          }
     };
 
 
@@ -184,10 +168,6 @@ ferror.push("false");
 
 
 /*##########################################################################################*/
-
-
-
-
 /*##########################################################################################*/
 //change Methods
 /*###########################################################################################*/
@@ -314,7 +294,6 @@ function checkRadio(eventData) {
               }}
       else {
         $(".radio-error-span").remove();
-
       }
   };
 
@@ -328,21 +307,18 @@ function checkRadio(eventData) {
       var m=parseInt($("#month").val());
       var d=parseInt($("#day").val());
 
-        if ($("#day").value!="select" &&
-            $("#year").value!="select" &&
-            $("#month").value!="select"){
+        if ($("#day").val()!="select" && $("#year").val()!="select" && $("#month").val()!="select"){
                   var dob = new Date(y,m,d);
                   var today = new Date();
                   var diffDate = Math.abs(dob.getTime() - today.getTime());
                   var diff = parseFloat(Math.abs(diffDate / (1000 * 60 * 60 * 24 * 365.25)));
-                  if(diff!="NaN"){
-                    $("#age").val(diff.toPrecision(3)+" Years");
-                  }
+                  $("#age").val(diff.toPrecision(3)+" Years");
+                  dateError();
                 }
                 else {
-                    $("#age").html("Please enter valid date");
+                  //dateError();
                 }
-              };
+            };
 
 
 /*CheckBox Validation click---------------------------------*/
@@ -367,15 +343,11 @@ function checkBox(eventData) {
         var compiled = _.template("<%= name %>");                              // UNDERSCOREJS TEMPLATE USE
         $($(a)).append(compiled({name:
           '<li class="checkbox-error-span"><span  style="display : table-row-group">Please check atleast 1 Interest</span></li>'}));
-
         }
       } else {
       $(".checkbox-error-span").remove();
-
     }
 };
-
-
 
 /*final Validation- All At ONCE------------------------------------------------------------*/
   var clickNextStep = function (eventData) {
@@ -431,26 +403,24 @@ function selectDate(d,m,y) {
         }
       dy.selectedIndex = 0;
       $("#day").val('select').change();                      //Reset Days Option
-
+dateError();
     }
-// if (mth.value=="select" && yr.value=="select" && dy.value=="select") {
-//   if ($("#date_ul li").size()==3) {
-//     var a=_.last($("#date_ul"));
-//     var compiled = _.template("<%= name %>");                              // UNDERSCOREJS TEMPLATE USE
-//     $($(a)).append(compiled({name:
-//       '<li class="date-error-span"><span  style="display : table-row-group">Please select Date Properly</span></li>'}));
-//
-//     }
-//    else {
-//   $(".date-error-span").remove();
-//       }
-//     }
-}
 
+  }
 
-
-
-
+var dateError = function () {
+  if ($("#day").val()=="select" && $("#year").val()=="select" && $("#month").val()=="select") {
+    if ($("#date_ul li").size()==3) {
+      var a=_.last($("#date_ul"));
+      var compiled = _.template("<%= name %>");                              // UNDERSCOREJS TEMPLATE USE
+      $($(a)).append(compiled({name:
+        '<li class="date-error-span"><span  style="display : table-row-group">Please select Date Properly</span></li>'}));
+      }
+      else {
+        $(".date-error-span").remove();
+        }
+      }
+    }
 
 /*Blur Events and associated Methods ----------------------------------------- */
     var handleBlurEvent = function (eventSource, eventData) {
@@ -554,7 +524,6 @@ var handleChangeEvent = function (eventSource, eventData) {
   switch (eventSource) {
 
     default:
-
   }
 };
 
