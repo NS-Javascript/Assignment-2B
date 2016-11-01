@@ -24,7 +24,8 @@ var cc=[];
       "gender",
       "nextStep",
       "country1",
-      "state1"
+      "state1",
+      "city1"
     ];
 
       var ferror=[];
@@ -189,24 +190,33 @@ var changeCountry=function(eventData) {
   console.log(ccc);
   console.log(ccc.country["0"].id);
   var con =$("#country1").val();
+  if (con !=="select") {
+
+
   switch (con) {
     case "usa" :
       $(".states").remove();
       $("#state1").val('select').change(); //reset seletion
       $("#state1").append('<option class="states" value="'+ccc.country["0"].states["0"].name+'">'+ccc.country["0"].states["0"].name+'</option>');
       $("#state1").append('<option class="states" value="'+ccc.country["0"].states[1].name+'">'+ccc.country["0"].states[1].name+'</option>');
+      $("#state-error").html("Please select state Properly ");
     break;
     case "aus" :
       $(".states").remove();
       $("#state1").val('select').change(); //reset seletion
       $("#state1").append('<option class="states" value="'+ccc.country[1].states["0"].name+'">'+ccc.country[1].states["0"].name+'</option>');
       $("#state1").append('<option class="states" value="'+ccc.country[1].states[1].name+'">'+ccc.country[1].states[1].name+'</option>');
+       $("#state-error").html("Please select State Properly");
     break;
-    default:
+    case "select" :
       $(".states").remove();
       $("#state1").val('select').change(); //reset seletion
       $(".cities").remove();
       $("#city1").val('select').change();
+      $("#state-error").html("Please select Country Properly ");
+      break;
+      default:
+  }
   }
 };
 
@@ -223,43 +233,60 @@ var as1c = ccc.country[1].states["0"].cities;
 var as2c = ccc.country[1].states[1].cities;
 
    var st =$("#state1").val();
+   if (st !=="select") {
  switch (st) {
    case "State 1 USA" :
    $(".cities").remove();
    $("#city1").val('select').change(); //reset seletion
    $("#city1").append('<option class="cities" value="'+us1c["0"].name+'">'+us1c["0"].name+'</option>');
    $("#city1").append('<option class="cities" value="'+us1c[1].name+'">'+us1c[1].name+'</option>');
-
+   //$("#state-error").html("Please select city");
+   changeCity();
     break;
    case "State 2 USA" :
    $(".cities").remove();
    $("#city1").val('select').change(); //reset seletion
    $("#city1").append('<option class="cities" value="'+us2c["0"].name+'">'+us2c["0"].name+'</option>');
    $("#city1").append('<option class="cities" value="'+us2c[1].name+'">'+us2c[1].name+'</option>');
-
+   //$("#state-error").html("Please select city");
+   changeCity();
     break;
     case "State 1 Australia" :
     $(".cities").remove();
     $("#city1").val('select').change(); //reset seletion
     $("#city1").append('<option class="cities" value="'+as1c["0"].name+'">'+as1c["0"].name+'</option>');
     $("#city1").append('<option class="cities" value="'+as1c[1].name+'">'+as1c[1].name+'</option>');
-
+    //$("#state-error").html("Please select city");
+    changeCity();
     break;
     case "State 2 Australia" :
     $(".cities").remove();
     $("#city1").val('select').change(); //reset seletion
     $("#city1").append('<option class="cities" value="'+as2c["0"].name+'">'+as2c["0"].name+'</option>');
     $("#city1").append('<option class="cities" value="'+as2c[1].name+'">'+as2c[1].name+'</option>');
-
+    //$("#state-error").html("Please select city");
+    changeCity();
     break;
-   default:
-   $(".cities").remove();
+case "select" :
+   //$(".cities").remove();
    $("#city1").val('select').change();
-   $(".states").remove();
+   //$(".states").remove();
    $("#state1").val('select').change();
+   $("#state-error").html("Please select city");
+   break;
+default:
+
 
  }
+ }
 
+};
+function changeCity() {
+if ($("#city1").val()!=="select" && $("#state1").val()!=="Select" && $("#country1").val()!=="Select") {
+ $("#state-error").html("");
+} else {
+$("#state-error").html("Please select city");
+}
 };
 /*##########################################################################################*/
 //Click Methods
@@ -274,6 +301,64 @@ var as2c = ccc.country[1].states[1].cities;
     var changeMonth =function(eventData){
         selectDate($("#day").attr("id"),$("#month").attr("id"),$("#year").attr("id"));
       };
+
+/*Day Chnage Click and Age Calculation-----------------------------------------------------*/
+        var changeDay =function(eventData){
+
+          var y=parseInt($("#year").val());
+          var m=parseInt($("#month").val());
+          var d=parseInt($("#day").val());
+            if ($("#day").val()!="select" && $("#year").val()!="select" && $("#month").val()!="select"){
+                      var dob = new Date(y,m,d);
+                      var today = new Date();
+                      var diffDate = Math.abs(dob.getTime() - today.getTime());
+                      var diff = parseFloat(Math.abs(diffDate / (1000 * 60 * 60 * 24 * 365.25)));
+                      $("#age").val(diff.toPrecision(3)+" Years");
+                      $(".date-error-span").remove();
+                    }
+                    else {
+                      dateError();
+                   }
+              };
+
+                /*------------------------------------------------------------------------------
+                *Function For Date POP UP
+                * Month Start with 0 -1 -2 -....11
+                * Common Fuction For Month And Year change
+                * When You Select Year and Month Properly Then Days will Populated
+                *-------------------------------------------------------------------------------*/
+                function selectDate(d,m,y) {
+                  var dy=document.getElementById(d);
+                  var mth=document.getElementById(m);
+                  var yr=document.getElementById(y);
+                  dy.options.length=1;
+                    if (mth.value && yr.value) {
+
+                      var days=new Date(yr.value,mth.value,1,-1).getDate(); //var d = new Date(year, month, day, hours) Give Actual No Of Days
+                                                                            // the first day of the next month minus 1 hour
+                      for (var i=1; i<=days; i++) {                         // Create Days Options Dynamically
+                          dy.options[i] = new Option(i,i);                  //new Option([text, [value, [defaultSelected, [selected]]]]);
+                        }
+                      dy.selectedIndex = 0;
+                      $("#day").val('select').change();                      //Reset Days Option
+                      dateError();
+                    }
+                  }
+
+var dateError = function () {
+          if ($("#year").val()=="select" || $("#month").val()=="select" || $("#day").val()=="select")
+              {
+                if ($("#date_ul li").size()==3) {
+                var a=_.last($("#date_ul"));
+                var compiled = _.template("<%= name %>");                              // UNDERSCOREJS TEMPLATE USE
+                $($(a)).append(compiled({name:
+                '<li class="date-error-span"><span  style="display : table-row-group">Please select Date Properly</span></li>'}));
+                }
+              }
+            };
+
+
+
 
 /*validation Gender Click------------------------------------------------------ */
   var clickblurResidence1= function (eventData) {
@@ -296,30 +381,6 @@ function checkRadio(eventData) {
         $(".radio-error-span").remove();
       }
   };
-
-
-
-
-  /*Day Chnage Click and Age Calculation-----------------------------------------------------*/
-    var changeDay =function(eventData){
-
-      var y=parseInt($("#year").val());
-      var m=parseInt($("#month").val());
-      var d=parseInt($("#day").val());
-
-        if ($("#day").val()!="select" && $("#year").val()!="select" && $("#month").val()!="select"){
-                  var dob = new Date(y,m,d);
-                  var today = new Date();
-                  var diffDate = Math.abs(dob.getTime() - today.getTime());
-                  var diff = parseFloat(Math.abs(diffDate / (1000 * 60 * 60 * 24 * 365.25)));
-                  $("#age").val(diff.toPrecision(3)+" Years");
-                  dateError();
-                }
-                else {
-                  //dateError();
-                }
-            };
-
 
 /*CheckBox Validation click---------------------------------*/
 var clickCheck18 = function (eventData) {
@@ -360,7 +421,6 @@ function checkBox(eventData) {
 };
 
 /*########################################################################################*/
-
 /*##########################################################################################
 Other Methods
 ###########################################################################################/*
@@ -383,44 +443,6 @@ Other Methods
 
 listYear("#year",1976); //call to Year Generation Method
 
-/*------------------------------------------------------------------------------
-*Function For Date POP UP
-* Month Start with 0 -1 -2 -....11
-* Common Fuction For Month And Year change
-* When You Select Year and Month Properly Then Days will Populated
-*-------------------------------------------------------------------------------*/
-function selectDate(d,m,y) {
-  var dy=document.getElementById(d);
-  var mth=document.getElementById(m);
-  var yr=document.getElementById(y);
-  dy.options.length=1;
-    if (mth.value && yr.value) {
-
-      var days=new Date(yr.value,mth.value,1,-1).getDate(); //var d = new Date(year, month, day, hours) Give Actual No Of Days
-                                                            // the first day of the next month minus 1 hour
-      for (var i=1; i<=days; i++) {                         // Create Days Options Dynamically
-          dy.options[i] = new Option(i,i);                  //new Option([text, [value, [defaultSelected, [selected]]]]);
-        }
-      dy.selectedIndex = 0;
-      $("#day").val('select').change();                      //Reset Days Option
-dateError();
-    }
-
-  }
-
-var dateError = function () {
-  if ($("#day").val()=="select" && $("#year").val()=="select" && $("#month").val()=="select") {
-    if ($("#date_ul li").size()==3) {
-      var a=_.last($("#date_ul"));
-      var compiled = _.template("<%= name %>");                              // UNDERSCOREJS TEMPLATE USE
-      $($(a)).append(compiled({name:
-        '<li class="date-error-span"><span  style="display : table-row-group">Please select Date Properly</span></li>'}));
-      }
-      else {
-        $(".date-error-span").remove();
-        }
-      }
-    }
 
 /*Blur Events and associated Methods ----------------------------------------- */
     var handleBlurEvent = function (eventSource, eventData) {
@@ -463,6 +485,12 @@ var dateError = function () {
         break;
         case "country1" :
           changeCountry(eventData);//
+        break;
+        case "state1" :
+          changeState(eventData);//
+        break;
+        case "city1" :
+          changeCity();
         break;
         case "year" :
           changeYear(eventData);
@@ -514,6 +542,9 @@ var dateError = function () {
       case "state1" :
         changeState(eventData);//
       break;
+      case "city1" :
+        changeCity();
+      break;
       default:
 
     }
@@ -522,6 +553,9 @@ var dateError = function () {
 /* Change Events and associated Methods ----------------------------------------- */
 var handleChangeEvent = function (eventSource, eventData) {
   switch (eventSource) {
+    // case "city1" :
+    //   changeCity();
+    // break;
 
     default:
   }
